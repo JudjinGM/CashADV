@@ -47,17 +47,17 @@ android {
 dependencies {
 
     // Core
-//    implementation(libs.androidx.core.ktx)
-//    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-//    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.constraintlayout)
 
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
     // Coroutines
-//    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Room
     ksp(libs.androidx.room.compiler)
@@ -65,26 +65,26 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     // Navigation Component
-//    implementation(libs.androidx.navigation.fragment.ktx)
-//    implementation(libs.androidx.navigation.ui.ktx)
-//    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     // Glide
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
     // Timber
-//    implementation(libs.timber)
-//
-//    // ViewModel + Lifecycle
-//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-//    implementation(libs.androidx.activity.ktx)
+    implementation(libs.timber)
+
+    // ViewModel + Lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.activity.ktx)
 
     // Network
-//    implementation(libs.retrofit)
-//    implementation(libs.kotlinx.serialization.json)
-//    implementation(libs.okhttp)
-//    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     // Test
     testImplementation(libs.junit)

@@ -34,13 +34,47 @@ dependencyResolutionManagement {
             version("retrofit", "2.9.0")
             version("room-compiler", "2.6.0")
             version("timber", "5.0.1")
+            version("android-gradle", "8.1.1")
+            version("kotlin", "1.9.0")
+            version("devtools-ksp", "1.9.10-1.0.13")
+            version("kotlinx-serialization", "1.9.20")
+
+            plugin(
+                "android-application",
+                "com.android.application"
+            ).versionRef("android-gradle")
+
+            plugin(
+                "android-kotlin",
+                "org.jetbrains.kotlin.android"
+            ).versionRef("kotlin")
+
+            plugin(
+                "dagger-hilt",
+                "com.google.dagger.hilt.android"
+            ).versionRef("hilt-android")
+
+            plugin(
+                "devtools-ksp",
+                "com.google.devtools.ksp"
+            ).versionRef("devtools-ksp")
+
+            plugin(
+                "org-jetbrains-kotlin-kapt",
+                "org.jetbrains.kotlin.kapt"
+            ).versionRef("kotlin")
+
+            plugin(
+                "kotlinx-serialization",
+                "org.jetbrains.kotlin.plugin.serialization"
+            ).versionRef("kotlinx-serialization")
 
             // Core
-           library(
-               "androidx-core-ktx",
-               "androidx.core",
-               "core-ktx"
-           ).versionRef("core-ktx")
+            library(
+                "androidx-core-ktx",
+                "androidx.core",
+                "core-ktx"
+            ).versionRef("core-ktx")
 
             library(
                 "androidx-appcompat",
@@ -54,13 +88,43 @@ dependencyResolutionManagement {
                 "constraintlayout"
             ).versionRef("constraintlayout")
 
-//            library(
-//                "material",
-//                "com.google.android.material",
-//                "material"
-//            ).versionRef("material")
+            library(
+                "material",
+                "com.google.android.material",
+                "material"
+            ).versionRef("material")
 
-            library("material", "com.google.android.material:material:1.10.0")
+            // Hilt
+            library(
+                "hilt-android",
+                "com.google.dagger",
+                "hilt-android"
+            ).versionRef("hilt-android")
+
+            library(
+                "hilt-android-compiler",
+                "com.google.dagger",
+                "hilt-android-compiler"
+            ).versionRef("hilt-android")
+
+            // Room
+            library(
+                "androidx-room-compiler",
+                "androidx.room",
+                "room-compiler"
+            ).versionRef("room-compiler")
+
+            library(
+                "androidx-room-ktx",
+                "androidx.room",
+                "room-ktx"
+            ).versionRef("room-compiler")
+
+            library(
+                "androidx-room-runtime",
+                "androidx.room",
+                "room-runtime"
+            ).versionRef("room-compiler")
 
             // Coroutines
             library(
@@ -87,6 +151,19 @@ dependencyResolutionManagement {
                 "androidx.fragment",
                 "fragment-ktx"
             ).versionRef("fragment-ktx")
+
+            // Glide
+            library(
+                "glide",
+                "com.github.bumptech.glide",
+                "glide"
+            ).versionRef("glide")
+
+            library(
+                "compiler",
+                "com.github.bumptech.glide",
+                "compiler"
+            ).versionRef("glide")
 
             // Timber
             library(
@@ -132,11 +209,28 @@ dependencyResolutionManagement {
                 "com.squareup.okhttp3",
                 "logging-interceptor"
             ).versionRef("okhttp")
+
+            // Test
+            library(
+                "junit",
+                "junit",
+                "junit"
+            ).versionRef("junit")
+
+            library(
+                "androidx-junit",
+                "androidx.test.ext",
+                "junit"
+            ).versionRef("androidx-junit")
+
+            library(
+                "androidx-espresso-core",
+                "androidx.test.espresso",
+                "espresso-core"
+            ).versionRef("espresso-core")
         }
     }
-
 }
-
 
 rootProject.name = "Cash Advisor"
 include(":app")
