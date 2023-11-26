@@ -38,8 +38,8 @@ dependencyResolutionManagement {
             version("kotlin", "1.9.0")
             version("devtools-ksp", "1.9.10-1.0.13")
             version("kotlinx-serialization", "1.9.20")
-            version("firebase-analytics", "21.5.0")
-            version("firebase-crashlytics", "18.6.0")
+            version("firebase-analytics-ktx", "")
+            version("firebase-crashlytics-ktx", "")
             version("firebase-crashlytics-gradle", "2.9.9")
             version("firebase-bom", "32.6.0")
             version("gms-googleServices", "4.4.0")
@@ -249,13 +249,13 @@ dependencyResolutionManagement {
                 "firebase-analytics",
                 "com.google.firebase",
                 "firebase-analytics"
-            ).versionRef("firebase-analytics")
+            ).versionRef("firebase-analytics-ktx")
 
             library(
                 "firebase-crashlytics",
                 "com.google.firebase",
                 "firebase-crashlytics"
-            ).versionRef("firebase-crashlytics")
+            ).versionRef("firebase-crashlytics-ktx")
 
             library("firebase-bom",
                 "com.google.firebase",
