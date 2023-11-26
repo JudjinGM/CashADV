@@ -27,10 +27,10 @@ android {
             applicationIdSuffix = ".debug"
         }
 
-        create("releaseTest") {
+        create("qa") {
             initWith(getByName("release"))
             isMinifyEnabled = false
-            applicationIdSuffix = ".test"
+            applicationIdSuffix = ".qa"
         }
 
         getByName("release") {
