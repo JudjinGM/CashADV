@@ -32,6 +32,7 @@ android {
             initWith(getByName("release"))
             isMinifyEnabled = false
             applicationIdSuffix = ".qa"
+            signingConfig = signingConfigs.getByName("debug")
         }
 
         getByName("release") {

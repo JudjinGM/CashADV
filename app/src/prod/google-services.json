@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "789138436651",
-    "project_id": "cash-advisor-test",
-    "storage_bucket": "cash-advisor-test.appspot.com"
+    "project_number": "409936335875",
+    "project_id": "cash-advisor-1",
+    "storage_bucket": "cash-advisor-1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789138436651:android:e07473bb2841ba109af06e",
+        "mobilesdk_app_id": "1:409936335875:android:71bc16d697644552bb6a36",
         "android_client_info": {
           "package_name": "app.cashadvisor"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB1P8OXHhzZNSVm6sr8OEYBe2GOcZy6JwE"
+          "current_key": "AIzaSyBnNQG9pybfvsXp2haJ3-bRQrga6UdZPz4"
         }
       ],
       "services": {
@@ -27,4 +27,3 @@
   ],
   "configuration_version": "1"
 }
-
