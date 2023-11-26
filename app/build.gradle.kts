@@ -22,7 +22,18 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("debug") {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+        }
+
+        create("releaseTest") {
+            initWith(getByName("release"))
+            isMinifyEnabled = false
+            applicationIdSuffix = ".test"
+        }
+
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -30,6 +41,20 @@ android {
             )
         }
     }
+
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("stage") {
+            dimension = "env"
+            applicationIdSuffix = ".stage"
+        }
+
+        create("prod") {
+            dimension = "env"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -41,7 +66,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {
