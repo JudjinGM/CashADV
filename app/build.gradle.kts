@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.firebase.crashlytics.gradle)
+    alias(libs.plugins.gms.googleServices)
 }
 
 android {
@@ -17,7 +19,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -31,6 +32,7 @@ android {
             initWith(getByName("release"))
             isMinifyEnabled = false
             applicationIdSuffix = ".qa"
+            signingConfig = signingConfigs.getByName("debug")
         }
 
         getByName("release") {
@@ -114,6 +116,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Firebase
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
 }
 
 kapt {
