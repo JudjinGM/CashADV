@@ -23,13 +23,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    val localProperties = gradleLocalProperties(rootDir)
-    val storePasswordLocal: String = localProperties.getProperty("storePassword")
-    val keyAliasLocal: String = localProperties.getProperty("keyAlias")
-    val keyPasswordLocal: String = localProperties.getProperty("keyPassword")
 
     signingConfigs {
         create("release") {
+
+            val localProperties = gradleLocalProperties(rootDir)
+            val storePasswordLocal: String = localProperties.getProperty("storePassword") ?: ""
+            val keyAliasLocal: String = localProperties.getProperty("keyAlias") ?: ""
+            val keyPasswordLocal: String = localProperties.getProperty("keyPassword") ?: ""
+
             storeFile = file("keyStore/cashadvisor.jks")
             storePassword = storePasswordLocal
             keyAlias = keyAliasLocal
@@ -53,8 +55,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
         }
@@ -88,47 +89,47 @@ android {
 
 dependencies {
 
-    // Core
+// Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
 
-    // Hilt
+// Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-    // Coroutines
+// Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-    // Room
+// Room
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
 
-    // Navigation Component
+// Navigation Component
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.fragment.ktx)
 
-    // Glide
+// Glide
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
-    // Timber
+// Timber
     implementation(libs.timber)
 
-    // ViewModel + Lifecycle
+// ViewModel + Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.ktx)
 
-    // Network
+// Network
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-    // Test
+// Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
