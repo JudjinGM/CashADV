@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
@@ -21,6 +23,20 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val localProperties = gradleLocalProperties(rootDir)
+    val storePasswordLocal: String = localProperties.getProperty("storePassword")
+    val keyAliasLocal: String = localProperties.getProperty("keyAlias")
+    val keyPasswordLocal: String = localProperties.getProperty("keyPassword")
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("keyStore/cashadvisor.jks")
+            storePassword = storePasswordLocal
+            keyAlias = keyAliasLocal
+            keyPassword = keyPasswordLocal
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             isDebuggable = true
@@ -31,6 +47,7 @@ android {
             initWith(getByName("release"))
             isMinifyEnabled = false
             applicationIdSuffix = ".qa"
+            signingConfig = signingConfigs.getByName("release")
         }
 
         getByName("release") {
@@ -39,6 +56,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
