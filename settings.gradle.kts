@@ -248,14 +248,14 @@ dependencyResolutionManagement {
             library(
                 "firebase-analytics",
                 "com.google.firebase",
-                "firebase-analytics"
-            ).versionRef("firebase-analytics-ktx")
+                "firebase-analytics-ktx"
+            ).withoutVersion()
 
             library(
                 "firebase-crashlytics",
                 "com.google.firebase",
-                "firebase-crashlytics"
-            ).versionRef("firebase-crashlytics-ktx")
+                "firebase-crashlytics-ktx"
+            ).withoutVersion()
 
             library("firebase-bom",
                 "com.google.firebase",
