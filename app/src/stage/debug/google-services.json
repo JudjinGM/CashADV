@@ -45,6 +45,25 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:562361127178:android:be4a9e3ce39d6333a5eaf3",
+        "android_client_info": {
+          "package_name": "app.cashadvisor.stage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH7evQOuxnF-wwwhv0jWqhYEQ5qEk1PSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:562361127178:android:a53cf9c3434d9670a5eaf3",
         "android_client_info": {
           "package_name": "app.cashadvisor.stage.debug"
@@ -67,25 +86,6 @@
         "mobilesdk_app_id": "1:562361127178:android:0286e732133836dfa5eaf3",
         "android_client_info": {
           "package_name": "app.cashadvisor.stage.qa"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBH7evQOuxnF-wwwhv0jWqhYEQ5qEk1PSk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:562361127178:android:d82ad8057bdb291fa5eaf3",
-        "android_client_info": {
-          "package_name": "app.cashadvisor.stage.release"
         }
       },
       "oauth_client": [],
