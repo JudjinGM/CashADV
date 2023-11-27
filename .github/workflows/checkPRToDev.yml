@@ -22,15 +22,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: actions/setup-java@v1 
+      - uses: actions/setup-java@v1
         with: {java-version: 1.17}
 
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-        
       - name: Build app stageDebug build variant
         run: |
-         ./gradlew assembleStageDebug
+         ./gradlew :app:build
       - name: Check status
         run: echo "Check build status"
       - name: Set failed if build failed
