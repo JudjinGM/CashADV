@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorAlert" format="color" />
+    <attr name="colorAdvance" format="color" />
+    <attr name="colorNeutral" format="color" />
+    <attr name="colorIntermediate" format="color" />
+
+    <style name="App.Theme.Base" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/bright_grey</item>
+
+        <item name="colorPrimaryVariant">@color/light_grey</item>
+
+        <item name="colorOnPrimary">@color/deep_grey</item>
+
+        <item name="colorSecondary">@color/black</item>
+
+        <item name="colorSecondaryVariant">@color/medium_grey</item>
+
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorAlert">@color/bloody_red</item>
+
+        <item name="colorAdvance">@color/dark_green</item>
+
+        <item name="colorNeutral">@color/saturated_blue</item>
+
+        <item name="colorIntermediate">@color/intense_purple</item>
+    </style>
+
+
+</resources>

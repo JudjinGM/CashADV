@@ -121,6 +121,9 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
     implementation(platform(libs.firebase.bom))
+
+    // Ui Kit Library
+    implementation(project(":uikit"))
 }
 
 kapt {
