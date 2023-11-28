@@ -33,7 +33,6 @@ jobs:
           echo "storePassword=$STORE_PASSWORD" > ./local.properties
           echo "keyAlias=$KEY_ALIAS" >> ./local.properties
           echo "keyPassword=$KEY_PASSWORD" >> ./local.properties
-          keytool -list -v -keystore /home/runner/work/CashADV/CashADV/app/keyStore/cashadvisor.jks -storepass $STORE_PASSWORD
           ./gradlew :app:build
 
       - name: Check status
