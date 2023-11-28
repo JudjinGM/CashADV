@@ -37,11 +37,16 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".qa"
             signingConfig = signingConfigs.getByName("debug")
-            firebaseAppDistribution{
-                artifactType = "APK"
-                releaseNotesFile = "src/stage/qa/releaseNotes.txt"
-                testers = "QA"
-            }
+
+        }
+        task("appDistirbutionToQaStageQa") {
+            dependsOn("assembleStageQa")
+            dependsOn("appDistributionUploadStageQa")
+        }
+        firebaseAppDistribution{
+            artifactType = "APK"
+            releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
+            testers = "QA"
         }
 
         getByName("release") {
@@ -50,12 +55,17 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            firebaseAppDistribution{
-                artifactType = "APK"
-                releaseNotesFile = "src/stage/qa/releaseNotes.txt"
-                testers = "QA"
 
-            }
+        }
+        task("appDistirbutionToQaProdQa") {
+            dependsOn("assembleProdQa")
+            dependsOn("appDistributionUploadProdQa")
+        }
+        firebaseAppDistribution{
+            artifactType = "APK"
+            releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
+            testers = "QA"
+
         }
     }
 
