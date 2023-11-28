@@ -2,53 +2,53 @@
 <resources>
     <!-- Text styles -->
     <style name="Header1">
-        <item name="fontFamily">@font/Gilroy-Bold</item>
+        <item name="fontFamily">@font/GilroyBold</item>
         <item name="android:textSize">40sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Header2">
-        <item name="fontFamily">@font/Gilroy-Bold</item>
+        <item name="fontFamily">@font/GilroyBold</item>
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Header3">
-        <item name="fontFamily">@font/Gilroy-Bold</item>
+        <item name="fontFamily">@font/GilroyBold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Main_Text">
-        <item name="fontFamily">@font/Gilroy-Semibold</item>
+        <item name="fontFamily">@font/GilroySemibold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Text_info">
-        <item name="fontFamily">@font/Gilroy-Semibold</item>
+        <item name="fontFamily">@font/GilroySemibold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name = "num_big">
-        <item name="fontFamily">@font/Inter-Bold</item>
+        <item name="fontFamily">@font/InterBold</item>
         <item name="android:textSize">45sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="num_reg">
-        <item name="fontFamily">@font/Inter-SemiBold</item>
+        <item name="fontFamily">@font/InterSemiBold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Text_cont">
-        <item name="fontFamily">@font/Inter-SemiBold</item>
+        <item name="fontFamily">@font/InterSemiBold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="Subtext">
-        <item name="fontFamily">@font/Inter-SemiBold</item>
+        <item name="fontFamily">@font/InterSemiBold</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="num_sub">
-        <item name="fontFamily">@font/Inter-Bold</item>
+        <item name="fontFamily">@font/InterBold</item>
         <item name="android:textSize">8sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
