@@ -38,6 +38,11 @@ dependencyResolutionManagement {
             version("kotlin", "1.9.0")
             version("devtools-ksp", "1.9.10-1.0.13")
             version("kotlinx-serialization", "1.9.20")
+            version("firebase-analytics-ktx", "")
+            version("firebase-crashlytics-ktx", "")
+            version("firebase-crashlytics-gradle", "2.9.9")
+            version("firebase-bom", "32.6.0")
+            version("gms-googleServices", "4.4.0")
 
             plugin(
                 "android-application",
@@ -68,6 +73,16 @@ dependencyResolutionManagement {
                 "kotlinx-serialization",
                 "org.jetbrains.kotlin.plugin.serialization"
             ).versionRef("kotlinx-serialization")
+
+            plugin(
+                "gms-googleServices",
+                "com.google.gms.google-services"
+            ).versionRef("gms-googleServices")
+
+            plugin(
+                "firebase-crashlytics-gradle",
+                "com.google.firebase.crashlytics"
+            ).versionRef("firebase-crashlytics-gradle")
 
             // Core
             library(
@@ -228,6 +243,40 @@ dependencyResolutionManagement {
                 "androidx.test.espresso",
                 "espresso-core"
             ).versionRef("espresso-core")
+
+            //Firebase
+            library(
+                "firebase-analytics",
+                "com.google.firebase",
+                "firebase-analytics-ktx"
+            ).withoutVersion()
+
+            library(
+                "firebase-crashlytics",
+                "com.google.firebase",
+                "firebase-crashlytics-ktx"
+            ).withoutVersion()
+
+            library("firebase-bom",
+                "com.google.firebase",
+                "firebase-bom"
+            ).versionRef("firebase-bom")
+
+            library(
+                "google-services",
+                "com.google.gms",
+                "google-services"
+            ).versionRef("gms-googleServices")
+
+            library("gradle",
+                "com.android.tools.build",
+                "gradle"
+            ).versionRef("android-gradle")
+
+            library("firebase-crashlytics-gradle",
+                "com.google.firebase",
+                "firebase-crashlytics-gradle"
+            ).versionRef("firebase-crashlytics-gradle")
         }
     }
 }

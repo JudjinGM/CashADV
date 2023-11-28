@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.devtools.ksp)
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.firebase.crashlytics.gradle)
+    alias(libs.plugins.gms.googleServices)
 }
 
 android {
@@ -19,7 +21,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -103,50 +104,55 @@ android {
 
 dependencies {
 
-// Core
+    // Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
 
-// Hilt
+    // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-// Coroutines
+    // Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
-// Room
+    // Room
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
 
-// Navigation Component
+    // Navigation Component
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.fragment.ktx)
 
-// Glide
+    // Glide
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
 
-// Timber
+    // Timber
     implementation(libs.timber)
 
-// ViewModel + Lifecycle
+    // ViewModel + Lifecycle
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.activity.ktx)
 
-// Network
+    // Network
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-// Test
+    // Test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Firebase
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
 }
 
 kapt {
