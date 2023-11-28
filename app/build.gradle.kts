@@ -28,7 +28,7 @@ android {
     signingConfigs {
         create("release") {
 
-            storeFile = file("${rootDir}/keyStore/cashadvisor.jks")
+            storeFile = file("keyStore/cashadvisor.jks")
 
             val localPropertiesFile = file("${rootDir}/local.properties")
 
