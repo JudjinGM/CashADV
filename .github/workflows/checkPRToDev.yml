@@ -30,9 +30,6 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "storePassword=$STORE_PASSWORD" > ./local.properties
-          echo "keyAlias=$KEY_ALIAS" >> ./local.properties
-          echo "keyPassword=$KEY_PASSWORD" >> ./local.properties
           ./gradlew :app:build
 
       - name: Check status

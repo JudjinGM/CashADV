@@ -27,11 +27,22 @@ android {
 
     signingConfigs {
         create("release") {
+            val storePasswordLocal: String
+            val keyAliasLocal: String
+            val keyPasswordLocal: String
 
-            val localProperties = gradleLocalProperties(rootDir)
-            val storePasswordLocal = localProperties.getProperty("storePassword") ?: "storePasswordEmpty"
-            val keyAliasLocal = localProperties.getProperty("keyAlias") ?: "keyAliasEmpty"
-            val keyPasswordLocal = localProperties.getProperty("keyPassword") ?: "keyPasswordEmpty"
+            val localPropertiesFile = file("${rootDir}/local.properties")
+
+            if (localPropertiesFile.exists()) {
+                val localProperties = gradleLocalProperties(rootDir)
+                storePasswordLocal = localProperties.getProperty("storePassword") ?: "storePasswordEmpty"
+                keyAliasLocal = localProperties.getProperty("keyAlias") ?: "keyAliasEmpty"
+                keyPasswordLocal = localProperties.getProperty("keyPassword") ?: "keyPasswordEmpty"
+            } else {
+                storePasswordLocal = System.getenv("STORE_PASSWORD") ?: "storePasswordEmpty"
+                keyAliasLocal = System.getenv("KEY_ALIAS") ?: "keyAliasEmpty"
+                keyPasswordLocal = System.getenv("KEY_PASSWORD") ?: "keyPasswordEmpty"
+            }
 
             storeFile = file("keyStore/cashadvisor.jks")
             storePassword = storePasswordLocal
