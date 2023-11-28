@@ -43,6 +43,7 @@ dependencyResolutionManagement {
             version("firebase-crashlytics-gradle", "2.9.9")
             version("firebase-bom", "32.6.0")
             version("gms-googleServices", "4.4.0")
+            version("android-library", "8.1.1")
 
             plugin(
                 "android-application",
@@ -83,6 +84,11 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-gradle",
                 "com.google.firebase.crashlytics"
             ).versionRef("firebase-crashlytics-gradle")
+
+            plugin(
+                "android-library",
+                "com.android.library"
+            ).versionRef("android-library")
 
             // Core
             library(
@@ -283,3 +289,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Cash Advisor"
 include(":app")
+include(":uikit")
