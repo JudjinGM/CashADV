@@ -1,3 +1,5 @@
+import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
@@ -7,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.firebase.crashlytics.gradle)
     alias(libs.plugins.gms.googleServices)
+    alias(libs.plugins.firebase.appdistribution)
+
 }
 
 android {
@@ -33,6 +37,11 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".qa"
             signingConfig = signingConfigs.getByName("debug")
+            firebaseAppDistribution{
+                artifactType = "APK"
+                releaseNotesFile = "src/stage/qa/releaseNotes.txt"
+                testers = "QA"
+            }
         }
 
         getByName("release") {
@@ -41,6 +50,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            firebaseAppDistribution{
+                artifactType = "APK"
+                releaseNotesFile = "src/stage/qa/releaseNotes.txt"
+                testers = "QA"
+
+            }
         }
     }
 

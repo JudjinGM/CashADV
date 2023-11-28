@@ -43,6 +43,7 @@ dependencyResolutionManagement {
             version("firebase-crashlytics-gradle", "2.9.9")
             version("firebase-bom", "32.6.0")
             version("gms-googleServices", "4.4.0")
+            version("firebase.appdistribution", "4.0.1")
 
             plugin(
                 "android-application",
@@ -83,6 +84,11 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-gradle",
                 "com.google.firebase.crashlytics"
             ).versionRef("firebase-crashlytics-gradle")
+
+            plugin(
+                "firebase.appdistribution",
+                "com.google.firebase.appdistribution"
+            ).versionRef("firebase.appdistribution")
 
             // Core
             library(
