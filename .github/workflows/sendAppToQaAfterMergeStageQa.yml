@@ -24,7 +24,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
         run: |
-          echo CREDENTIAL_FILE_CONTENT > ./app/serviceCredentialsFile.json
+          echo "$CREDENTIAL_FILE_CONTENT" > ./app/serviceCredentialsFile.json
           echo "App type: stageQa" >> ./app/releaseNotes.txt
           echo "buildNumber=${GITHUB_RUN_NUMBER}" >> ./app/releaseNotes.txt
           ./gradlew appDistributionToQaStageQa
