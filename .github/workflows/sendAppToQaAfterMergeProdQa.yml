@@ -21,6 +21,9 @@ jobs:
         env:
           CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
         run: |
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           echo CREDENTIAL_FILE_CONTENT > ./app/serviceCredentialsFile.json
           echo "App type: prodQa" >> ./app/releaseNotes.txt
           echo "buildNumber=${GITHUB_RUN_NUMBER}" >> ./app/releaseNotes.txt
