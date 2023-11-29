@@ -22,13 +22,10 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          VERSION_NAME: ${GITHUB_RUN_NUMBER}
         run: |
           echo "$CREDENTIAL_FILE_CONTENT" > ./app/serviceCredentialsFile.json
           echo "App type: stageQa" >> ./app/src/releaseNotes.txt
-          echo "buildNumber = ${GITHUB_RUN_NUMBER}" >> ./app/src/releaseNotes.txt
-          echo "versionName = ${VERSION_NAME}" >> ./app/src/releaseNotes.txt
-
+          echo "buildNumber=${GITHUB_RUN_NUMBER}" >> ./app/src/releaseNotes.txt
           ./gradlew appDistributionToQaStageQa
 
       - name: Check status

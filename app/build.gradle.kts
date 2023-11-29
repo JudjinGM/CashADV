@@ -19,13 +19,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-
-        val versionNameInit = System.getenv("VERSION_NAME") ?: "0"
         applicationId = "app.cashadvisor"
         minSdk = 23
         targetSdk = 34
         versionCode = 1
-        versionName = "1.{$versionNameInit}"
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
