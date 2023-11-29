@@ -61,6 +61,59 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <!-- Register Disclaimer Text Styles -->
+    <style name="DisclaimerText" parent="Subtext">
+        <item name="android:textAlignment">2</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <!-- Register Title Text Styles -->
+    <style name="RegisterHeader" parent="Main_Text">
+        <item name="android:textAlignment">4</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Register Step Description Styles -->
+    <style name="RegisterSteps" parent="Subtext">
+        <item name="android:textAlignment">4</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Register Step -->
+    <style name="RegisterStep" parent="Subtext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:minWidth">35dp</item>
+        <item name="android:textAlignment">4</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textColor">@color/text_color_selector</item>
+        <item name="android:background">@color/background_border_color_selector</item>
+    </style>
+
+    <!-- Register Buttons -->
+    <style name="RegisterButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="fontFamily">@font/GilroySemibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_color_selector</item>
+        <item name="android:background">@color/button_background_border_selector</item>
+    </style>
+
+    <style name="ForgetPassword" parent="Text_cont">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <!-- Text Field Headers -->
+    <style name="TextFieldHeader" parent="Text_cont">
+        <item name="android:textAlignment">2</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ResetPasswordDisclaimer" parent="Subtext">
+        <item name="android:textAlignment">4</item>
+    </style>
+
     <!-- Total Listing Text Styles -->
     <style name="TotalListingSectionHeaderBlack" parent="Main_Text">
         <item name="android:textColor">@color/red</item>
@@ -81,6 +134,21 @@
         <item name="android:textColor">?attr/colorOnPrimaryVariant</item>
         <item name="android:textAlignment">3</item>
     </style>
+
+    <!-- Profile Text Styles -->
+    <style name="ProfileName" parent="Text_info">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textAlignment">2</item>
+    </style>
+    <!-- Profile Tags Styles -->
+    <style name="TagsButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="fontFamily">@font/GilroySemibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/tag_text_selector</item>
+        <item name="android:background">@color/tag_button_selector</item>
+    </style>
+
+
 
 
 
