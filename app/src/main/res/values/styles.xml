@@ -163,8 +163,16 @@
         <item name="android:background">@drawable/gray_button_background</item>
     </style>
 
+    <!-- Calendar Styles -->
+    <style name="CurrentMonth" parent="Text_cont">
+        <item name="android:textColor">#393d3f</item>
+        <item name="android:textAlignment">4</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">30dp</item>
+        <item name="android:background">@drawable/gray_button_background</item>
 
-
-
-
+    </style>
 </resources>
