@@ -15,29 +15,12 @@ android {
     }
 
     buildTypes {
-        getByName("debug") {}
-
-        create("qa") {
-            initWith(getByName("release"))
-        }
-
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
-        }
-    }
-
-    flavorDimensions += "env"
-
-    productFlavors {
-        create("stage") {
-            dimension = "env"
-        }
-
-        create("prod") {
-            dimension = "env"
         }
     }
 

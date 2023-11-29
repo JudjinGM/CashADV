@@ -53,12 +53,14 @@ android {
         getByName("debug") {
             isDebuggable = true
             applicationIdSuffix = ".debug"
+            matchingFallbacks += listOf("release")
         }
 
         create("qa") {
             initWith(getByName("release"))
             applicationIdSuffix = ".qa"
             signingConfig = signingConfigs.getByName("release")
+            matchingFallbacks += listOf("release")
         }
 
         getByName("release") {
