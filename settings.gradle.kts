@@ -43,7 +43,9 @@ dependencyResolutionManagement {
             version("firebase-crashlytics-gradle", "2.9.9")
             version("firebase-bom", "32.6.0")
             version("gms-googleServices", "4.4.0")
+            version("firebase.appdistribution", "4.0.1")
             version("android-library", "8.1.1")
+
 
             plugin(
                 "android-application",
@@ -84,6 +86,11 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-gradle",
                 "com.google.firebase.crashlytics"
             ).versionRef("firebase-crashlytics-gradle")
+
+            plugin(
+                "firebase.appdistribution",
+                "com.google.firebase.appdistribution"
+            ).versionRef("firebase.appdistribution")
 
             plugin(
                 "android-library",
