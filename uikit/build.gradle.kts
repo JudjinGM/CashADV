@@ -15,14 +15,32 @@ android {
     }
 
     buildTypes {
-        release {
+        getByName("debug") {}
+
+        create("qa") {
+            initWith(getByName("release"))
+        }
+
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
+
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("stage") {
+            dimension = "env"
+        }
+
+        create("prod") {
+            dimension = "env"
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
