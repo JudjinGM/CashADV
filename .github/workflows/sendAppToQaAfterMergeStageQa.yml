@@ -22,7 +22,7 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
-          VERSION_NAME: 1.${GITHUB_RUN_NUMBER}
+          VERSION_NAME: ${GITHUB_RUN_NUMBER}
         run: |
           echo "$CREDENTIAL_FILE_CONTENT" > ./app/serviceCredentialsFile.json
           echo "App type: stageQa" >> ./app/src/releaseNotes.txt
