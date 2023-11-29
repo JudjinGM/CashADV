@@ -39,10 +39,7 @@ android {
             signingConfig = signingConfigs.getByName("debug")
 
         }
-        task("appDistirbutionToQaStageQa") {
-            dependsOn("assembleStageQa")
-            dependsOn("appDistributionUploadStageQa")
-        }
+
         firebaseAppDistribution{
             artifactType = "APK"
             releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
@@ -57,10 +54,7 @@ android {
             )
 
         }
-        task("appDistirbutionToQaProdQa") {
-            dependsOn("assembleProdQa")
-            dependsOn("appDistributionUploadProdQa")
-        }
+
         firebaseAppDistribution{
             artifactType = "APK"
             releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
@@ -93,6 +87,15 @@ android {
     buildFeatures {
         viewBinding = true
     }
+}
+task("appDistirbutionToQaStageQa") {
+    dependsOn("assembleStageQa")
+    dependsOn("appDistributionUploadStageQa")
+}
+
+task("appDistirbutionToQaProdQa") {
+    dependsOn("assembleProdQa")
+    dependsOn("appDistributionUploadProdQa")
 }
 
 dependencies {
