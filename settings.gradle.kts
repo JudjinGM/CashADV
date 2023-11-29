@@ -91,6 +91,8 @@ dependencyResolutionManagement {
                 "firebase.appdistribution",
                 "com.google.firebase.appdistribution"
             ).versionRef("firebase.appdistribution")
+
+            plugin(
                 "android-library",
                 "com.android.library"
             ).versionRef("android-library")
