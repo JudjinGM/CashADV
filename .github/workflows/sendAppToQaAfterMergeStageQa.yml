@@ -1,6 +1,7 @@
 name: Build and sent to QA stageQa
 
 on:
+  # Triggers the workflow when pull request closed events but only for the "dev" branch
   pull_request:
     types:
       - closed
@@ -9,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  send_to_qa_stage:
     runs-on: ubuntu-latest
 
     steps:
