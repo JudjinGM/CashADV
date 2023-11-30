@@ -11,6 +11,7 @@ on:
 
 jobs:
   send_to_qa_stage:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
