@@ -152,6 +152,9 @@ dependencies {
 
     // Ui Kit Library
     implementation(project(":uikit"))
+
+    //Sign-In
+    implementation(libs.play.services.auth)
 }
 
 kapt {
