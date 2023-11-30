@@ -173,6 +173,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:minHeight">30dp</item>
         <item name="android:background">@drawable/gray_button_background</item>
+    </style>
 
     <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/white</item>
