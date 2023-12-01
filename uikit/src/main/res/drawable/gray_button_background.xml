@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#393d3f"/> <!-- Здесь вы можете указать свой цвет заливки -->
-    <corners android:radius="10dp"/> <!-- Закругление углов -->
-    <stroke android:width="2dp" android:color="#00000000"/>  <!-- Цвет обводки (прозрачный) -->
+    <solid android:color="#00000000"/>
+    <corners android:radius="10dp"/>
+    <stroke android:width="2dp" android:color="@color/subcolour2"/>
 </shape>

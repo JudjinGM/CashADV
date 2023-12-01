@@ -64,7 +64,7 @@
     <!-- Register Disclaimer Text Styles -->
     <style name="DisclaimerText" parent="Subtext">
         <item name="android:textAlignment">2</item>
-        <item name="android:textColor">#393d3f</item>
+        <item name="android:textColor">@color/subcolour2</item>
     </style>
 
     <!-- Register Title Text Styles -->
@@ -165,7 +165,7 @@
 
     <!-- Calendar Styles -->
     <style name="CurrentMonth" parent="Text_cont">
-        <item name="android:textColor">#393d3f</item>
+        <item name="android:textColor">@color/subcolour2</item>
         <item name="android:textAlignment">4</item>
         <item name="android:paddingStart">5dp</item>
         <item name="android:paddingEnd">5dp</item>

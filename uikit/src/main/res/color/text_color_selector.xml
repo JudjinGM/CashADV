@@ -2,5 +2,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/colour1" android:state_enabled="true" /> <!-- Active color -->
     <item android:color="@color/m1" android:state_checked="true" /> <!-- Pressed color -->
-    <item android:color="#393d3f" /> <!-- Default color -->
+    <item android:color="@color/subcolour2" /> <!-- Default color -->
 </selector>
