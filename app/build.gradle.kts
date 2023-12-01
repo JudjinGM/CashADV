@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
 
 plugins {
@@ -10,7 +12,6 @@ plugins {
     alias(libs.plugins.firebase.crashlytics.gradle)
     alias(libs.plugins.gms.googleServices)
     alias(libs.plugins.firebase.appdistribution)
-
 }
 
 android {
@@ -26,40 +27,48 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+
+            val localProperties = gradleLocalProperties(rootDir)
+
+            val storePasswordLocal: String =
+                System.getenv("STORE_PASSWORD") ?: localProperties.getProperty("storePassword")
+                ?: "storePasswordEmpty"
+            val keyAliasLocal: String =
+                System.getenv("KEY_ALIAS") ?: localProperties.getProperty("keyAlias")
+                ?: "keyAliasEmpty"
+            val keyPasswordLocal: String =
+                System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("keyPassword")
+                ?: "keyPasswordEmpty"
+
+            storeFile = file("keyStore/cashadvisor.jks")
+            storePassword = storePasswordLocal
+            keyAlias = keyAliasLocal
+            keyPassword = keyPasswordLocal
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             isDebuggable = true
             applicationIdSuffix = ".debug"
+            matchingFallbacks += listOf("release")
         }
 
         create("qa") {
             initWith(getByName("release"))
-            isMinifyEnabled = false
             applicationIdSuffix = ".qa"
-            signingConfig = signingConfigs.getByName("debug")
-
-        }
-
-        firebaseAppDistribution{
-            artifactType = "APK"
-            releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
-            testers = "QA"
+            signingConfig = signingConfigs.getByName("release")
+            matchingFallbacks += listOf("release")
         }
 
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
-
-        }
-
-        firebaseAppDistribution{
-            artifactType = "APK"
-            releaseNotesFile = "app/src/stage/qa/releaseNotes.txt"
-            testers = "QA"
-
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -88,12 +97,20 @@ android {
         viewBinding = true
     }
 }
-task("appDistirbutionToQaStageQa") {
+
+firebaseAppDistribution {
+    artifactType = "APK"
+    releaseNotesFile = "app/src/releaseNotes.txt"
+    testers = "QA"
+    serviceCredentialsFile = "app/serviceCredentialsFile.json"
+}
+
+task("appDistributionToQaStageQa") {
     dependsOn("assembleStageQa")
     dependsOn("appDistributionUploadStageQa")
 }
 
-task("appDistirbutionToQaProdQa") {
+task("appDistributionToQaProdQa") {
     dependsOn("assembleProdQa")
     dependsOn("appDistributionUploadProdQa")
 }
