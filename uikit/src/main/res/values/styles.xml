@@ -137,7 +137,7 @@
         <item name="android:textAlignment">2</item>
     </style>
 
-    <!-- Profile Tags Styles test -->
+    <!-- Profile Tags Styles -->
     <style name="Widget.CashAdvisor.Text.TagsActive" parent="Widget.CashAdvisor.Text.Text_info">
         <item name="android:minHeight">20dp</item>
         <item name="android:minWidth">35dp</item>
