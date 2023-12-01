@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Widget.CashAdvisor.Text" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <!-- Basic Text styles -->
@@ -82,7 +82,7 @@
         <item name="android:textAlignment">4</item>
         <item name="android:paddingStart">10dp</item>
         <item name="android:paddingEnd">10dp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:background">@drawable/textview_border_active</item>
     </style>
 
@@ -97,7 +97,7 @@
     </style>
 
     <style name="Widget.CashAdvisor.Text.ForgetPassword" parent="Widget.CashAdvisor.Text.Text_cont">
-        <item name="android:textColor">@color/m3</item>
+        <item name="android:textColor">?attr/m3</item>
     </style>
 
     <!-- Text Field Headers -->
@@ -146,7 +146,7 @@
         <item name="android:paddingEnd">15dp</item>
         <item name="android:paddingTop">9dp</item>
         <item name="android:paddingBottom">7dp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">?attr/whitecolour</item>
         <item name="android:background">@drawable/black_button_background</item>
     </style>
 
@@ -158,7 +158,7 @@
         <item name="android:paddingEnd">15dp</item>
         <item name="android:paddingTop">9dp</item>
         <item name="android:paddingBottom">7dp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:background">@drawable/gray_button_background</item>
     </style>
 
