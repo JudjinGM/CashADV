@@ -4,79 +4,79 @@
     <style name="Header1">
         <item name="fontFamily">@font/gilroybold</item>
         <item name="android:textSize">40sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Header2">
         <item name="fontFamily">@font/gilroybold</item>
         <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Header3">
         <item name="fontFamily">@font/gilroybold</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Main_Text">
         <item name="fontFamily">@font/gilroysemibold</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Text_info">
         <item name="fontFamily">@font/gilroysemibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="num_big">
         <item name="fontFamily">@font/interbold</item>
         <item name="android:textSize">45sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="num_reg">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Text_cont">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="Subtext">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="num_sub">
         <item name="fontFamily">@font/interbold</item>
         <item name="android:textSize">8sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <!-- Register Disclaimer Text Styles -->
     <style name="DisclaimerText" parent="Subtext">
         <item name="android:textAlignment">2</item>
-        <item name="android:textColor">@color/subcolour2</item>
+        <item name="android:textColor">?attr/subcolour2</item>
     </style>
 
     <!-- Register Title Text Styles -->
     <style name="RegisterHeader" parent="Main_Text">
         <item name="android:textAlignment">4</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <!-- Register Step Description Styles -->
     <style name="RegisterSteps" parent="Subtext">
         <item name="android:textAlignment">4</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <!-- Register Step -->
@@ -101,13 +101,13 @@
     </style>
 
     <style name="ForgetPassword" parent="Text_cont">
-        <item name="android:textColor">@color/m3</item>
+        <item name="android:textColor">?attr/m3</item>
     </style>
 
     <!-- Text Field Headers -->
     <style name="TextFieldHeader" parent="Text_cont">
         <item name="android:textAlignment">2</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
     </style>
 
     <style name="ResetPasswordDisclaimer" parent="Subtext">
@@ -116,28 +116,28 @@
 
     <!-- Total Listing Text Styles -->
     <style name="TotalListingSectionHeaderBlack" parent="Main_Text">
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:textAlignment">2</item>
     </style>
 
     <style name="TotalListingSectionHeaderRed" parent="Main_Text">
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:textAlignment">3</item>
     </style>
 
     <style name="TotalListingSectionElementName" parent="Text_cont">
-        <item name="android:textColor">@color/subcolour2</item>
+        <item name="android:textColor">?attr/subcolour2</item>
         <item name="android:textAlignment">2</item>
     </style>
 
     <style name="TotalListingSectionElementNum" parent="Text_cont">
-        <item name="android:textColor">@color/subcolour2</item>
+        <item name="android:textColor">?attr/subcolour2</item>
         <item name="android:textAlignment">3</item>
     </style>
 
     <!-- Profile Text Styles -->
     <style name="ProfileName" parent="Text_info">
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:textAlignment">2</item>
     </style>
     <!-- Profile Tags Styles -->
@@ -152,20 +152,20 @@
     <style name="BlackButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colour1</item>
+        <item name="android:textColor">?attr/colour1</item>
         <item name="android:background">@drawable/black_button_background</item>
     </style>
 
     <style name="GreyButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">#000000</item>
+        <item name="android:textColor">?attr/colour2</item>
         <item name="android:background">@drawable/gray_button_background</item>
     </style>
 
     <!-- Calendar Styles -->
     <style name="CurrentMonth" parent="Text_cont">
-        <item name="android:textColor">@color/subcolour2</item>
+        <item name="android:textColor">?attr/subcolour2</item>
         <item name="android:textAlignment">4</item>
         <item name="android:paddingStart">5dp</item>
         <item name="android:paddingEnd">5dp</item>
