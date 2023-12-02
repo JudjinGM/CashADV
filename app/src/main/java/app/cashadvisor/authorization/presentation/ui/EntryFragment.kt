@@ -1,11 +1,19 @@
 package app.cashadvisor.authorization.presentation.ui
 
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.ActivityResultRegistry
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
@@ -18,15 +26,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
 class EntryFragment : Fragment() {
-
-    companion object {
-        const val RC_SIGN_IN = 111
-    }
-
     private var _binding: FragmentEntryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var startResultSignIn: ActivityResultLauncher<Intent>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,6 @@ class EntryFragment : Fragment() {
         arguments?.let {
 
         }
-
         setupGoogleRegistration()
     }
 
@@ -59,24 +61,13 @@ class EntryFragment : Fragment() {
 
         binding.signInButton.setOnClickListener{
             val signIntent = mGoogleSignInClient.signInIntent
-            startActivityForResult(signIntent, RC_SIGN_IN)
+            startResultSignIn.launch(signIntent)
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode === RC_SIGN_IN) {
-            val task =
-                GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
     }
 
     override fun onStart() {
@@ -88,26 +79,38 @@ class EntryFragment : Fragment() {
     }
 
     //Настроить регистрацию через google
-    private fun setupGoogleRegistration(){
-        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
+    private fun setupGoogleRegistration() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
+        setupResultSignIn()
+    }
+
+    private fun setupResultSignIn(){
+        startResultSignIn = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val task =
+                    GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleSignInResult(task)
+            }
+        }
     }
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+            val account: GoogleSignInAccount? = completedTask.getResult(ApiException::class.java)
             val googleFirstName = account?.givenName ?: ""
-            Log.i("Google First Name", googleFirstName)
+            Log.i("Google Account", "Google First Name: $googleFirstName")
             val googleLastName = account?.familyName ?: ""
-            Log.i("Google Last Name", googleLastName)
+            Log.i("Google Account", "Google Last Name: $googleLastName")
             val googleEmail = account?.email ?: ""
-            Log.i("Google Email", googleEmail)
+            Log.i("Google Account", "Google Email: $googleEmail")
         } catch (e: ApiException) {
             Log.e(
-                "failed code=", e.statusCode.toString()
+                "Google Account", "failed code= ${e.statusCode}"
             )
         }
     }
