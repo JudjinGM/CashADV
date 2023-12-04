@@ -165,7 +165,7 @@
 
     <!-- Buttons Styles -->
       <style name="BlackButton10" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:textColor">?attr/white</item>
+        <item name="android:textColor">?attr/whitecolour</item>
         <item name="android:background">@drawable/button_black_10</item>
     </style>
 
@@ -175,7 +175,7 @@
     </style>
 
     <style name="BlackButton100" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:textColor">?attr/white</item>
+        <item name="android:textColor">?attr/whitecolour</item>
         <item name="android:background">@drawable/button_black_100</item>
     </style>
 
@@ -190,7 +190,7 @@
     </style>
 
     <style name="BlackButton15" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="android:textColor">?attr/white</item>
+        <item name="android:textColor">?attr/whitecolour</item>
         <item name="android:background">@drawable/button_black_15</item>
     </style>
 
