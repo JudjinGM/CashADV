@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Widget.CashAdvisor.Text" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?attr/colour1</item>
     </style>
@@ -163,18 +164,79 @@
     </style>
 
     <!-- Buttons Styles -->
-    <style name="BlackButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="fontFamily">@font/intersemibold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/colour1</item>
-        <item name="android:background">@drawable/black_button_background</item>
+      <style name="BlackButton10" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/white</item>
+        <item name="android:background">@drawable/button_black_10</item>
     </style>
 
-    <style name="GreyButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="fontFamily">@font/intersemibold</item>
-        <item name="android:textSize">14sp</item>
+    <style name="Bg2Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="android:textColor">?attr/colour2</item>
-        <item name="android:background">@drawable/gray_button_background</item>
+        <item name="android:background">@drawable/button_bg2_10</item>
+    </style>
+
+    <style name="BlackButton100" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/white</item>
+        <item name="android:background">@drawable/button_black_100</item>
+    </style>
+
+    <style name="Bg1Button15" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/colour2</item>
+        <item name="android:background">@drawable/button_bg1_15</item>
+    </style>
+
+    <style name="WhiteButton15" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/colour2</item>
+        <item name="android:background">@drawable/button_white_15</item>
+    </style>
+
+    <style name="BlackButton15" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/white</item>
+        <item name="android:background">@drawable/button_black_15</item>
+    </style>
+
+    <style name="BlackLineButton10_1_5" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/colour2</item>
+        <item name="android:background">@drawable/button_black_line_10_1_5</item>
+    </style>
+
+    <style name="Subcolour2LineButton10_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/subcolour2</item>
+        <item name="android:background">@drawable/button_subcolour2_line_10_2</item>
+    </style>
+
+    <style name="M1LineButton10_1_5" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/m1</item>
+        <item name="android:background">@drawable/button_m1_line_10_1_5</item>
+    </style>
+
+    <style name="FormatSelectButton">
+        <item name="android:elevation">4dp</item>
+        <item name="android:background">@drawable/button_white_4</item>
+    </style>
+
+    <style name="BlackLineButton10_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/colour2</item>
+        <item name="android:background">@drawable/button_black_line_10_2</item>
+    </style>
+
+    <style name="Bg2LineButton10_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/bg2</item>
+        <item name="android:background">@drawable/button_bg2_line_10_2</item>
+    </style>
+
+    <style name="Subcolour1LineButton10_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/subcolour1</item>
+        <item name="android:background">@drawable/button_subcolour1_line_10_2</item>
+    </style>
+
+    <style name="BlackLineButton15_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/colour2</item>
+        <item name="android:background">@drawable/button_black_line_15_2</item>
+    </style>
+
+    <style name="M2LineButton10_2" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">?attr/m2</item>
+        <item name="android:background">@drawable/button_m2_line_10_2</item>
     </style>
 
     <!-- Calendar Styles -->
