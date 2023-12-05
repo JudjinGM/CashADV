@@ -1,5 +1,6 @@
 package app.cashadvisor.main.presentation.ui
 
+import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -7,7 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
+import app.cashadvisor.common.configureTimber
 import app.cashadvisor.databinding.ActivityMainBinding
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +20,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.configureTimber()
+
+        Timber.tag("MainActivity").d("Debug log")
+        Timber.tag("MainActivity").i("Info log")
+        Timber.tag("MainActivity").w("Warning log")
+        Timber.tag("MainActivity").e("Error log")
 
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
