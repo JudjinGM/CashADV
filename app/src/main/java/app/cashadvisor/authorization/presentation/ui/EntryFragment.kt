@@ -1,6 +1,4 @@
 package app.cashadvisor.authorization.presentation.ui
-
-import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
@@ -82,6 +77,7 @@ class EntryFragment : Fragment() {
     private fun setupGoogleRegistration() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
+            .requestIdToken(getString(R.string.client_id))
             .build()
 
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
@@ -108,6 +104,10 @@ class EntryFragment : Fragment() {
             Log.i("Google Account", "Google Last Name: $googleLastName")
             val googleEmail = account?.email ?: ""
             Log.i("Google Account", "Google Email: $googleEmail")
+            val googleIdToken = account?.idToken
+            Log.i("Google Account", "Google idToken: $googleIdToken")
+            Log.i("Google Account", "Token Info: https://oauth2.googleapis.com/tokeninfo?id_token=$googleIdToken")
+
         } catch (e: ApiException) {
             Log.e(
                 "Google Account", "failed code= ${e.statusCode}"
