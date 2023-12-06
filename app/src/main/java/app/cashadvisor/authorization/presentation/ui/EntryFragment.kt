@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
 import app.cashadvisor.databinding.FragmentEntryBinding
-import app.cashadvisor.main.presentation.ui.MainActivity
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.VKApiCallback
 import com.vk.api.sdk.auth.VKAuthenticationResult
@@ -28,7 +27,7 @@ class EntryFragment : Fragment() {
             is VKAuthenticationResult.Success -> {
                 Log.d("TEST", "Success: ${result.token.userId}")
                 Toast.makeText(
-                    activity as? MainActivity,
+                    requireContext(),
                     "Success: userId ${result.token.userId.value}",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -39,7 +38,7 @@ class EntryFragment : Fragment() {
             is VKAuthenticationResult.Failed -> {
                 Log.d("TEST", "Failed: ${result.exception.authError}")
                 Toast.makeText(
-                    activity as? MainActivity,
+                    requireContext(),
                     "Failed: ${result.exception.authError}",
                     Toast.LENGTH_LONG
                 ).show()
@@ -88,7 +87,7 @@ class EntryFragment : Fragment() {
             override fun success(result: List<UsersUserFullDto>) {
                 Log.d("TEST", "result: ${result.first().firstName}")
                 Toast.makeText(
-                    activity as? MainActivity,
+                    requireContext(),
                     "Success: ${result.first().firstName} ${result.first().lastName}",
                     Toast.LENGTH_SHORT
                 ).show()
