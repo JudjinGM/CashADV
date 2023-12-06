@@ -70,6 +70,14 @@ android {
             )
             signingConfig = signingConfigs.getByName("release")
         }
+
+        debug {
+            buildConfigField("String", "LOGGING_LEVEL", "\"DEBUG\"")
+        }
+
+        release {
+            buildConfigField("String", "LOGGING_LEVEL", "\"RELEASE\"")
+        }
     }
 
     flavorDimensions += "env"
