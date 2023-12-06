@@ -7,9 +7,10 @@ import timber.log.Timber
 
 
 fun AppCompatActivity.configureTimber() {
-    if (BuildConfig.DEBUG) {
-        Timber.plant(Timber.DebugTree())
-    } else {
-        Timber.plant(TimberLogTree())
+    when (BuildConfig.BUILD_TYPE) {
+        "debug" -> {}
+        "release" -> {}
+        "qa" -> {}
+        else -> {}
     }
 }

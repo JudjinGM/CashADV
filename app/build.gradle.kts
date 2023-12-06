@@ -54,6 +54,7 @@ android {
             isDebuggable = true
             applicationIdSuffix = ".debug"
             matchingFallbacks += listOf("release")
+            buildConfigField("String", "LOGGING_LEVEL", "\"DEBUG\"")
         }
 
         create("qa") {
@@ -61,6 +62,7 @@ android {
             applicationIdSuffix = ".qa"
             signingConfig = signingConfigs.getByName("release")
             matchingFallbacks += listOf("release")
+            buildConfigField("String", "LOGGING_LEVEL", "\"QA\"")
         }
 
         getByName("release") {
@@ -69,13 +71,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
-        }
-
-        debug {
-            buildConfigField("String", "LOGGING_LEVEL", "\"DEBUG\"")
-        }
-
-        release {
             buildConfigField("String", "LOGGING_LEVEL", "\"RELEASE\"")
         }
     }
