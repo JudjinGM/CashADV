@@ -45,6 +45,7 @@ dependencyResolutionManagement {
             version("gms-googleServices", "4.4.0")
             version("firebase.appdistribution", "4.0.1")
             version("android-library", "8.1.1")
+            version("vkid", "4.1.0")
 
 
             plugin(
@@ -290,6 +291,16 @@ dependencyResolutionManagement {
                 "com.google.firebase",
                 "firebase-crashlytics-gradle"
             ).versionRef("firebase-crashlytics-gradle")
+
+            // Auth vk
+            library("vkid",
+                "com.vk",
+                "android-sdk-core"
+            ).versionRef("vkid")
+            library("vkid",
+                "com.vk",
+                "android-sdk-api"
+            ).versionRef("vkid")
         }
     }
 }

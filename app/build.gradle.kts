@@ -167,6 +167,9 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(platform(libs.firebase.bom))
 
+    // Auth vk
+    implementation(libs.vkid)
+
     // Ui Kit Library
     implementation(project(":uikit"))
 }
