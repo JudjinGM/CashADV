@@ -3,6 +3,7 @@ package app.cashadvisor.main.presentation.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -55,6 +56,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        val logAndCrashButton = Button(this).apply {
+            text = "Log and Crash"
+            setOnClickListener {
+                Timber.tag("MainActivity").d("Debug log")
+                Timber.tag("MainActivity").i("Info log")
+                Timber.tag("MainActivity").w("Warning log")
+                Timber.tag("MainActivity").e("Error log")
+//                throw RuntimeException("This is a test crash.")
+            }
+        }
+        binding.root.addView(logAndCrashButton)
 
 
         // Creates a button that mimics a crash when pressed

@@ -19,5 +19,5 @@ fun AppCompatActivity.configureTimber() = when (BuildConfig.LOGGING_LEVEL) {
         Timber.plant(ReleaseTree())
     }
 
-    else -> {}
+    else -> { Timber.plant(TimberUncknownBuildTree()) }
 }
