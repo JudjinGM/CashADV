@@ -6,15 +6,15 @@ import timber.log.Timber
 
 
 fun AppCompatActivity.configureTimber() = when (BuildConfig.LOGGING_LEVEL) {
-    "debug" -> {
+    "DEBUG" -> {
         Timber.plant(Timber.DebugTree())
     }
 
-    "release" -> {
+    "RELEASE" -> {
         Timber.plant(ReleaseTree())
     }
 
-    "qa" -> {
+    "QA" -> {
         Timber.plant(Timber.DebugTree())
         Timber.plant(ReleaseTree())
     }
