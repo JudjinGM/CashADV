@@ -5,16 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
 import app.cashadvisor.databinding.FragmentStartBinding
+import com.google.firebase.BuildConfig
 
 
 class StartFragment : Fragment() {
 
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,7 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentStartBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentStartBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -36,6 +37,15 @@ class StartFragment : Fragment() {
 
         binding.btnContinue.setOnClickListener {
             findNavController().navigate(R.id.action_startFragment_to_entryFragment)
+        }
+
+
+        if (app.cashadvisor.BuildConfig.DEBUG) {
+
+            binding.uikitSampleButton.isVisible = true
+            binding.uikitSampleButton.setOnClickListener {
+                findNavController().navigate(R.id.action_startFragment_to_uikitSampleFragment)
+            }
         }
     }
 
