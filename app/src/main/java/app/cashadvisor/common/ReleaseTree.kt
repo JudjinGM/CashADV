@@ -15,9 +15,9 @@ class ReleaseTree : Timber.Tree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         when (priority) {
             WARN -> {crashlytics.log("$priority $tag $message")
-                crashlytics.recordException(t ?: Exception(message))
+                crashlytics.recordException(t ?: RuntimeException(message))
             }
-            ERROR -> crashlytics.recordException(t ?: Exception(message))
+            ERROR -> crashlytics.recordException(t ?: RuntimeException(message))
         }
     }
 }
