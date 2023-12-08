@@ -59,6 +59,9 @@
         <action
             android:id="@+id/action_startFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_uikitSampleFragment"
+            app:destination="@id/uikitSampleFragment" />
     </fragment>
     <fragment
         android:id="@+id/entryFragment"
@@ -346,5 +349,50 @@
             android:id="@+id/action_bankAccountsFragment_to_addBankSelectionFragment"
             app:destination="@id/addBankSelectionFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/uikitSampleFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.UikitSampleFragment"
+        android:label="UikitSampleFragment"
+        tools:layout="@layout/fragment_uikit_sample">
+        <action
+            android:id="@+id/action_uikitSampleFragment_to_firstDiagramFragment"
+            app:destination="@id/firstDiagramFragment" />
+        <action
+            android:id="@+id/action_uikitSampleFragment_to_secondDiagramFragment"
+            app:destination="@id/secondDiagramFragment" />
+        <action
+            android:id="@+id/action_uikitSampleFragment_to_thirdDiagramFragment"
+            app:destination="@id/thirdDiagramFragment" />
+        <action
+            android:id="@+id/action_uikitSampleFragment_to_fourthDiagramFragment"
+            app:destination="@id/fourthDiagramFragment" />
+        <action
+            android:id="@+id/action_uikitSampleFragment_to_fifthDiagramFragment"
+            app:destination="@id/fifthDiagramFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstDiagramFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.FirstDiagramFragment"
+        android:label="fragment_first_diagram"
+        tools:layout="@layout/fragment_first_diagram" />
+    <fragment
+        android:id="@+id/secondDiagramFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.SecondDiagramFragment"
+        android:label="fragment_second_diagram"
+        tools:layout="@layout/fragment_second_diagram" />
+    <fragment
+        android:id="@+id/thirdDiagramFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.ThirdDiagramFragment"
+        android:label="fragment_third_diagram"
+        tools:layout="@layout/fragment_third_diagram" />
+    <fragment
+        android:id="@+id/fourthDiagramFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.FourthDiagramFragment"
+        android:label="fragment_fourth_diagram"
+        tools:layout="@layout/fragment_fourth_diagram" />
+    <fragment
+        android:id="@+id/fifthDiagramFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.diagrams.FifthDiagramFragment"
+        android:label="fragment_fifth_diagram"
+        tools:layout="@layout/fragment_fifth_diagram" />
 </navigation>
