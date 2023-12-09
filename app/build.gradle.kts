@@ -42,12 +42,20 @@ android {
                 System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("keyPassword")
                 ?: "keyPasswordEmpty"
 
-            storeFile = file("keyStore/cashadvisor.jks")
+            storeFile = file("keyStore/cashadvisor.jks" )
             storePassword = storePasswordLocal
             keyAlias = keyAliasLocal
             keyPassword = keyPasswordLocal
         }
+
+        getByName("debug") {
+            storeFile = file("keyStore/debug.keystore")
+            storePassword = "android"
+            keyAlias ="androiddebugkey"
+            keyPassword = "android"
+        }
     }
+
 
     buildTypes {
         getByName("debug") {
@@ -173,6 +181,9 @@ dependencies {
 
     // Ui Kit Library
     implementation(project(":uikit"))
+
+    //Sign-In
+    implementation(libs.play.services.auth)
 }
 
 kapt {
