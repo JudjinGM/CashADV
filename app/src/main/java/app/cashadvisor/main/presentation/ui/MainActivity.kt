@@ -8,8 +8,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
-import app.cashadvisor.common.configureTimber
 import app.cashadvisor.databinding.ActivityMainBinding
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.configureTimber()
 
         Timber.tag("MainActivity").d("Debug log")
         Timber.tag("MainActivity").i("Info log")
@@ -65,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 Timber.tag("MainActivity").w("Warning log")
                 Timber.tag("MainActivity").e("Error log")
 //                throw RuntimeException("This is a test crash.")
+                FirebaseCrashlytics.getInstance().log("This is a test crash sended from button.")
             }
         }
         binding.root.addView(logAndCrashButton)
