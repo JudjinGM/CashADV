@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 Timber.tag("MainActivity").i("Info log")
                 Timber.tag("MainActivity").w("Warning log")
                 Timber.tag("MainActivity").e("Error log")
-//                throw RuntimeException("This is a test crash.")
+                throw RuntimeException("This is a test crash.")
                 FirebaseCrashlytics.getInstance().log("This is a test crash sended from button.")
             }
         }
