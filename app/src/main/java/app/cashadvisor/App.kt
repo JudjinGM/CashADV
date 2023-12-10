@@ -13,20 +13,20 @@ class App : Application() {
     }
 
     private fun configureTimber() = when (BuildConfig.LOGGING_LEVEL) {
-        "DEBUG" -> {
+        DEBUG -> {
             Timber.plant(Timber.DebugTree())
         }
 
-        "RELEASE" -> {
+        RELEASE -> {
             plantReleaseTree()
         }
 
-        "QA" -> {
+        QA -> {
             Timber.plant(Timber.DebugTree())
             plantReleaseTree()
         }
 
-        else -> { }
+        else -> {}
     }
 
     private fun plantReleaseTree() {
@@ -42,11 +42,21 @@ class App : Application() {
                 when (priority) {
                     Log.WARN -> {
                         FirebaseCrashlytics.getInstance().log("$priority $tag $message")
-                        FirebaseCrashlytics.getInstance().recordException(t ?: RuntimeException(message))
+                        FirebaseCrashlytics.getInstance()
+                            .recordException(t ?: RuntimeException(message))
                     }
-                    Log.ERROR -> FirebaseCrashlytics.getInstance().recordException(t ?: RuntimeException(message))
+
+                    Log.ERROR -> FirebaseCrashlytics.getInstance()
+                        .recordException(t ?: RuntimeException(message))
                 }
             }
         })
+    }
+
+    companion object {
+        private const val DEBUG = "DEBUG"
+        private const val RELEASE = "RELEASE"
+        private const val QA = "QA"
+
     }
 }
