@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircularGraph">
+
+        <attr name="arcColor1" format="color"/>
+        <attr name="arcColor2" format="color"/>
+        <attr name="circleThickness" format="dimension"/>
+        <attr name="arcSpacing" format="dimension"/>
+        <attr name="headerText" format="string"/>
+        <attr name="textScale" format="dimension"/>
+
+    </declare-styleable>
+
+</resources>
