@@ -9,6 +9,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- vk auth -->
-    <integer name="com_vk_sdk_AppId">51807488</integer>
-
+    <integer name="com_vk_sdk_AppId">51812499</integer>
 </resources>
