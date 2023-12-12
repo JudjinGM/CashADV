@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomViewDiagramFourth">
+        <attr name="colorProgress" format="color" />
+        <attr name="colorBackground" format="color" />
+        <attr name="radiusView" format="dimension" />
+    </declare-styleable>
+
+    <attr name="CustomViewDiagramFourthStyle" format="reference" />
+</resources>

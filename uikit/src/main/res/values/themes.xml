@@ -27,5 +27,13 @@
         <item name="sm1">@color/sm1</item>
         <item name="sm2">@color/sm2</item>
         <item name="sm5">@color/sm5</item>
+
+        <item name="CustomViewDiagramFourthStyle">@style/CustomViewDiagramFourthStyle</item>
+    </style>
+
+    <style name="CustomViewDiagramFourthStyle">
+        <item name="colorProgress">@color/m7</item>
+        <item name="colorBackground">@color/bg2</item>
+        <item name="radiusView">10dp</item>
     </style>
 </resources>
