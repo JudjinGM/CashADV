@@ -20,8 +20,8 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     defStyleRes: Int = R.style.CustomViewDiagramFourthStyle
 ) : View(context, attributesSet, defStyleAttr, defStyleRes) {
 
-    private var widthBar: Float = 0f
-    private var maxWidthBar = 0f
+    private var barWidth: Float = 0f
+    private var barMaxWidth = 0f
 
     private var colorBackgroundProgress by Delegates.notNull<Int>()
     private var colorProgress by Delegates.notNull<Int>()
@@ -37,7 +37,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     var progress: Int = 0
         set(value) {
             field = value.coerceIn(0, 100)
-            widthBar = maxWidthBar * (100 - field) / 100f
+            barWidth = barMaxWidth * (100 - field) / 100f
             invalidate()
         }
 
@@ -90,7 +90,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             right = width - paddingRight - paddingProgressFromBackground
             bottom = height - paddingBottom - paddingProgressFromBackground
         }
-        maxWidthBar = width.toFloat() - progressSizeField.height()
+        barMaxWidth = width.toFloat() - progressSizeField.height()
         progress = progress
     }
 
@@ -118,7 +118,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        progressSizeField.left = paddingLeft.toFloat() + paddingProgressFromBackground + widthBar
+        progressSizeField.left = paddingLeft.toFloat() + paddingProgressFromBackground + barWidth
 
         canvas.drawRoundRect(
             backgroundSizeField, cornerRadius, cornerRadius, rectPaint
