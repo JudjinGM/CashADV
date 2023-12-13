@@ -42,18 +42,27 @@ android {
                 System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("keyPassword")
                 ?: "keyPasswordEmpty"
 
-            storeFile = file("keyStore/cashadvisor.jks")
+            storeFile = file("keyStore/cashadvisor.jks" )
             storePassword = storePasswordLocal
             keyAlias = keyAliasLocal
             keyPassword = keyPasswordLocal
         }
+
+        getByName("debug") {
+            storeFile = file("keyStore/debug.keystore")
+            storePassword = "android"
+            keyAlias ="androiddebugkey"
+            keyPassword = "android"
+        }
     }
+
 
     buildTypes {
         getByName("debug") {
             isDebuggable = true
             applicationIdSuffix = ".debug"
             matchingFallbacks += listOf("release")
+            buildConfigField("String", "LOGGING_LEVEL", "\"DEBUG\"")
         }
 
         create("qa") {
@@ -61,6 +70,7 @@ android {
             applicationIdSuffix = ".qa"
             signingConfig = signingConfigs.getByName("release")
             matchingFallbacks += listOf("release")
+            buildConfigField("String", "LOGGING_LEVEL", "\"QA\"")
         }
 
         getByName("release") {
@@ -69,6 +79,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+            buildConfigField("String", "LOGGING_LEVEL", "\"RELEASE\"")
         }
     }
 
@@ -95,6 +106,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -169,6 +181,9 @@ dependencies {
 
     // Ui Kit Library
     implementation(project(":uikit"))
+
+    //Sign-In
+    implementation(libs.play.services.auth)
 }
 
 kapt {
