@@ -14,8 +14,8 @@ class SecondDiagramFragment : Fragment() {
     private var _binding: FragmentSecondDiagramBinding? = null
     private val binding get() = _binding!!
 
-    private var processOne = 0
-    private var processTwo = 0
+    private var processProgressOne = 0
+    private var processProgressTwo = 0
 
 
     override fun onCreateView(
@@ -30,27 +30,27 @@ class SecondDiagramFragment : Fragment() {
         val progressList = listOf(
             Progress(
                 id = 1,
-                processOne,
+                processProgressOne,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 2,
-                processTwo,
+                processProgressTwo,
                 mainColor = resources.getColor(R.color.m7, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 1,
-                processOne,
+                processProgressOne,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 2,
-                processTwo,
+                processProgressTwo,
                 mainColor = resources.getColor(R.color.m7, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 1,
-                processOne,
+                processProgressOne,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             )
@@ -59,20 +59,20 @@ class SecondDiagramFragment : Fragment() {
         binding.progressBar.initialiseProgressBar(progressList)
 
         binding.buttonPlusOne.setOnClickListener {
-            processOne += 1
-            binding.progressBar.setProgressById(1, processOne)
+            processProgressOne += 1
+            binding.progressBar.setProgressById(1, processProgressOne)
         }
         binding.buttonMinusOne.setOnClickListener {
-            processOne -= 1
-            binding.progressBar.setProgressById(1, processOne)
+            processProgressOne -= 1
+            binding.progressBar.setProgressById(1, processProgressOne)
         }
         binding.buttonPlusTwo.setOnClickListener {
-            processTwo += 1
-            binding.progressBar.setProgressById(2, processTwo)
+            processProgressTwo += 1
+            binding.progressBar.setProgressById(2, processProgressTwo)
         }
         binding.buttonMinusTwo.setOnClickListener {
-            processTwo -= 1
-            binding.progressBar.setProgressById(2, processTwo)
+            processProgressTwo -= 1
+            binding.progressBar.setProgressById(2, processProgressTwo)
         }
     }
 

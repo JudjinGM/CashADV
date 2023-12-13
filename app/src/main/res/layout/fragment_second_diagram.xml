@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="app.cashadvisor.authorization.presentation.ui.diagrams.SecondDiagramFragment">
 
-    <app.cashadvisor.customView.multipleCircleProgreeBar.MultipleCircleProgressBar
+    <app.cashadvisor.customView.multipleCircleProgreeBar.MultipleCircleProgressBars
         android:id="@+id/progressBar"
         android:layout_width="160dp"
         android:layout_height="160dp"

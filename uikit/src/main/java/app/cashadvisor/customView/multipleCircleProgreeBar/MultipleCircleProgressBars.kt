@@ -11,13 +11,12 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import app.cashadvisor.customView.multipleCircleProgreeBar.model.Progress
 import app.cashadvisor.customView.multipleCircleProgreeBar.model.ProgressCircle
 
 
-class MultipleCircleProgressBar @JvmOverloads constructor(
+class MultipleCircleProgressBars @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -94,14 +93,26 @@ class MultipleCircleProgressBar @JvmOverloads constructor(
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
-            super.onRestoreInstanceState(state.getParcelable(STATE_KEY, BaseSavedState::class.java))
-            val savedProgressList = state.getParcelableArray(PROGRESS_LIST_KEY, Progress::class.java)
-            if (savedProgressList != null) {
-                progressList = savedProgressList.toList()
-                invalidate()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                super.onRestoreInstanceState(
+                    state.getParcelable(STATE_KEY, BaseSavedState::class.java)
+                )
+                val savedProgressList =
+                    state.getParcelableArray(PROGRESS_LIST_KEY, Progress::class.java)
+                if (savedProgressList != null) {
+                    progressList = savedProgressList.toList()
+                    invalidate()
+                }
+            } else {
+                super.onRestoreInstanceState(state.getParcelable(STATE_KEY))
+                val savedProgressList =
+                    state.getParcelableArray(PROGRESS_LIST_KEY)
+                if (savedProgressList != null) {
+                    progressList = savedProgressList.toList() as List<Progress>
+                    invalidate()
+                }
             }
         } else {
             super.onRestoreInstanceState(state)
