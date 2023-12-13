@@ -1,4 +1,4 @@
-package app.cashadvisor.customView.multipleCircleProgreeBar
+package app.cashadvisor.customView.multipleCircleProgressBar
 
 
 import android.content.Context
@@ -12,8 +12,8 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.os.bundleOf
-import app.cashadvisor.customView.multipleCircleProgreeBar.model.Progress
-import app.cashadvisor.customView.multipleCircleProgreeBar.model.ProgressCircle
+import app.cashadvisor.customView.multipleCircleProgressBar.model.Progress
+import app.cashadvisor.customView.multipleCircleProgressBar.model.ProgressCircle
 
 
 class MultipleCircleProgressBars @JvmOverloads constructor(

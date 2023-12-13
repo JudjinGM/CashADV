@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import app.cashadvisor.customView.multipleCircleProgreeBar.model.Progress
+import app.cashadvisor.customView.multipleCircleProgressBar.model.Progress
 import app.cashadvisor.databinding.FragmentSecondDiagramBinding
 import app.cashadvisor.uikit.R
 

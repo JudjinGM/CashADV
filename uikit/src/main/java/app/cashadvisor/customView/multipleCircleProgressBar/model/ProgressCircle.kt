@@ -1,4 +1,4 @@
-package app.cashadvisor.customView.multipleCircleProgreeBar.model
+package app.cashadvisor.customView.multipleCircleProgressBar.model
 
 import android.graphics.Paint
 
