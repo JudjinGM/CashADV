@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <customView.CustomViewDiagramFourth
+    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
         android:id="@+id/custom_diagram_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@+id/custom_diagram_fourth" />
 
 
-    <customView.CustomViewDiagramFourth
+    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
         android:id="@+id/custom_m6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="@+id/custom_m6"
         app:layout_constraintTop_toTopOf="@+id/custom_m6" />
 
-    <customView.CustomViewDiagramFourth
+    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
         android:id="@+id/custom_m8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="@+id/custom_m8"
         app:layout_constraintTop_toTopOf="@+id/custom_m8" />
 
-    <customView.CustomViewDiagramFourth
+    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
         android:id="@+id/custom_m9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

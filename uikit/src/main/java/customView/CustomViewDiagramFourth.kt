@@ -1,4 +1,4 @@
-package customView
+package app.cashadvisor.uikit.customview
 
 import android.content.Context
 import android.graphics.Canvas
@@ -34,7 +34,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     private val backgroundSizeField = RectF(0f, 0f, 0f, 0f)
     private val progressSizeField = RectF(0f, 0f, 0f, 0f)
 
-    var progress: Int = 1
+    var progress: Int = 0
         set(value) {
             field = value.coerceIn(0, 100)
             widthBar = maxWidthBar * (100 - field) / 100f
