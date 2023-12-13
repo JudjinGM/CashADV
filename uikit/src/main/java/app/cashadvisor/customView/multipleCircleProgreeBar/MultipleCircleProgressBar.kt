@@ -6,8 +6,13 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
+import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import app.cashadvisor.customView.multipleCircleProgreeBar.model.Progress
 import app.cashadvisor.customView.multipleCircleProgreeBar.model.ProgressCircle
 
@@ -80,6 +85,27 @@ class MultipleCircleProgressBar @JvmOverloads constructor(
         drawProgressBar(
             canvas = canvas, progressCircleList = progressCircleList
         )
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        return bundleOf(
+            STATE_KEY to super.onSaveInstanceState(),
+            PROGRESS_LIST_KEY to progressList.toTypedArray()
+        )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            super.onRestoreInstanceState(state.getParcelable(STATE_KEY, BaseSavedState::class.java))
+            val savedProgressList = state.getParcelableArray(PROGRESS_LIST_KEY, Progress::class.java)
+            if (savedProgressList != null) {
+                progressList = savedProgressList.toList()
+                invalidate()
+            }
+        } else {
+            super.onRestoreInstanceState(state)
+        }
     }
 
 
@@ -217,5 +243,8 @@ class MultipleCircleProgressBar @JvmOverloads constructor(
         const val PROGRESS_MAX_VALUE = 100f
         const val FULL_CIRCLE_ANGLE = 360
         const val START_ANGLE = 270f
+
+        const val STATE_KEY = "superState"
+        const val PROGRESS_LIST_KEY = "progressList"
     }
 }
