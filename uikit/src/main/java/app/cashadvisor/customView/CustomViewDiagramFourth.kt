@@ -1,16 +1,17 @@
-package app.cashadvisor.uikit.customview
+package app.cashadvisor.customView
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Typeface
+import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import app.cashadvisor.uikit.R
 import kotlin.math.max
-import kotlin.properties.Delegates
 
 
 class CustomViewDiagramFourth @JvmOverloads constructor(
@@ -23,18 +24,24 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     private var barWidth: Float = 0f
     private var barMaxWidth = 0f
 
-    private var colorBackgroundProgress by Delegates.notNull<Int>()
-    private var colorProgress by Delegates.notNull<Int>()
-    private var paddingProgressFromBackground by Delegates.notNull<Float>()
-    private var cornerRadius by Delegates.notNull<Float>()
+    private var colorBackgroundProgress = Color.GRAY
+    private var colorProgress = Color.GREEN
+    private var colorTextProgress = Color.WHITE
+    private var textSizeProgress = DEFAULT_TEXT_SIZE
+
+    private var paddingProgressFromBackground = PADDING_PROGRESS_BACKGROUND
+    private var paddingTextProgress = PADDING_TEXT_PROGRESS
+    private var cornerRadius = DEFAULT_CORNER_RADIUS
 
     private lateinit var rectPaint: Paint
     private lateinit var rectPaintProgress: Paint
+    private lateinit var textPaint: Paint
+    private lateinit var textFontProgress: Typeface
 
     private val backgroundSizeField = RectF(0f, 0f, 0f, 0f)
     private val progressSizeField = RectF(0f, 0f, 0f, 0f)
 
-    var progress: Int = 0
+    var progress: Int = 40
         set(value) {
             field = value.coerceIn(0, 100)
             barWidth = barMaxWidth * (100 - field) / 100f
@@ -57,10 +64,29 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             colorProgress = getColor(R.styleable.CustomViewDiagramFourth_colorProgress, Color.GREEN)
             cornerRadius =
                 getDimension(R.styleable.CustomViewDiagramFourth_radiusView, DEFAULT_CORNER_RADIUS)
+            colorTextProgress =
+                getColor(R.styleable.CustomViewDiagramFourth_textColorProgress, Color.WHITE)
+            textSizeProgress = getDimension(
+                R.styleable.CustomViewDiagramFourth_textSizeProgress, DEFAULT_TEXT_SIZE
+            )
+        }
+        val textFontId =
+            typedArray.getResourceId(R.styleable.CustomViewDiagramFourth_textFontProgress, 0)
+        textFontProgress = if (textFontId != 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Typeface.create(resources.getFont(textFontId), Typeface.NORMAL)
+            } else {
+                Typeface.DEFAULT
+            }
+        } else {
+            Typeface.DEFAULT
         }
 
         paddingProgressFromBackground = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, PADDING_PROGRESS_BACKGROUND, resources.displayMetrics
+        )
+        paddingTextProgress = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, PADDING_TEXT_PROGRESS, resources.displayMetrics
         )
         typedArray.recycle()
     }
@@ -73,6 +99,13 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
         rectPaintProgress = Paint().apply {
             isAntiAlias = true
             color = colorProgress
+        }
+        textPaint = Paint().apply {
+            isAntiAlias = true
+            textAlign = Paint.Align.RIGHT
+            color = colorTextProgress
+            textSize = textSizeProgress
+            typeface = textFontProgress
         }
     }
 
@@ -118,20 +151,31 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        val xPos = progressSizeField.right - paddingTextProgress - paddingProgressFromBackground
+        val yPos = height / 2f
+        val yPosText = (yPos - ((textPaint.descent() + textPaint.ascent()) / 2))
         progressSizeField.left = paddingLeft.toFloat() + paddingProgressFromBackground + barWidth
 
         canvas.drawRoundRect(
             backgroundSizeField, cornerRadius, cornerRadius, rectPaint
         )
-        if (progress == 0) return
-        canvas.drawRoundRect(
-            progressSizeField, cornerRadius, cornerRadius, rectPaintProgress
+
+        if (progress != 0) {
+            canvas.drawRoundRect(
+                progressSizeField, cornerRadius, cornerRadius, rectPaintProgress
+            )
+        }
+
+        canvas.drawText(
+            progress.toString(), xPos, yPosText, textPaint
         )
     }
 
     companion object {
         const val PADDING_PROGRESS_BACKGROUND = 1f
-        const val DEFAULT_CORNER_RADIUS = 10F
+        const val PADDING_TEXT_PROGRESS = 5f
+        const val DEFAULT_CORNER_RADIUS = 10f
+        const val DEFAULT_TEXT_SIZE = 11F
         const val DEFAULT_HEIGHT = 15f
         const val DEFAULT_WIDTH = 150f
     }

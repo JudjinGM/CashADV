@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
+    <app.cashadvisor.customView.CustomViewDiagramFourth
         android:id="@+id/custom_diagram_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,23 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text" />
 
-    <TextView
-        android:id="@+id/text_custom_diagram_fourth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/intersemibold"
-        android:paddingTop="2dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="3dp"
-        android:text="58"
-        android:textColor="?attr/whitecolour"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/custom_diagram_fourth"
-        app:layout_constraintEnd_toEndOf="@+id/custom_diagram_fourth"
-        app:layout_constraintTop_toTopOf="@+id/custom_diagram_fourth" />
-
-
-    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
+    <app.cashadvisor.customView.CustomViewDiagramFourth
         android:id="@+id/custom_m6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,22 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_diagram_fourth" />
 
-    <TextView
-        android:id="@+id/text_custom_m6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/intersemibold"
-        android:paddingTop="2dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="3dp"
-        android:text="58"
-        android:textColor="?attr/whitecolour"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/custom_m6"
-        app:layout_constraintEnd_toEndOf="@+id/custom_m6"
-        app:layout_constraintTop_toTopOf="@+id/custom_m6" />
-
-    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
+    <app.cashadvisor.customView.CustomViewDiagramFourth
         android:id="@+id/custom_m8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,22 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_m6" />
 
-    <TextView
-        android:id="@+id/text_custom_m8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/intersemibold"
-        android:paddingTop="2dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="3dp"
-        android:text="58"
-        android:textColor="?attr/whitecolour"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/custom_m8"
-        app:layout_constraintEnd_toEndOf="@+id/custom_m8"
-        app:layout_constraintTop_toTopOf="@+id/custom_m8" />
-
-    <app.cashadvisor.uikit.customview.CustomViewDiagramFourth
+    <app.cashadvisor.customView.CustomViewDiagramFourth
         android:id="@+id/custom_m9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,21 +58,6 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custom_m8" />
-
-    <TextView
-        android:id="@+id/text_custom_m9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/intersemibold"
-        android:paddingTop="2dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="3dp"
-        android:text="58"
-        android:textColor="?attr/whitecolour"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/custom_m9"
-        app:layout_constraintEnd_toEndOf="@+id/custom_m9"
-        app:layout_constraintTop_toTopOf="@+id/custom_m9" />
 
     <Button
         android:id="@+id/random_int"

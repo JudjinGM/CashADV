@@ -26,13 +26,9 @@ class FourthDiagramFragment : Fragment() {
         binding.randomInt.setOnClickListener {
             with(binding) {
                 customDiagramFourth.progress = Random.nextInt(-5, 105)
-                textCustomDiagramFourth.text = customDiagramFourth.progress.toString()
                 customM6.progress = Random.nextInt(-5, 105)
-                textCustomM6.text = customM6.progress.toString()
                 customM8.progress = Random.nextInt(-5, 105)
-                textCustomM8.text = customM8.progress.toString()
                 customM9.progress = Random.nextInt(-5, 105)
-                textCustomM9.text = customM9.progress.toString()
             }
         }
 
@@ -40,13 +36,9 @@ class FourthDiagramFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 with(binding) {
                     customDiagramFourth.progress = progress
-                    textCustomDiagramFourth.text = progress.toString()
                     customM6.progress = progress
-                    textCustomM6.text = progress.toString()
                     customM8.progress = progress
-                    textCustomM8.text = progress.toString()
                     customM9.progress = progress
-                    textCustomM9.text = progress.toString()
                 }
             }
 
