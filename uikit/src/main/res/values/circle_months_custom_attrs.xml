@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircularDiagramFive">
+
+        <attr name="firstCircleColor" format="color"/>
+        <attr name="secondCircleColor" format="color"/>
+        <attr name="firstTextColor" format="color"/>
+        <attr name="secondTextColor" format="color"/>
+        <attr name="firstTextSize" format="dimension"/>
+        <attr name="secondTextSize" format="dimension"/>
+        <attr name="strokeWidthFirst" format="dimension"/>
+        <attr name="strokeWidthSecond" format="dimension"/>
+
+    </declare-styleable>
+</resources>
