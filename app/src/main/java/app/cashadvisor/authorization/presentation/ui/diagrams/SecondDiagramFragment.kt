@@ -32,32 +32,32 @@ class SecondDiagramFragment : Fragment() {
                 id = 1,
                 processProgressOne,
                 500,
-                mainColor = resources.getColor(R.color.m6, context?.theme),
-                backgroundColor = resources.getColor(R.color.sm2, context?.theme)
+                mainColor = R.color.m6,
+                backgroundColor = R.color.sm2
             ), Progress(
                 id = 2,
                 processProgressTwo,
                 100,
-                mainColor = resources.getColor(R.color.m7, context?.theme),
-                backgroundColor = resources.getColor(R.color.sm2, context?.theme)
+                mainColor = R.color.m7,
+                backgroundColor = R.color.sm2
             ), Progress(
                 id = 1,
                 processProgressOne,
                 50,
-                mainColor = resources.getColor(R.color.m6, context?.theme),
-                backgroundColor = resources.getColor(R.color.sm2, context?.theme)
+                mainColor = R.color.m6,
+                backgroundColor = R.color.sm2
             ), Progress(
                 id = 2,
                 processProgressTwo,
                 10,
-                mainColor = resources.getColor(R.color.m7, context?.theme),
-                backgroundColor = resources.getColor(R.color.sm2, context?.theme)
+                mainColor = R.color.m7,
+                backgroundColor = R.color.sm2
             ), Progress(
                 id = 1,
                 processProgressOne,
                 5,
-                mainColor = resources.getColor(R.color.m6, context?.theme),
-                backgroundColor = resources.getColor(R.color.sm2, context?.theme)
+                mainColor = R.color.m6,
+                backgroundColor = R.color.sm2
             )
         )
 

@@ -2,12 +2,15 @@ package app.cashadvisor.customView.multipleCircleProgressBar.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.ColorRes
 
-data class Progress(val id: Int,
-                    var value: Int,
-                    val maxValue: Int,
-                    val mainColor: Int,
-                    val backgroundColor: Int):Parcelable {
+data class Progress(
+    val id: Int,
+    var value: Int,
+    val maxValue: Int,
+    @ColorRes val mainColor: Int,
+    @ColorRes val backgroundColor: Int
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readInt(),

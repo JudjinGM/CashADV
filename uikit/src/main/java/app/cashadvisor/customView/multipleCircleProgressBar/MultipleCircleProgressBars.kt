@@ -28,9 +28,9 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     private var centerX: Float = 0f
     private var centerY: Float = 0f
 
-    private var listOfMainPaints: List<Paint> = mutableListOf()
-    private var listOfTransparentPaints: List<Paint> = mutableListOf()
-    private var progressCircleList: List<ProgressCircle> = mutableListOf()
+    private var listOfMainPaints: List<Paint> = listOf()
+    private var listOfTransparentPaints: List<Paint> = listOf()
+    private var progressCircleList: List<ProgressCircle> = listOf()
 
     private val arcPath = Path()
 
@@ -183,7 +183,7 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     }
 
     private fun initPaint(paint: Paint, color: Int) {
-        paint.color = color
+        paint.color = resources.getColor(color, context.theme)
         paint.style = Paint.Style.STROKE
         paint.isAntiAlias = true
         paint.strokeCap = Paint.Cap.ROUND
