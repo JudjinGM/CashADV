@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Widget.CashAdvisor.Text" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?attr/colour1</item>
     </style>
@@ -159,21 +160,6 @@
         <item name="android:paddingTop">9dp</item>
         <item name="android:paddingBottom">7dp</item>
         <item name="android:textColor">?attr/colour1</item>
-        <item name="android:background">@drawable/gray_button_background</item>
-    </style>
-
-    <!-- Buttons Styles -->
-    <style name="BlackButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="fontFamily">@font/intersemibold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/colour1</item>
-        <item name="android:background">@drawable/black_button_background</item>
-    </style>
-
-    <style name="GreyButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
-        <item name="fontFamily">@font/intersemibold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/colour2</item>
         <item name="android:background">@drawable/gray_button_background</item>
     </style>
 
