@@ -5,9 +5,11 @@ import android.os.Parcelable
 
 data class Progress(val id: Int,
                     var value: Int,
+                    val maxValue: Int,
                     val mainColor: Int,
                     val backgroundColor: Int):Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt(),
@@ -18,6 +20,7 @@ data class Progress(val id: Int,
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeInt(value)
+        parcel.writeInt(maxValue)
         parcel.writeInt(mainColor)
         parcel.writeInt(backgroundColor)
     }

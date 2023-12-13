@@ -53,7 +53,7 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val defaultSide = convertDimension(DEFAULT_SIZE).toInt()
+        val defaultSide = convertDimension(DEFAULT_VIEW_SIZE).toInt()
 
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
@@ -86,13 +86,6 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
         )
     }
 
-    override fun onSaveInstanceState(): Parcelable {
-        return bundleOf(
-            STATE_KEY to super.onSaveInstanceState(),
-            PROGRESS_LIST_KEY to progressList.toTypedArray()
-        )
-    }
-
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is Bundle) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -119,6 +112,13 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
         }
     }
 
+    override fun onSaveInstanceState(): Parcelable {
+        return bundleOf(
+            STATE_KEY to super.onSaveInstanceState(),
+            PROGRESS_LIST_KEY to progressList.toTypedArray()
+        )
+    }
+
 
     private fun prepareForDraw() {
         centerX = width / 2f
@@ -135,11 +135,6 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
             progressCircleList = initProgressCircles(
                 progressList, listOfMainPaints, listOfTransparentPaints, radiusList
             )
-
-            val angleList: MutableList<Float> = mutableListOf()
-            for (progress in progressList) {
-                angleList.add(getAngle(progress.value))
-            }
         }
     }
 
@@ -208,7 +203,7 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
                 ProgressCircle(
                     paintMain = listOfMainPaints[index],
                     paintBackground = listOfBackgroundPaints[index],
-                    endAngle = getAngle(progress.value),
+                    endAngle = getAngle(progress.value, progress.maxValue),
                     radius = radiusList[index]
                 )
             )
@@ -235,8 +230,10 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
         return (width / 2) / (progressCount * 2)
     }
 
-    private fun getAngle(progress: Int): Float {
-        return progress * FULL_CIRCLE_ANGLE / PROGRESS_MAX_VALUE
+    private fun getAngle(progress: Int, maxValue: Int): Float {
+        return if (progress > maxValue) {
+            FULL_CIRCLE_ANGLE
+        } else progress * FULL_CIRCLE_ANGLE / maxValue
     }
 
     private fun applyStrokeWidthToPaints(paints: List<Paint>, strokeWidth: Int) {
@@ -250,9 +247,8 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     }
 
     companion object {
-        const val DEFAULT_SIZE = 160
-        const val PROGRESS_MAX_VALUE = 100f
-        const val FULL_CIRCLE_ANGLE = 360
+        const val DEFAULT_VIEW_SIZE = 160
+        const val FULL_CIRCLE_ANGLE = 360f
         const val START_ANGLE = 270f
 
         const val STATE_KEY = "superState"

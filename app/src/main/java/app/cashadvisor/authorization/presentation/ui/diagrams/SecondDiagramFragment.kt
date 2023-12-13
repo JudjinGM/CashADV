@@ -31,26 +31,31 @@ class SecondDiagramFragment : Fragment() {
             Progress(
                 id = 1,
                 processProgressOne,
+                500,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 2,
                 processProgressTwo,
+                100,
                 mainColor = resources.getColor(R.color.m7, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 1,
                 processProgressOne,
+                50,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 2,
                 processProgressTwo,
+                10,
                 mainColor = resources.getColor(R.color.m7, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             ), Progress(
                 id = 1,
                 processProgressOne,
+                5,
                 mainColor = resources.getColor(R.color.m6, context?.theme),
                 backgroundColor = resources.getColor(R.color.sm2, context?.theme)
             )
