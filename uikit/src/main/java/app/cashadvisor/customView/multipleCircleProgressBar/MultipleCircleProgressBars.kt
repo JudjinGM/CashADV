@@ -4,7 +4,6 @@ package app.cashadvisor.customView.multipleCircleProgressBar
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Path
 import android.graphics.RectF
 import android.os.Build
 import android.os.Bundle
@@ -31,8 +30,6 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     private var listOfMainPaints: List<Paint> = listOf()
     private var listOfTransparentPaints: List<Paint> = listOf()
     private var progressCircleList: List<ProgressCircle> = listOf()
-
-    private val arcPath = Path()
 
     fun initialiseProgressBar(progressList: List<Progress>) {
         this.progressList = progressList
@@ -100,8 +97,7 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
                 }
             } else {
                 super.onRestoreInstanceState(state.getParcelable(STATE_KEY))
-                val savedProgressList =
-                    state.getParcelableArray(PROGRESS_LIST_KEY)
+                val savedProgressList = state.getParcelableArray(PROGRESS_LIST_KEY)
                 if (savedProgressList != null) {
                     progressList = savedProgressList.toList() as List<Progress>
                     invalidate()
@@ -149,11 +145,10 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
             canvas.drawCircle(
                 centerX, centerY, progressCircle.radius.toFloat(), progressCircle.paintBackground
             )
-            arcPath.addRoundRect(rectF, 100f, 100f, Path.Direction.CW)
 
-            arcPath.reset()
-            arcPath.addArc(rectF, START_ANGLE, progressCircle.endAngle)
-            canvas.drawPath(arcPath, progressCircle.paintMain)
+            canvas.drawArc(
+                rectF, START_ANGLE, progressCircle.endAngle, false, progressCircle.paintMain
+            )
         }
     }
 
