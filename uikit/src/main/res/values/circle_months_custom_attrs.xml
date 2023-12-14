@@ -3,14 +3,14 @@
 
     <declare-styleable name="CircularDiagramFive">
 
-        <attr name="firstCircleColor" format="color"/>
-        <attr name="secondCircleColor" format="color"/>
-        <attr name="firstTextColor" format="color"/>
-        <attr name="secondTextColor" format="color"/>
-        <attr name="firstTextSize" format="dimension"/>
-        <attr name="secondTextSize" format="dimension"/>
-        <attr name="strokeWidthFirst" format="dimension"/>
-        <attr name="strokeWidthSecond" format="dimension"/>
+        <attr name="cdf_firstCircleColor" format="color"/>
+        <attr name="cdf_secondCircleColor" format="color"/>
+        <attr name="cdf_firstTextColor" format="color"/>
+        <attr name="cdf_secondTextColor" format="color"/>
+        <attr name="cdf_firstTextSize" format="dimension"/>
+        <attr name="cdf_secondTextSize" format="dimension"/>
+        <attr name="cdf_strokeWidthFirst" format="dimension"/>
+        <attr name="cdf_strokeWidthSecond" format="dimension"/>
 
     </declare-styleable>
 </resources>

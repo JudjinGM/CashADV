@@ -271,12 +271,6 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-ktx"
             ).withoutVersion()
 
-            library(
-                "firebase-messaging",
-                "com.google.firebase",
-                "firebase-messaging"
-            ).withoutVersion()
-
             library("firebase-bom",
                 "com.google.firebase",
                 "firebase-bom"

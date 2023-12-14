@@ -38,14 +38,14 @@ class CircularDiagramFive(
     init {
         if (attributeSet != null) {
             val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CircularDiagramFive)
-            firstCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_firstCircleColor, firstCircleColor)
-            secondCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_secondCircleColor, secondCircleColor)
-            firstTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_firstTextColor, firstTextColor)
-            secondTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_secondTextColor, secondTextColor)
-            firstTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_firstTextSize, firstTextSize)
-            secondTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_secondTextSize, secondTextSize)
-            strokeWidthFirst = typedArray.getDimension(R.styleable.CircularDiagramFive_strokeWidthFirst, strokeWidthFirst)
-            strokeWidthSecond = typedArray.getDimension(R.styleable.CircularDiagramFive_strokeWidthSecond, strokeWidthSecond)
+            firstCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_firstCircleColor, firstCircleColor)
+            secondCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_secondCircleColor, secondCircleColor)
+            firstTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_firstTextColor, firstTextColor)
+            secondTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_secondTextColor, secondTextColor)
+            firstTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_firstTextSize, firstTextSize)
+            secondTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_secondTextSize, secondTextSize)
+            strokeWidthFirst = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthFirst, strokeWidthFirst)
+            strokeWidthSecond = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthSecond, strokeWidthSecond)
 
             typedArray.recycle()
         }
@@ -54,6 +54,7 @@ class CircularDiagramFive(
             style = Paint.Style.STROKE
             strokeWidth = strokeWidthFirst
             color = firstCircleColor
+            isAntiAlias = true
         }
 
         paintSecondCircle.apply {
@@ -61,18 +62,21 @@ class CircularDiagramFive(
             strokeCap = Paint.Cap.ROUND
             strokeWidth = strokeWidthSecond
             color = secondCircleColor
+            isAntiAlias = true
         }
 
         paintMoths.apply {
             color = firstTextColor
             textAlign = Paint.Align.CENTER
             textSize = firstTextSize
+            isAntiAlias = true
         }
 
         paintWord.apply {
             color = secondTextColor
             textAlign = Paint.Align.CENTER
             textSize = secondTextSize
+            isAntiAlias = true
         }
     }
 
@@ -87,8 +91,7 @@ class CircularDiagramFive(
 
         canvas.drawCircle((width/2).toFloat(), (height/2).toFloat(), circleRadius, paintFirstCircle)
         canvas.drawText(monthsCount, xPos, yPosText, paintMoths)
-        // Пока захардкодил. Как будут ресурсы - сделать нормально. 
-        canvas.drawText("месяцы", xPos, height.toFloat()-(height.toFloat()/3), paintWord)
+        canvas.drawText(context.getString(R.string.months), xPos, yPosText+(yPosText/6), paintWord)
 
         canvas.drawArc(
             xPos - circleRadius,
