@@ -13,56 +13,57 @@
         android:id="@+id/circularGraph"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        app:arcColor1="?attr/subcolour1"
-        app:arcColor2="?attr/m5"
-        app:circleThickness="12dp"
+        android:layout_marginStart="4dp"
+        app:cg_circleThickness="12dp"
+        app:cg_constSourceArcColor="?attr/m5"
+        app:cg_varSourceArcColor="?attr/subcolour1"
+        app:cg_headerText="@string/circular_graph_header_total"
+        app:cg_headerTextSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/calculateButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:textScale="16sp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/permanentSourceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Постоянные источники, руб."
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Постоянные источники, руб."
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/circularGraph"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/circularGraph" />
 
     <EditText
         android:id="@+id/permanentSourceEnterField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@id/circularGraph"
-        app:layout_constraintTop_toTopOf="@id/permanentSourceTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/permanentSourceTitle" />
 
     <TextView
         android:id="@+id/variableSourceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Переменные источники, руб."
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:text="Переменные источники, руб."
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/circularGraph"
-        app:layout_constraintTop_toBottomOf="@id/permanentSourceEnterField"/>
+        app:layout_constraintTop_toBottomOf="@+id/permanentSourceEnterField" />
 
     <EditText
         android:id="@+id/variableSourceEnterField"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/circularGraph"
-        app:layout_constraintTop_toTopOf="@id/variableSourceTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/variableSourceTitle" />
 
     <Button
         android:id="@+id/calculateButton"
@@ -71,6 +72,6 @@
         android:text="Рассчитать"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

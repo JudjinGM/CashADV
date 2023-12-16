@@ -3,12 +3,12 @@
 
     <declare-styleable name="CircularGraph">
 
-        <attr name="arcColor1" format="color"/>
-        <attr name="arcColor2" format="color"/>
-        <attr name="circleThickness" format="dimension"/>
-        <attr name="arcSpacing" format="dimension"/>
-        <attr name="headerText" format="string"/>
-        <attr name="textScale" format="dimension"/>
+        <attr name="cg_constSourceArcColor" format="color"/>
+        <attr name="cg_varSourceArcColor" format="color"/>
+        <attr name="cg_circleThickness" format="dimension"/>
+        <attr name="cg_arcSpacing" format="dimension"/>
+        <attr name="cg_headerText" format="string"/>
+        <attr name="cg_headerTextSize" format="dimension"/>
 
     </declare-styleable>
 

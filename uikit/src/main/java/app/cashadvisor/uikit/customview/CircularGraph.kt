@@ -14,11 +14,11 @@ class CircularGraph(
 
     private val paint1 = Paint(Paint.ANTI_ALIAS_FLAG)
     private val paint2 = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val textPaint1 = Paint()
-    private val textPaint2 = Paint()
+    private val textPaint1 = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val textPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private var totalValueText = ""
-    private var headerText = "Всего!"
+    private var headerText = ""
     private val rubleSymbol = "\u20BD"
     private var strokeWidth = 36f
 
@@ -51,12 +51,12 @@ class CircularGraph(
         if (attrs != null) {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CircularGraph)
 
-            color1 = typedArray.getColor(R.styleable.CircularGraph_arcColor1, color1)
-            color2 = typedArray.getColor(R.styleable.CircularGraph_arcColor2, color2)
-            strokeWidth = typedArray.getDimension(R.styleable.CircularGraph_circleThickness, strokeWidth)
-            biasAngle = typedArray.getDimension(R.styleable.CircularGraph_arcSpacing, biasAngle)
-            headerText = typedArray.getString(R.styleable.CircularGraph_headerText) ?: headerText
-            textSize = typedArray.getDimension(R.styleable.CircularGraph_textScale, textSize)
+            color1 = typedArray.getColor(R.styleable.CircularGraph_cg_varSourceArcColor, color1)
+            color2 = typedArray.getColor(R.styleable.CircularGraph_cg_constSourceArcColor, color2)
+            strokeWidth = typedArray.getDimension(R.styleable.CircularGraph_cg_circleThickness, strokeWidth)
+            biasAngle = typedArray.getDimension(R.styleable.CircularGraph_cg_arcSpacing, biasAngle)
+            headerText = typedArray.getString(R.styleable.CircularGraph_cg_headerText) ?: headerText
+            textSize = typedArray.getDimension(R.styleable.CircularGraph_cg_headerTextSize, textSize)
 
             typedArray.recycle()
         }
