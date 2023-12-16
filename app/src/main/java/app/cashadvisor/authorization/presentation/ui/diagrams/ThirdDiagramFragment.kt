@@ -22,6 +22,12 @@ class ThirdDiagramFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.customDiagramFourth.progress = 25
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
