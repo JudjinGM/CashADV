@@ -50,7 +50,7 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        val defaultSide = convertDimension(DEFAULT_VIEW_SIZE).toInt()
+        val defaultSide = dp(DEFAULT_VIEW_SIZE).toInt()
 
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
@@ -158,30 +158,31 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
     }
 
     private fun initMainPaints(progressList: List<Progress>): List<Paint> {
-        val result: MutableList<Paint> = mutableListOf()
-        for (progress in progressList) {
-            val paint = Paint()
-            initPaint(paint, progress.mainColor)
-            result.add(paint)
+        return progressList.map { progress ->
+            Paint().apply {
+                color = resources.getColor(
+                    progress.mainColor,
+                    context.theme
+                )
+                style = Paint.Style.STROKE
+                isAntiAlias = true
+                strokeCap = Paint.Cap.ROUND
+            }
         }
-        return result
     }
 
     private fun initBackgroundPaints(progressList: List<Progress>): List<Paint> {
-        val result: MutableList<Paint> = mutableListOf()
-        for (progress in progressList) {
-            val paint = Paint()
-            initPaint(paint, progress.backgroundColor)
-            result.add(paint)
+        return progressList.map { progress ->
+            Paint().apply {
+                color = resources.getColor(
+                    progress.backgroundColor,
+                    context.theme
+                )
+                style = Paint.Style.STROKE
+                isAntiAlias = true
+                strokeCap = Paint.Cap.ROUND
+            }
         }
-        return result
-    }
-
-    private fun initPaint(paint: Paint, color: Int) {
-        paint.color = resources.getColor(color, context.theme)
-        paint.style = Paint.Style.STROKE
-        paint.isAntiAlias = true
-        paint.strokeCap = Paint.Cap.ROUND
     }
 
     private fun initProgressCircles(
@@ -235,10 +236,6 @@ class MultipleCircleProgressBars @JvmOverloads constructor(
         for (paint in paints) {
             paint.strokeWidth = strokeWidth.toFloat()
         }
-    }
-
-    private fun convertDimension(dimensionDp: Int): Float {
-        return dimensionDp * resources.displayMetrics.density
     }
 
     companion object {
