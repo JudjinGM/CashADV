@@ -6,9 +6,13 @@
         <attr name="cg_constSourceArcColor" format="color"/>
         <attr name="cg_varSourceArcColor" format="color"/>
         <attr name="cg_circleThickness" format="dimension"/>
-        <attr name="cg_arcSpacing" format="dimension"/>
+        <attr name="cg_arcSpacing" format="float"/>
         <attr name="cg_headerText" format="string"/>
-        <attr name="cg_headerTextSize" format="dimension"/>
+        <attr name="cg_captionTextSize" format="dimension"/>
+        <attr name="cg_currencySymbol" format="string"/>
+        <attr name="cg_headerTextColor" format="color"/>
+        <attr name="cg_valueTextColor" format="color"/>
+        <attr name="android:fontFamily"/>
 
     </declare-styleable>
 
