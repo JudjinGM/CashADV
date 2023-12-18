@@ -24,7 +24,7 @@ class ThirdDiagramFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.customDiagramFourth.progress = 25
+        binding.customDiagramFourth.progress = 85
 
     }
 

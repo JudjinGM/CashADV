@@ -121,7 +121,7 @@ class CustomViewDiagramThird @JvmOverloads constructor(
             right = width - paddingRight - paddingProgressFromBackground
             bottom = height - paddingBottom - paddingProgressFromBackground
         }
-        barMaxWidth = width.toFloat() - paddingProgressFromBackground - paddingProgressFromBackground
+        barMaxWidth = width.toFloat() - progressSizeField.height() -paddingProgressFromBackground
         progress = progress
     }
 
@@ -151,7 +151,7 @@ class CustomViewDiagramThird @JvmOverloads constructor(
         val xPos = progressSizeField.left + paddingTextProgress + paddingProgressFromBackground
         val yPos = height / 2f
         val yPosText = (yPos - ((textPaint.descent() + textPaint.ascent()) / 2))
-        progressSizeField.right = paddingLeft.toFloat() + paddingProgressFromBackground + barWidth
+        progressSizeField.right =  progressSizeField.height() +barWidth
 
         canvas.drawRoundRect(
             backgroundSizeField, cornerRadius, cornerRadius, rectPaint
