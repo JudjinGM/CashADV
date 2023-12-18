@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import app.cashadvisor.uikit.R
 
 class CircularDiagramFive(
@@ -15,7 +16,7 @@ class CircularDiagramFive(
     private val paintFirstCircle = Paint()
     private val paintSecondCircle = Paint()
 
-    private val paintMoths = Paint()
+    private val paintPeriod = Paint()
     private val paintWord = Paint()
 
     private var firstCircleColor = context.getColor(R.color.subcolour1)
@@ -24,16 +25,19 @@ class CircularDiagramFive(
     private var firstTextColor = context.getColor(R.color.colour2)
     private var secondTextColor = context.getColor(R.color.subcolour2)
 
-    private var firstTextSize = 120f
-    private var secondTextSize = 40f
+    private var firstTextSize = STANDARD_TEXT_SIZE_BIG
+    private var secondTextSize = STANDARD_TEXT_SIZE_SMALL
 
-    private var strokeWidthFirst = 10f
-    private var strokeWidthSecond = 30f
+    private var strokeWidthFirst = STANDARD_STROKE_SIZE_SMALL
+    private var strokeWidthSecond = STANDARD_STROKE_SIZE_BIG
 
-    private var startAngle = 270f
     private var sweepAngle = 0f
 
-    private var monthsCount = "0/0"
+    private var fontFirst = UNDEFINED_FONT
+    private var fontSecond = UNDEFINED_FONT
+
+    private var periodCount = "0/0"
+    private var measure = context.getString(R.string.months)
 
     init {
         if (attributeSet != null) {
@@ -46,6 +50,9 @@ class CircularDiagramFive(
             secondTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_secondTextSize, secondTextSize)
             strokeWidthFirst = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthFirst, strokeWidthFirst)
             strokeWidthSecond = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthSecond, strokeWidthSecond)
+            measure = typedArray.getString(R.styleable.CircularDiagramFive_cdf_measure) ?: measure
+            fontFirst = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilyFirst, fontFirst)
+            fontSecond = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilySecond, fontSecond)
 
             typedArray.recycle()
         }
@@ -65,11 +72,14 @@ class CircularDiagramFive(
             isAntiAlias = true
         }
 
-        paintMoths.apply {
+        paintPeriod.apply {
             color = firstTextColor
             textAlign = Paint.Align.CENTER
             textSize = firstTextSize
             isAntiAlias = true
+            if (fontFirst != UNDEFINED_FONT) {
+                typeface = ResourcesCompat.getFont(context, fontFirst)
+            }
         }
 
         paintWord.apply {
@@ -77,6 +87,9 @@ class CircularDiagramFive(
             textAlign = Paint.Align.CENTER
             textSize = secondTextSize
             isAntiAlias = true
+            if (fontSecond != UNDEFINED_FONT) {
+                typeface = ResourcesCompat.getFont(context, fontSecond)
+            }
         }
     }
 
@@ -87,27 +100,36 @@ class CircularDiagramFive(
 
         val xPos = width / 2f
         val yPos = height / 2f
-        val yPosText =  (yPos - ((paintMoths.descent() + paintMoths.ascent()) / 2))
+        val yPosText =  (yPos - ((paintPeriod.descent() + paintPeriod.ascent()) / 2))
 
         canvas.drawCircle((width/2).toFloat(), (height/2).toFloat(), circleRadius, paintFirstCircle)
-        canvas.drawText(monthsCount, xPos, yPosText, paintMoths)
-        canvas.drawText(context.getString(R.string.months), xPos, yPosText+(yPosText/6), paintWord)
+        canvas.drawText(periodCount, xPos, yPosText, paintPeriod)
+        canvas.drawText(measure, xPos, yPosText+(yPosText/6), paintWord)
 
         canvas.drawArc(
             xPos - circleRadius,
             yPos - circleRadius,
             xPos + circleRadius,
             yPos + circleRadius,
-            startAngle,
+            START_POINT,
             sweepAngle,
             false,
             paintSecondCircle
         )
     }
 
-    fun setValue(currentMonth: Int, totalMonths: Int) {
-        monthsCount = "$currentMonth/$totalMonths"
-        sweepAngle = (360 / totalMonths) * currentMonth.toFloat()
+    fun setValue(current: Int, total: Int) {
+        periodCount = "$current/$total"
+        sweepAngle = (360 / total) * current.toFloat()
         invalidate()
+    }
+
+    companion object {
+        const val STANDARD_TEXT_SIZE_BIG = 120f
+        const val STANDARD_TEXT_SIZE_SMALL = 40f
+        const val STANDARD_STROKE_SIZE_BIG = 30f
+        const val STANDARD_STROKE_SIZE_SMALL = 10f
+        const val START_POINT = 270f
+        const val UNDEFINED_FONT = 0
     }
 }
