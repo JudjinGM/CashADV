@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="months"> месяцы</string>
-
+    <string name="circular_graph_header_total">Всего!</string>
+    <string name="circular_graph_currency_symbol_ruble">₽</string>
+    <string name="circular_graph_unknown_text">n/a</string>
 </resources>
