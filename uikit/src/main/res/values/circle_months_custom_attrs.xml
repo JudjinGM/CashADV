@@ -14,6 +14,7 @@
         <attr name="cdf_measure" format="string"/>
         <attr name="cdf_fontFamilyFirst" format="reference"/>
         <attr name="cdf_fontFamilySecond" format="reference"/>
+        <attr name="cdf_textSpacing" format="dimension"/>
 
     </declare-styleable>
 </resources>

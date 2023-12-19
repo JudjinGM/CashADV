@@ -3,6 +3,7 @@ package customcircle
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
@@ -38,6 +39,10 @@ class CircularDiagramFive(
 
     private var periodCount = "0/0"
     private var measure = context.getString(R.string.months)
+    private var textSpacing = DEFAULT_SPACING_BETWEEN_TEXT_DP
+
+    private val boundOne = Rect()
+    private val boundTwo = Rect()
 
     init {
         if (attributeSet != null) {
@@ -53,6 +58,7 @@ class CircularDiagramFive(
             measure = typedArray.getString(R.styleable.CircularDiagramFive_cdf_measure) ?: measure
             fontFirst = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilyFirst, fontFirst)
             fontSecond = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilySecond, fontSecond)
+            textSpacing = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_textSpacing, textSpacing)
 
             typedArray.recycle()
         }
@@ -96,15 +102,32 @@ class CircularDiagramFive(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val circleRadius = (height/2.5).toFloat()
+        val circleRadius = width.coerceAtMost(height) / 2f - strokeWidthSecond/2
 
         val xPos = width / 2f
         val yPos = height / 2f
-        val yPosText =  (yPos - ((paintPeriod.descent() + paintPeriod.ascent()) / 2))
 
-        canvas.drawCircle((width/2).toFloat(), (height/2).toFloat(), circleRadius, paintFirstCircle)
-        canvas.drawText(periodCount, xPos, yPosText, paintPeriod)
-        canvas.drawText(measure, xPos, yPosText+(yPosText/6), paintWord)
+        paintPeriod.getTextBounds(periodCount, 0, periodCount.length, boundOne)
+        val heightWordOne = boundOne.height()
+
+        paintWord.getTextBounds(measure, 0, periodCount.length, boundTwo)
+        val heightWordTwo = boundTwo.height()
+
+        val yPosTextOne = yPos - (paintPeriod.descent() + paintPeriod.ascent()) / 2
+
+        val yPosTextTwoCenter =
+            yPos + heightWordOne / 2 + heightWordTwo / 2 + dpToPx(textSpacing.toInt())
+
+        val yPosTextTwo = yPosTextTwoCenter - (paintWord.descent() + paintWord.ascent()) / 2
+
+        canvas.drawCircle(
+            (width / 2).toFloat(),
+            (height / 2).toFloat(),
+            circleRadius,
+            paintFirstCircle
+        )
+        canvas.drawText(periodCount, xPos, yPosTextOne, paintPeriod)
+        canvas.drawText(measure, xPos, yPosTextTwo, paintWord)
 
         canvas.drawArc(
             xPos - circleRadius,
@@ -116,6 +139,9 @@ class CircularDiagramFive(
             false,
             paintSecondCircle
         )
+    }
+    private fun dpToPx(dp: Int): Float {
+        return dp * resources.displayMetrics.density
     }
 
     fun setValue(current: Int, total: Int) {
@@ -131,5 +157,6 @@ class CircularDiagramFive(
         const val STANDARD_STROKE_SIZE_SMALL = 10f
         const val START_POINT = 270f
         const val UNDEFINED_FONT = 0
+        const val DEFAULT_SPACING_BETWEEN_TEXT_DP = 5f
     }
 }
