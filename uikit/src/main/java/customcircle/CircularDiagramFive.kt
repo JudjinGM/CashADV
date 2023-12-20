@@ -7,6 +7,7 @@ import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import app.cashadvisor.customView.multipleCircleProgressBar.dp
 import app.cashadvisor.uikit.R
 
 class CircularDiagramFive(
@@ -39,26 +40,60 @@ class CircularDiagramFive(
 
     private var periodCount = "0/0"
     private var measure = context.getString(R.string.months)
-    private var textSpacing = DEFAULT_SPACING_BETWEEN_TEXT_DP
+    private var textSpacing = dp(DEFAULT_SPACING_BETWEEN_TEXT_DP)
 
     private val boundOne = Rect()
     private val boundTwo = Rect()
 
     init {
         if (attributeSet != null) {
-            val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.CircularDiagramFive)
-            firstCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_firstCircleColor, firstCircleColor)
-            secondCircleColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_secondCircleColor, secondCircleColor)
-            firstTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_firstTextColor, firstTextColor)
-            secondTextColor = typedArray.getColor(R.styleable.CircularDiagramFive_cdf_secondTextColor, secondTextColor)
-            firstTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_firstTextSize, firstTextSize)
-            secondTextSize = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_secondTextSize, secondTextSize)
-            strokeWidthFirst = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthFirst, strokeWidthFirst)
-            strokeWidthSecond = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_strokeWidthSecond, strokeWidthSecond)
+            val typedArray =
+                context.obtainStyledAttributes(attributeSet, R.styleable.CircularDiagramFive)
+            firstCircleColor = typedArray.getColor(
+                R.styleable.CircularDiagramFive_cdf_firstCircleColor,
+                firstCircleColor
+            )
+            secondCircleColor = typedArray.getColor(
+                R.styleable.CircularDiagramFive_cdf_secondCircleColor,
+                secondCircleColor
+            )
+            firstTextColor = typedArray.getColor(
+                R.styleable.CircularDiagramFive_cdf_firstTextColor,
+                firstTextColor
+            )
+            secondTextColor = typedArray.getColor(
+                R.styleable.CircularDiagramFive_cdf_secondTextColor,
+                secondTextColor
+            )
+            firstTextSize = typedArray.getDimension(
+                R.styleable.CircularDiagramFive_cdf_firstTextSize,
+                firstTextSize
+            )
+            secondTextSize = typedArray.getDimension(
+                R.styleable.CircularDiagramFive_cdf_secondTextSize,
+                secondTextSize
+            )
+            strokeWidthFirst = typedArray.getDimension(
+                R.styleable.CircularDiagramFive_cdf_strokeWidthFirst,
+                strokeWidthFirst
+            )
+            strokeWidthSecond = typedArray.getDimension(
+                R.styleable.CircularDiagramFive_cdf_strokeWidthSecond,
+                strokeWidthSecond
+            )
             measure = typedArray.getString(R.styleable.CircularDiagramFive_cdf_measure) ?: measure
-            fontFirst = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilyFirst, fontFirst)
-            fontSecond = typedArray.getResourceId(R.styleable.CircularDiagramFive_cdf_fontFamilySecond, fontSecond)
-            textSpacing = typedArray.getDimension(R.styleable.CircularDiagramFive_cdf_textSpacing, textSpacing)
+            fontFirst = typedArray.getResourceId(
+                R.styleable.CircularDiagramFive_cdf_fontFamilyFirst,
+                fontFirst
+            )
+            fontSecond = typedArray.getResourceId(
+                R.styleable.CircularDiagramFive_cdf_fontFamilySecond,
+                fontSecond
+            )
+            textSpacing = typedArray.getDimension(
+                R.styleable.CircularDiagramFive_cdf_textSpacing,
+                textSpacing
+            )
 
             typedArray.recycle()
         }
@@ -102,7 +137,7 @@ class CircularDiagramFive(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val circleRadius = width.coerceAtMost(height) / 2f - strokeWidthSecond/2
+        val circleRadius = width.coerceAtMost(height) / 2f - strokeWidthSecond / 2
 
         val xPos = width / 2f
         val yPos = height / 2f
@@ -116,7 +151,7 @@ class CircularDiagramFive(
         val yPosTextOne = yPos - (paintPeriod.descent() + paintPeriod.ascent()) / 2
 
         val yPosTextTwoCenter =
-            yPos + heightWordOne / 2 + heightWordTwo / 2 + dpToPx(textSpacing.toInt())
+            yPos + heightWordOne / 2 + heightWordTwo / 2 + textSpacing
 
         val yPosTextTwo = yPosTextTwoCenter - (paintWord.descent() + paintWord.ascent()) / 2
 
@@ -140,9 +175,6 @@ class CircularDiagramFive(
             paintSecondCircle
         )
     }
-    private fun dpToPx(dp: Int): Float {
-        return dp * resources.displayMetrics.density
-    }
 
     fun setValue(current: Int, total: Int) {
         periodCount = "$current/$total"
@@ -157,6 +189,6 @@ class CircularDiagramFive(
         const val STANDARD_STROKE_SIZE_SMALL = 10f
         const val START_POINT = 270f
         const val UNDEFINED_FONT = 0
-        const val DEFAULT_SPACING_BETWEEN_TEXT_DP = 5f
+        const val DEFAULT_SPACING_BETWEEN_TEXT_DP = 5
     }
 }
