@@ -24,10 +24,10 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     private var barWidth: Float = 0f
     private var barMaxWidth = 0f
 
-    private var colorBackgroundProgress = Color.GRAY
-    private var colorProgress = Color.GREEN
+    private var backgroundProgressColor = Color.GRAY
+    private var progressColor = Color.GREEN
     private var colorTextProgress = Color.WHITE
-    private var textSizeProgress = DEFAULT_TEXT_SIZE
+    private var progressTextPadding = DEFAULT_TEXT_SIZE
 
     private var paddingProgressFromBackground = PADDING_PROGRESS_BACKGROUND
     private var paddingTextProgress = PADDING_TEXT_PROGRESS
@@ -58,15 +58,15 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(
             attributesSet, R.styleable.CustomViewDiagramFourth, defStyleAttr, defStyleRes
         ).apply {
-            colorBackgroundProgress = getColor(
+            backgroundProgressColor = getColor(
                 R.styleable.CustomViewDiagramFourth_colorBackground, Color.GRAY
             )
-            colorProgress = getColor(R.styleable.CustomViewDiagramFourth_colorProgress, Color.GREEN)
+            progressColor = getColor(R.styleable.CustomViewDiagramFourth_colorProgress, Color.GREEN)
             cornerRadius =
                 getDimension(R.styleable.CustomViewDiagramFourth_radiusView, DEFAULT_CORNER_RADIUS)
             colorTextProgress =
                 getColor(R.styleable.CustomViewDiagramFourth_textColorProgress, Color.WHITE)
-            textSizeProgress = getDimension(
+            progressTextPadding = getDimension(
                 R.styleable.CustomViewDiagramFourth_textSizeProgress, DEFAULT_TEXT_SIZE
             )
         }
@@ -94,17 +94,17 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     private fun initPaint() {
         rectPaint = Paint().apply {
             isAntiAlias = true
-            color = colorBackgroundProgress
+            color = backgroundProgressColor
         }
         rectPaintProgress = Paint().apply {
             isAntiAlias = true
-            color = colorProgress
+            color = progressColor
         }
         textPaint = Paint().apply {
             isAntiAlias = true
             textAlign = Paint.Align.RIGHT
             color = colorTextProgress
-            textSize = textSizeProgress
+            textSize = progressTextPadding
             typeface = textFontProgress
         }
     }
