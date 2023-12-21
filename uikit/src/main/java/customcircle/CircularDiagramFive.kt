@@ -145,7 +145,7 @@ class CircularDiagramFive(
         paintPeriod.getTextBounds(periodCount, 0, periodCount.length, boundOne)
         val heightWordOne = boundOne.height()
 
-        paintWord.getTextBounds(measure, 0, periodCount.length, boundTwo)
+        paintWord.getTextBounds(measure, 0, measure.length, boundTwo)
         val heightWordTwo = boundTwo.height()
 
         val yPosTextOne = yPos - (paintPeriod.descent() + paintPeriod.ascent()) / 2
