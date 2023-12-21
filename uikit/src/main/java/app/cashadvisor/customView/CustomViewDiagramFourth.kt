@@ -27,10 +27,10 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     private var backgroundProgressColor = Color.GRAY
     private var progressColor = Color.GREEN
     private var colorTextProgress = Color.WHITE
-    private var progressTextPadding = DEFAULT_TEXT_SIZE
+    private var textSizeProgress = DEFAULT_TEXT_SIZE
 
     private var paddingProgressFromBackground = PADDING_PROGRESS_BACKGROUND
-    private var paddingTextProgress = PADDING_TEXT_PROGRESS
+    private var progressTextPadding = PADDING_TEXT_PROGRESS
     private var cornerRadius = DEFAULT_CORNER_RADIUS
 
     private lateinit var rectPaint: Paint
@@ -66,7 +66,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
                 getDimension(R.styleable.CustomViewDiagramFourth_radiusView, DEFAULT_CORNER_RADIUS)
             colorTextProgress =
                 getColor(R.styleable.CustomViewDiagramFourth_textColorProgress, Color.WHITE)
-            progressTextPadding = getDimension(
+            textSizeProgress = getDimension(
                 R.styleable.CustomViewDiagramFourth_textSizeProgress, DEFAULT_TEXT_SIZE
             )
         }
@@ -85,7 +85,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
         paddingProgressFromBackground = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, PADDING_PROGRESS_BACKGROUND, resources.displayMetrics
         )
-        paddingTextProgress = TypedValue.applyDimension(
+        progressTextPadding = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP, PADDING_TEXT_PROGRESS, resources.displayMetrics
         )
         typedArray.recycle()
@@ -104,7 +104,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             isAntiAlias = true
             textAlign = Paint.Align.RIGHT
             color = colorTextProgress
-            textSize = progressTextPadding
+            textSize = textSizeProgress
             typeface = textFontProgress
         }
     }
@@ -151,7 +151,7 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val xPos = progressSizeField.right - paddingTextProgress - paddingProgressFromBackground
+        val xPos = progressSizeField.right - progressTextPadding - paddingProgressFromBackground
         val yPos = height / 2f
         val yPosText = (yPos - ((textPaint.descent() + textPaint.ascent()) / 2))
         progressSizeField.left = paddingLeft.toFloat() + paddingProgressFromBackground + barWidth
