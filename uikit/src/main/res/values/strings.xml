@@ -3,4 +3,5 @@
     <string name="circular_graph_header_total">Всего!</string>
     <string name="circular_graph_currency_symbol_ruble">₽</string>
     <string name="circular_graph_unknown_text">n/a</string>
+    <string name="months">месяцы</string>
 </resources>
