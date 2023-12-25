@@ -35,7 +35,7 @@
         <item name="colorBackground">?attr/colour1</item>
         <item name="radiusView">10dp</item>
         <item name="textSizeProgress">11sp</item>
-        <item name="textColorProgress">?attr/colour1</item>
+        <item name="textColorProgress">?attr/whitecolour</item>
         <item name="textFontProgress">@font/intersemibold</item>
     </style>
 </resources>

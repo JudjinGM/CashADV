@@ -23,17 +23,17 @@ class CustomViewDiagramThird @JvmOverloads constructor(
     private var barWidth: Float = 0f
     private var barMaxWidth = 0f
 
-    private var colorBackgroundProgress = Color.GRAY
-    private var colorProgress = Color.GREEN
-    private var colorTextProgress = Color.WHITE
+    private var backgroundProgressColor = Color.GRAY
+    private var progressColor = Color.GREEN
+    private var textProgressColor = Color.WHITE
     private var textSizeProgress = DEFAULT_TEXT_SIZE
 
-    private var paddingProgressFromBackground = PADDING_PROGRESS_BACKGROUND
-    private var paddingTextProgress = PADDING_TEXT_PROGRESS
+    private var paddingProgressFromBackground = BACKGROUND_PROGRESS_PADDING
+    private var progressTextPadding = PROGRESS_TEXT_PADDING
     private var cornerRadius = DEFAULT_CORNER_RADIUS
 
     private lateinit var rectPaint: Paint
-    private lateinit var rectPaintProgress: Paint
+    private lateinit var progressRectPaint: Paint
     private lateinit var textPaint: Paint
     private lateinit var textFontProgress: Typeface
 
@@ -57,13 +57,13 @@ class CustomViewDiagramThird @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(
             attributesSet, R.styleable.CustomViewDiagramThird, defStyleAttr, defStyleRes
         ).apply {
-            colorBackgroundProgress = getColor(
+            backgroundProgressColor = getColor(
                 R.styleable.CustomViewDiagramThird_colorBackground, Color.GRAY
             )
-            colorProgress = getColor(R.styleable.CustomViewDiagramThird_colorProgress, Color.GREEN)
+            progressColor = getColor(R.styleable.CustomViewDiagramThird_colorProgress, Color.GREEN)
             cornerRadius =
                 getDimension(R.styleable.CustomViewDiagramThird_radiusView, DEFAULT_CORNER_RADIUS)
-            colorTextProgress =
+            textProgressColor =
                 getColor(R.styleable.CustomViewDiagramThird_textColorProgress, Color.WHITE)
             textSizeProgress = getDimension(
                 R.styleable.CustomViewDiagramThird_textSizeProgress, DEFAULT_TEXT_SIZE
@@ -82,27 +82,28 @@ class CustomViewDiagramThird @JvmOverloads constructor(
         }
 
         paddingProgressFromBackground = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, PADDING_PROGRESS_BACKGROUND,
+            TypedValue.COMPLEX_UNIT_DIP, BACKGROUND_PROGRESS_PADDING ,
             resources.displayMetrics
         )
-        paddingTextProgress = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, PADDING_TEXT_PROGRESS, resources.displayMetrics
+        progressTextPadding = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, PROGRESS_TEXT_PADDING, resources.displayMetrics
         )
         typedArray.recycle()
     }
-    fun initPaint(){
+
+    fun initPaint() {
         rectPaint = Paint().apply {
             isAntiAlias = true
-            color = colorBackgroundProgress
+            color = backgroundProgressColor
         }
-        rectPaintProgress = Paint().apply {
+        progressRectPaint = Paint().apply {
             isAntiAlias = true
-            color = colorProgress
+            color = progressColor
         }
         textPaint = Paint().apply {
             isAntiAlias = true
             textAlign = Paint.Align.RIGHT
-            color = colorTextProgress
+            color = textProgressColor
             textSize = textSizeProgress
             typeface = textFontProgress
         }
@@ -121,7 +122,7 @@ class CustomViewDiagramThird @JvmOverloads constructor(
             right = width - paddingRight - paddingProgressFromBackground
             bottom = height - paddingBottom - paddingProgressFromBackground
         }
-        barMaxWidth = width.toFloat() - progressSizeField.height() -paddingProgressFromBackground
+        barMaxWidth = width.toFloat() - progressSizeField.height() - paddingProgressFromBackground
         progress = progress
     }
 
@@ -148,10 +149,10 @@ class CustomViewDiagramThird @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val xPos = progressSizeField.left + paddingTextProgress + paddingProgressFromBackground
+        val xPos = progressSizeField.left + progressTextPadding + textPaint.measureText(progress.toString())
         val yPos = height / 2f
         val yPosText = (yPos - ((textPaint.descent() + textPaint.ascent()) / 2))
-        progressSizeField.right =  progressSizeField.height() +barWidth
+        progressSizeField.right = progressSizeField.height() + barWidth
 
         canvas.drawRoundRect(
             backgroundSizeField, cornerRadius, cornerRadius, rectPaint
@@ -159,7 +160,7 @@ class CustomViewDiagramThird @JvmOverloads constructor(
 
         if (progress != 0) {
             canvas.drawRoundRect(
-                progressSizeField, cornerRadius, cornerRadius, rectPaintProgress
+                progressSizeField, cornerRadius, cornerRadius, progressRectPaint
             )
         }
 
@@ -169,10 +170,10 @@ class CustomViewDiagramThird @JvmOverloads constructor(
     }
 
 
-
     companion object {
-        const val PADDING_PROGRESS_BACKGROUND = 1f
-        const val PADDING_TEXT_PROGRESS = 21f
+
+        const val BACKGROUND_PROGRESS_PADDING  = 1f
+        const val PROGRESS_TEXT_PADDING = 3f
         const val DEFAULT_CORNER_RADIUS = 10f
         const val DEFAULT_TEXT_SIZE = 11F
         const val DEFAULT_HEIGHT = 15f
