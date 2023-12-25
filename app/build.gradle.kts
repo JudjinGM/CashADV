@@ -177,6 +177,7 @@ dependencies {
     //Firebase
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
     implementation(platform(libs.firebase.bom))
 
     // Ui Kit Library

@@ -41,7 +41,7 @@ dependencyResolutionManagement {
             version("firebase-analytics-ktx", "")
             version("firebase-crashlytics-ktx", "")
             version("firebase-crashlytics-gradle", "2.9.9")
-            version("firebase-messaging", "23.3.1")
+            version("firebase-messaging", "23.4.0")
             version("firebase-bom", "32.6.0")
             version("gms-googleServices", "4.4.0")
             version("firebase.appdistribution", "4.0.1")
@@ -269,6 +269,12 @@ dependencyResolutionManagement {
                 "firebase-crashlytics",
                 "com.google.firebase",
                 "firebase-crashlytics-ktx"
+            ).withoutVersion()
+
+            library(
+                "firebase-messaging",
+                "com.google.firebase",
+                "firebase-messaging"
             ).withoutVersion()
 
             library("firebase-bom",
