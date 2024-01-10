@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui
+package app.cashadvisor.authorization.presentation.ui.start
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
 import app.cashadvisor.databinding.FragmentStartBinding
-import com.google.firebase.BuildConfig
 
 
 class StartFragment : Fragment() {
@@ -19,9 +18,6 @@ class StartFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
     }
 
     override fun onCreateView(
@@ -35,15 +31,14 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnContinue.setOnClickListener {
+        binding.tapToContinueTextView.setOnClickListener {
             findNavController().navigate(R.id.action_startFragment_to_entryFragment)
         }
 
 
         if (app.cashadvisor.BuildConfig.DEBUG) {
-
-            binding.uikitSampleButton.isVisible = true
-            binding.uikitSampleButton.setOnClickListener {
+            binding.tapToUiKitSampleTextView.isVisible = true
+            binding.tapToUiKitSampleTextView.setOnClickListener {
                 findNavController().navigate(R.id.action_startFragment_to_uikitSampleFragment)
             }
         }

@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/startFragment"
-        android:name="app.cashadvisor.authorization.presentation.ui.StartFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.start.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start" >
         <action
