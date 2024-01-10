@@ -8,24 +8,21 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.BuildConfig.BUILD_TYPE
 import app.cashadvisor.R
+import app.cashadvisor.common.ui.BaseFragment
+import app.cashadvisor.common.ui.BaseViewModel
 import app.cashadvisor.databinding.FragmentUikitSampleBinding
 import com.google.firebase.BuildConfig
 
-class UikitSampleFragment : Fragment() {
+class UikitSampleViewModel : BaseViewModel() {
+    // example viewModel
+}
 
-    private var _binding: FragmentUikitSampleBinding? = null
-    private val binding get() = _binding!!
+class UikitSampleFragment :
+    BaseFragment<FragmentUikitSampleBinding, UikitSampleViewModel>(FragmentUikitSampleBinding::inflate) {
+    override val viewModel: UikitSampleViewModel by lazy { UikitSampleViewModel() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUikitSampleBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun configureViews() {
 
         binding.firstDiagramButton.setOnClickListener {
             findNavController().navigate(R.id.action_uikitSampleFragment_to_firstDiagramFragment)
@@ -44,8 +41,8 @@ class UikitSampleFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun subscribe() {
+        // example subscribe
     }
+
 }
