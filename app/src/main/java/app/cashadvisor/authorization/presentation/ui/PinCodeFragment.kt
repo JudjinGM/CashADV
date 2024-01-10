@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
-import app.cashadvisor.databinding.FragmentLoginBinding
 import app.cashadvisor.databinding.FragmentPinCodeBinding
 
 class PinCodeFragment : Fragment() {
