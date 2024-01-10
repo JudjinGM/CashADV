@@ -22,8 +22,8 @@ abstract class BaseActivity<VB : ViewBinding>(
         super.onCreate(savedInstanceState)
         _binding = inflate.invoke(layoutInflater)
         setContentView(binding.root)
-        initViews()
+        configureViews()
     }
 
-    abstract fun initViews()
+    abstract fun configureViews()
 }
