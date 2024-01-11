@@ -2,7 +2,7 @@ package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.authorization.domain.useCase.GetTokenUseCase
+import app.cashadvisor.authorization.domain.useCase.IsUserAuthenticationValidUseCase
 import app.cashadvisor.authorization.presentation.ui.model.StartScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val getTokenUseCase: GetTokenUseCase
+    private val isUserAuthenticationValidUseCase: IsUserAuthenticationValidUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<StartScreenUiState> =
@@ -22,12 +22,8 @@ class StartViewModel @Inject constructor(
 
     val uiState: StateFlow<StartScreenUiState> = _uiState.asStateFlow()
 
-    fun setDebugStatus(isDebug: Boolean) {
-        _uiState.update { currentState ->
-            currentState.copy(
-                isDebug = isDebug
-            )
-        }
+    init {
+        setDebugStatus(app.cashadvisor.BuildConfig.DEBUG)
     }
 
     fun authenticateUser() {
@@ -46,12 +42,18 @@ class StartViewModel @Inject constructor(
         }
     }
 
+    private fun setDebugStatus(isDebug: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(isDebug = isDebug)
+        }
+    }
+
     private fun loadAuthenticationData() {
         viewModelScope.launch {
             try {
-                getTokenUseCase.execute()
-                    .collect { tokenValue ->
-                        updateUiAuthState(tokenValue)
+                isUserAuthenticationValidUseCase()
+                    .collect { isAuthenticationValid->
+                        updateUiAuthState(isAuthenticationValid)
                     }
             } catch (e: Exception) {
                 _uiState.update { currentState ->
@@ -63,19 +65,19 @@ class StartViewModel @Inject constructor(
         }
     }
 
-    private fun updateUiAuthState(tokenValue: String?) {
-        if (tokenValue.isNullOrBlank()) {
+    private fun updateUiAuthState(isAuthenticationValid: Boolean) {
+        if (isAuthenticationValid) {
             _uiState.update { currentState ->
                 currentState.copy(
                     isUserAuthenticated = true,
-                    isAuthenticationSuccessful = false
+                    isAuthenticationSuccessful = true
                 )
             }
         } else {
             _uiState.update { currentState ->
                 currentState.copy(
                     isUserAuthenticated = true,
-                    isAuthenticationSuccessful = true
+                    isAuthenticationSuccessful = false
                 )
             }
         }
