@@ -58,13 +58,17 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_entryFragment"
-            app:destination="@id/entryFragment" />
+            app:destination="@id/entryFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_startFragment_to_uikitSampleFragment"
             app:destination="@id/uikitSampleFragment" />
         <action
             android:id="@+id/action_startFragment_to_pinCodeFragment"
-            app:destination="@id/pinCodeFragment" />
+            app:destination="@id/pinCodeFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/entryFragment"

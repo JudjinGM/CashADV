@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 
 class GetTokenUseCaseImpl : GetTokenUseCase {
     override suspend fun execute(): Flow<String> = flow {
-        emit(MOCK_TOKEN)
+        emit(MOCK_EMPTY_TOKEN)
     }
 
     companion object {

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -47,7 +48,7 @@ class StartFragment : Fragment() {
         }
 
         binding.tapToContinueTextView.setOnClickListener {
-            viewModel.navigateToNextScreen()
+            viewModel.authenticateUser()
         }
 
         binding.tapToUiKitSampleTextView.setOnClickListener {
@@ -63,14 +64,18 @@ class StartFragment : Fragment() {
     private fun updateUi(uiState: StartScreenUiState) {
         with(uiState) {
             binding.tapToUiKitSampleTextView.isVisible = isDebug
-            if (navigateToNextScreen) {
-                if (isUserLoggedIn) {
+            if (isUserAuthenticated) {
+                if (isAuthenticationSuccessful) {
                     findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
                 } else {
                     findNavController().navigate(R.id.action_startFragment_to_entryFragment)
                 }
-                viewModel.navigationProceeded()
+            }
+            userMessage?.let {
+                Toast.makeText(requireContext(), getText(userMessage), Toast.LENGTH_SHORT).show()
+                viewModel.userMessageShown()
             }
         }
     }
+
 }
