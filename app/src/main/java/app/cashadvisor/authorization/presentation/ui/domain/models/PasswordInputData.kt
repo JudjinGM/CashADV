@@ -8,8 +8,8 @@ data class PasswordInputData(
     private fun isCorrectSymbols(): Boolean = password.matches(Regex(REGEX_PATTERN))
 
     companion object {
-        const val MIN_LENGTH = 8
-        const val REGEX_PATTERN = "[a-zA-Z0-9_]+"
+        const val MIN_LENGTH = 8 // todo уточнить требования по минимальной длине пароля
+        const val REGEX_PATTERN = "[a-zA-Z0-9_]+" // по условию: цифры, буквы A-z и знак _
     }
 }
 

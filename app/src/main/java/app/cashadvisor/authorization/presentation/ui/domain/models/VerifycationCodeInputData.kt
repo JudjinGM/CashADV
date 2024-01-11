@@ -9,7 +9,7 @@ data class VerifycationCodeInputData(
 
     companion object {
         const val CODE_LENGTH = 4
-        const val REGEX_PATTERN = "[0-9]+"
+        const val REGEX_PATTERN = "[0-9]+" // todo уточнить требования символам в коде
     }
 }
 
