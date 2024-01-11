@@ -3,6 +3,8 @@ package app.cashadvisor.authorization.presentation.ui.domain.models
 data class VerifycationCodeInputData(
     val code: String
 ) : BaseInputData() {
+    // todo возможно стоит возвращать результат валидации вместо булевого значения с указанием на ошибку
+
     override fun isValid(): Boolean = (code.length == CODE_LENGTH) && isNumbersOnly()
 
     private fun isNumbersOnly(): Boolean = code.matches(Regex(REGEX_PATTERN))
