@@ -1,6 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import com.android.build.api.dsl.ApplicationDefaultConfig
 
 plugins {
     alias(libs.plugins.android.application)
@@ -25,6 +25,8 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        initVKID()
     }
 
     signingConfigs {
@@ -42,7 +44,7 @@ android {
                 System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("keyPassword")
                 ?: "keyPasswordEmpty"
 
-            storeFile = file("keyStore/cashadvisor.jks" )
+            storeFile = file("keyStore/cashadvisor.jks")
             storePassword = storePasswordLocal
             keyAlias = keyAliasLocal
             keyPassword = keyPasswordLocal
@@ -180,7 +182,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     // Auth vk
-    implementation(libs.vkid)
+    implementation(libs.vk.auth)
 
     // Ui Kit Library
     implementation(project(":uikit"))
@@ -191,4 +193,19 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+}
+
+fun ApplicationDefaultConfig.initVKID() {
+    val localProperties = gradleLocalProperties(rootDir)
+
+    val clientId = localProperties.getProperty("VKIDClientID")
+    val clientSecret = localProperties.getProperty("VKIDClientSecret")
+    addManifestPlaceholders(
+        mapOf(
+            "VKIDRedirectHost" to "vk.com",
+            "VKIDRedirectScheme" to "vk$clientId",
+            "VKIDClientID" to clientId,
+            "VKIDClientSecret" to clientSecret
+        )
+    )
 }

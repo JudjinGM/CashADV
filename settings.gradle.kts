@@ -10,6 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url =
+                java.net.URI("https://artifactory-external.vkpartner.ru/artifactory/vkid-sdk-andorid/")
+        }
     }
 
     versionCatalogs {
@@ -46,7 +50,7 @@ dependencyResolutionManagement {
             version("firebase.appdistribution", "4.0.1")
             version("android-library", "8.1.1")
             version("gms-play-services-auth", "20.7.0")
-            version("vkid", "4.1.0")
+            version("vkid", "1.0.0")
 
 
             plugin(
@@ -300,13 +304,9 @@ dependencyResolutionManagement {
             ).versionRef("gms-play-services-auth")
 
             // Auth vk
-            library("vkid",
-                "com.vk",
-                "android-sdk-core"
-            ).versionRef("vkid")
-            library("vkid",
-                "com.vk",
-                "android-sdk-api"
+            library("vk-auth",
+                "com.vk.id",
+                "vkid"
             ).versionRef("vkid")
         }
     }

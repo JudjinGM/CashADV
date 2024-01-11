@@ -20,12 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.vk.api.sdk.VK
-import com.vk.api.sdk.VKApiCallback
-import com.vk.api.sdk.auth.VKAuthenticationResult
-import com.vk.dto.common.id.UserId
-import com.vk.sdk.api.users.UsersService
-import com.vk.sdk.api.users.dto.UsersUserFullDto
+import com.vk.id.AccessToken
+import com.vk.id.VKID
+import com.vk.id.VKIDAuthFail
 
 class EntryFragment : Fragment() {
     private var _binding: FragmentEntryBinding? = null
@@ -33,29 +30,30 @@ class EntryFragment : Fragment() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var startResultSignIn: ActivityResultLauncher<Intent>
 
-    private val activityVKAuthLauncher = registerForActivityResult(VK.getVKAuthActivityResultContract()) { result ->
-        when (result) {
-            is VKAuthenticationResult.Success -> {
-                Log.d("TEST", "Success: ${result.token.userId}")
-                Toast.makeText(
-                    requireContext(),
-                    "Success: userId ${result.token.userId.value}",
-                    Toast.LENGTH_SHORT
-                ).show()
+    private val vkAuthCallback = object : VKID.AuthCallback {
+        override fun onSuccess(accessToken: AccessToken) {
+            val token = accessToken.token
+            Toast.makeText(requireContext(), "token: ${token}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "${accessToken.userData.firstName} ${accessToken.userData.lastName}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
-                getUserInfoFromVK(result.token.userId)
-            }
-
-            is VKAuthenticationResult.Failed -> {
-                Log.d("TEST", "Failed: ${result.exception.authError}")
-                Toast.makeText(
-                    requireContext(),
-                    "Failed: ${result.exception.authError}",
-                    Toast.LENGTH_LONG
-                ).show()
+        override fun onFail(fail: VKIDAuthFail) {
+            Toast.makeText(requireContext(), "error: ${fail.description}", Toast.LENGTH_LONG).show()
+            when (fail) {
+                is VKIDAuthFail.Canceled -> {
+                    //...
+                }
+                else -> {
+                    //...
+                }
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -87,7 +85,8 @@ class EntryFragment : Fragment() {
             startResultSignIn.launch(signIntent)
         }
         binding.btnAuthVk.setOnClickListener {
-            activityVKAuthLauncher.launch(arrayListOf())
+            val vkid = VKID(requireContext())
+            vkid.authorize(this, vkAuthCallback)
         }
 
     }
@@ -145,22 +144,5 @@ class EntryFragment : Fragment() {
                 "Google Account", "failed code= ${e.statusCode}"
             )
         }
-    }
-
-    private fun getUserInfoFromVK(userId: UserId) {
-        VK.execute(UsersService().usersGet(userIds = listOf(userId)), object:
-            VKApiCallback<List<UsersUserFullDto>> {
-            override fun success(result: List<UsersUserFullDto>) {
-                Log.d("TEST", "result: ${result.first().firstName}")
-                Toast.makeText(
-                    requireContext(),
-                    "Success: ${result.first().firstName} ${result.first().lastName}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            override fun fail(error: Exception) {
-                Log.e("TEST", error.toString())
-            }
-        })
     }
 }
