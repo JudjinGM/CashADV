@@ -2,7 +2,7 @@ package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.authorization.domain.useCase.IsUserAuthenticationValidUseCase
+import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCase
 import app.cashadvisor.authorization.presentation.ui.model.StartScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val isUserAuthenticationValidUseCase: IsUserAuthenticationValidUseCase
+    private val getUserAuthenticationStateUseCase: GetUserAuthenticationStateUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<StartScreenUiState> =
@@ -51,9 +51,14 @@ class StartViewModel @Inject constructor(
     private fun loadAuthenticationData() {
         viewModelScope.launch {
             try {
-                isUserAuthenticationValidUseCase()
-                    .collect { isAuthenticationValid->
-                        updateUiAuthState(isAuthenticationValid)
+                getUserAuthenticationStateUseCase()
+                    .collect { isAuthenticationSuccessful ->
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                isUserAuthenticated = true,
+                                isAuthenticationSuccessful = isAuthenticationSuccessful
+                            )
+                        }
                     }
             } catch (e: Exception) {
                 _uiState.update { currentState ->
@@ -64,23 +69,4 @@ class StartViewModel @Inject constructor(
             }
         }
     }
-
-    private fun updateUiAuthState(isAuthenticationValid: Boolean) {
-        if (isAuthenticationValid) {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    isUserAuthenticated = true,
-                    isAuthenticationSuccessful = true
-                )
-            }
-        } else {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    isUserAuthenticated = true,
-                    isAuthenticationSuccessful = false
-                )
-            }
-        }
-    }
-
 }

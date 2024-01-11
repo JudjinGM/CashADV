@@ -3,7 +3,7 @@ package app.cashadvisor.authorization.domain.useCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class IsUserAuthenticationValidUseCaseImpl : IsUserAuthenticationValidUseCase {
+class GetUserAuthenticationStateUseCaseImpl : GetUserAuthenticationStateUseCase {
 
     override fun invoke(): Flow<Boolean> = flow {
         emit(true)

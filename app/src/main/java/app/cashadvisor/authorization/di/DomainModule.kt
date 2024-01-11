@@ -1,7 +1,7 @@
 package app.cashadvisor.authorization.di
 
-import app.cashadvisor.authorization.domain.useCase.IsUserAuthenticationValidUseCase
-import app.cashadvisor.authorization.domain.useCase.IsUserAuthenticationValidUseCaseImpl
+import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCase
+import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +13,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 class DomainModule {
     @Provides
     @ViewModelScoped
-    fun provideIsUserAuthenticationValidUseCase(): IsUserAuthenticationValidUseCase {
-        return IsUserAuthenticationValidUseCaseImpl()
+    fun provideGetUserAuthenticationStateUseCase(): GetUserAuthenticationStateUseCase {
+        return GetUserAuthenticationStateUseCaseImpl()
     }
 }
