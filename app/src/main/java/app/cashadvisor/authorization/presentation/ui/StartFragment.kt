@@ -42,6 +42,15 @@ class StartFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
+                    with(uiState) {
+                        if (isUserAuthenticated) {
+                            if (isAuthenticationSuccessful) {
+                                findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
+                            } else {
+                                findNavController().navigate(R.id.action_startFragment_to_entryFragment)
+                            }
+                        }
+                    }
                     updateUi(uiState)
                 }
             }
@@ -64,13 +73,6 @@ class StartFragment : Fragment() {
     private fun updateUi(uiState: StartScreenUiState) {
         with(uiState) {
             binding.tapToUiKitSampleTextView.isVisible = isDebug
-            if (isUserAuthenticated) {
-                if (isAuthenticationSuccessful) {
-                    findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
-                } else {
-                    findNavController().navigate(R.id.action_startFragment_to_entryFragment)
-                }
-            }
             userMessage?.let {
                 Toast.makeText(requireContext(), getText(userMessage), Toast.LENGTH_SHORT).show()
                 viewModel.userMessageShown()
