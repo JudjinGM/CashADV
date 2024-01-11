@@ -11,7 +11,7 @@ typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
  * Базовый фрагмент, позволяет привести к единому виду все реализации фрагментов, работает в связке с BaseViewModel.
  *
  * При реализации потребуется реализовать абстрактные методы для инициализации вью: configureViews()  и слушатели событий: subscribe()
- * так же потребуется реализовать абстрактное свойство viewModel: VM, то есть override val viewModel by viewModels<SomeViewModel>()
+ * так же потребуется реализовать абстрактное свойство viewModel: VM, то есть override val viewModel by viewModels&lt;SomeViewModel&gt;()
  */
 abstract class BaseFragment<VB: ViewBinding, VM: BaseViewModel> (
     private val inflate: Inflate<VB>
