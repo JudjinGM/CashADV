@@ -1,6 +1,6 @@
 package app.cashadvisor.authorization.presentation.ui.domain.models
 
-data class RegistrationData (
+data class LoginData (
 
     val email: EMailInputData,
     val password: PasswordInputData,
