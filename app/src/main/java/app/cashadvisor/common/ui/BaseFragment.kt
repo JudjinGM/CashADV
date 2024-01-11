@@ -33,13 +33,13 @@ abstract class BaseFragment<VB: ViewBinding, VM: BaseViewModel> (
 
         override fun onViewCreated(view: android.view.View, savedInstanceState: android.os.Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            configureViews()
-            subscribe()
+            onConfigureViews()
+            onSubscribe()
         }
 
-        abstract fun configureViews()
+        abstract fun onConfigureViews()
 
-        abstract fun subscribe()
+        abstract fun onSubscribe()
 
         override fun onDestroyView() {
             super.onDestroyView()

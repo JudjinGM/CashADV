@@ -15,7 +15,7 @@ class UikitSampleFragment :
     override val viewModel: UikitSampleViewModel by lazy { UikitSampleViewModel() }
 
 
-    override fun configureViews() {
+    override fun onConfigureViews() {
 
         binding.firstDiagramButton.setOnClickListener {
             findNavController().navigate(R.id.action_uikitSampleFragment_to_firstDiagramFragment)
@@ -34,7 +34,7 @@ class UikitSampleFragment :
         }
     }
 
-    override fun subscribe() {
+    override fun onSubscribe() {
         // example subscribe
     }
 
