@@ -42,21 +42,12 @@ class StartFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
-                    with(uiState) {
-                        if (isUserAuthenticated) {
-                            if (isAuthenticationSuccessful) {
-                                findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_startFragment_to_entryFragment)
-                            }
-                        }
-                    }
                     updateUi(uiState)
                 }
             }
         }
 
-        binding.tapToContinueTextView.setOnClickListener {
+        binding.containerLayout.setOnClickListener {
             viewModel.authenticateUser()
         }
 
@@ -73,9 +64,19 @@ class StartFragment : Fragment() {
     private fun updateUi(uiState: StartScreenUiState) {
         with(uiState) {
             binding.tapToUiKitSampleTextView.isVisible = isDebug
+
             userMessage?.let {
                 Toast.makeText(requireContext(), getText(userMessage), Toast.LENGTH_SHORT).show()
                 viewModel.userMessageShown()
+            }
+
+            if (isUserAuthenticated) {
+                if (isAuthenticationSuccessful) {
+                    findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
+                } else {
+                    findNavController().navigate(R.id.action_startFragment_to_entryFragment)
+                }
+                viewModel.userProceededNext()
             }
         }
     }

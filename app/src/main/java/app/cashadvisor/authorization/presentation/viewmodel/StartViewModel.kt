@@ -40,6 +40,12 @@ class StartViewModel @Inject constructor(
         }
     }
 
+    fun userProceededNext() {
+        _uiState.update { currentUiState ->
+            currentUiState.copy(isUserAuthenticated = false)
+        }
+    }
+
     private fun loadAuthenticationData() {
         viewModelScope.launch {
             try {

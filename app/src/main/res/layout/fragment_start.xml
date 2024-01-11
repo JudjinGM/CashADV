@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".authorization.presentation.ui.StartFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
@@ -43,15 +48,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/tapToUiKitSampleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/grid_3"
+        android:layout_marginBottom="@dimen/grid_12"
         android:text="@string/tap_to_uikit_sample"
         android:textAppearance="@style/Widget.CashAdvisor.Text.SubtextStart2"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tapToContinueTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
