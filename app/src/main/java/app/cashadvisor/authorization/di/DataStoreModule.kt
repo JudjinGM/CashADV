@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.data.di
+package app.cashadvisor.authorization.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
