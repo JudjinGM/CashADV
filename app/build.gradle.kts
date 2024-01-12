@@ -184,6 +184,9 @@ dependencies {
 
     //Sign-In
     implementation(libs.play.services.auth)
+
+    //DataStore Preferences
+    implementation(libs.datastore.preferences)
 }
 
 kapt {

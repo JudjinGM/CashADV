@@ -23,7 +23,7 @@ dependencyResolutionManagement {
             version("espresso-core", "3.5.1")
             version("fragment-ktx", "1.6.2")
             version("glide", "4.15.1")
-            version("hilt-android", "2.44")
+            version("hilt-android", "2.50")
             version("junit", "4.13.2")
             version("kotlinx-coroutines-android", "1.7.1")
             version("kotlinx-serialization-json", "1.6.1")
@@ -47,6 +47,7 @@ dependencyResolutionManagement {
             version("firebase.appdistribution", "4.0.1")
             version("android-library", "8.1.1")
             version("gms-play-services-auth", "20.7.0")
+            version("datastore-preferences", "1.0.0")
 
             plugin(
                 "android-application",
@@ -271,7 +272,8 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-ktx"
             ).withoutVersion()
 
-            library("firebase-bom",
+            library(
+                "firebase-bom",
                 "com.google.firebase",
                 "firebase-bom"
             ).versionRef("firebase-bom")
@@ -297,6 +299,13 @@ dependencyResolutionManagement {
                 "com.google.android.gms",
                 "play-services-auth"
             ).versionRef("gms-play-services-auth")
+
+            //Datastore preferences
+            library(
+                "datastore-preferences",
+                "androidx.datastore",
+                "datastore-preferences"
+            ).versionRef("datastore-preferences")
         }
     }
 }
