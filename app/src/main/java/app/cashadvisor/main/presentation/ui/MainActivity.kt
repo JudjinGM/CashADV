@@ -10,8 +10,10 @@ import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
