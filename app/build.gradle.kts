@@ -198,8 +198,8 @@ kapt {
 fun ApplicationDefaultConfig.initVKID() {
     val localProperties = gradleLocalProperties(rootDir)
 
-    val clientId = localProperties.getProperty("VKIDClientID")
-    val clientSecret = localProperties.getProperty("VKIDClientSecret")
+    val clientId = System.getenv("VKIDClientID") ?: localProperties.getProperty("VKIDCLIENTID") ?: "VKIDClientID"
+    val clientSecret = System.getenv("VKIDClientSecret") ?: localProperties.getProperty("VKIDCLIENTSECRET") ?: "VKIDClientSecret"
     addManifestPlaceholders(
         mapOf(
             "VKIDRedirectHost" to "vk.com",
