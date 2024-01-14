@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface AccountInteractor {
     suspend fun getAccountInfo(): Flow<NetworkResult<AccountData>>
     suspend fun setAccountName(data: AccountNameInputData): Flow<NetworkResult<Boolean>>
+    fun isAccountNameValid(data: AccountNameInputData): Boolean
 }

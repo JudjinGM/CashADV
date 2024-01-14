@@ -28,6 +28,7 @@ class AccountInteractorImpl : AccountInteractor {
             emit(NetworkResult.Success(true))
         }
 
+    override fun isAccountNameValid(data: AccountNameInputData): Boolean = data.isValid()
 
     companion object {
         private val MOCK_PROFILE = ProfileData(
