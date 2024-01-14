@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.domain.models
+package app.cashadvisor.common.models
 
 abstract class BaseInputData {
 

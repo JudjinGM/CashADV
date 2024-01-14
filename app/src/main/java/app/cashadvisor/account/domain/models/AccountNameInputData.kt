@@ -1,6 +1,6 @@
 package app.cashadvisor.account.domain.models
 
-import app.cashadvisor.authorization.domain.models.BaseInputData
+import app.cashadvisor.common.models.BaseInputData
 
 data class AccountNameInputData(
     val name: String

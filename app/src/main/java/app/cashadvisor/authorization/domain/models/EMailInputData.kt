@@ -1,5 +1,7 @@
 package app.cashadvisor.authorization.domain.models
 
+import app.cashadvisor.common.models.BaseInputData
+
 data class EMailInputData(
     val email: String
 ) : BaseInputData() {
