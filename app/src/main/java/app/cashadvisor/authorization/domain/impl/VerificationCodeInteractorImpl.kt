@@ -1,7 +1,7 @@
-package app.cashadvisor.authorization.presentation.ui.domain.impl
+package app.cashadvisor.authorization.domain.impl
 
-import app.cashadvisor.authorization.presentation.ui.domain.api.VerificationCodeInteractor
-import app.cashadvisor.authorization.presentation.ui.domain.models.VerifycationCodeInputData
+import app.cashadvisor.authorization.domain.api.VerificationCodeInteractor
+import app.cashadvisor.authorization.domain.models.VerifycationCodeInputData
 
 class VerificationCodeInteractorImpl: VerificationCodeInteractor {
     override fun submitCode(code: VerifycationCodeInputData) {

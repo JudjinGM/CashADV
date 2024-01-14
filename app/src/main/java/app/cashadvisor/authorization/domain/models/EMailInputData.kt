@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.domain.models
+package app.cashadvisor.authorization.domain.models
 
 data class EMailInputData(
     val email: String

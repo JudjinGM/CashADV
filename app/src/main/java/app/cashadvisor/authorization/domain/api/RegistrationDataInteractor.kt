@@ -1,6 +1,6 @@
-package app.cashadvisor.authorization.presentation.ui.domain.api
+package app.cashadvisor.authorization.domain.api
 
-import app.cashadvisor.authorization.presentation.ui.domain.models.LoginData
+import app.cashadvisor.authorization.domain.models.LoginData
 import app.cashadvisor.common.models.NetworkResult
 import kotlinx.coroutines.flow.Flow
 
