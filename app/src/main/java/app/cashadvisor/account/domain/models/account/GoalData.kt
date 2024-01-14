@@ -1,4 +1,4 @@
-package app.cashadvisor.account.domain.models
+package app.cashadvisor.account.domain.models.account
 
 data class GoalData (
     val currentState: Int,

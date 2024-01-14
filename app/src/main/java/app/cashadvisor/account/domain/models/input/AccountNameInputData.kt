@@ -1,4 +1,4 @@
-package app.cashadvisor.account.domain.models
+package app.cashadvisor.account.domain.models.input
 
 import app.cashadvisor.common.models.BaseInputData
 
