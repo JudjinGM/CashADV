@@ -1,8 +1,10 @@
 package app.cashadvisor.authorization.domain.api
 
 import app.cashadvisor.authorization.domain.models.VerifycationCodeInputData
+import app.cashadvisor.common.models.NetworkResult
+import kotlinx.coroutines.flow.Flow
 
 interface VerificationCodeInteractor {
-    fun submitCode(code: VerifycationCodeInputData): Unit // todo тут должен быть какой-то ресурс, который будет возвращать результат валидации
-    fun requestCode(): Unit // todo тут должен быть какой-то ресурс, который будет возвращать результат валидации
+    suspend fun submitCode(code: VerifycationCodeInputData): Flow<NetworkResult<Boolean>>
+    suspend fun requestCode(): Flow<NetworkResult<Boolean>>
 }

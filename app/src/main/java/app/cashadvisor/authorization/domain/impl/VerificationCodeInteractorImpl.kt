@@ -2,13 +2,17 @@ package app.cashadvisor.authorization.domain.impl
 
 import app.cashadvisor.authorization.domain.api.VerificationCodeInteractor
 import app.cashadvisor.authorization.domain.models.VerifycationCodeInputData
+import app.cashadvisor.common.models.NetworkResult
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlin.random.Random
 
 class VerificationCodeInteractorImpl: VerificationCodeInteractor {
-    override fun submitCode(code: VerifycationCodeInputData) {
-        // todo тут должен быть какой-то ресурс, который будет возвращать результат валидации
+    override suspend fun submitCode(code: VerifycationCodeInputData): Flow<NetworkResult<Boolean>> = flow {
+        emit(NetworkResult.Success(Random.nextBoolean()))
     }
 
-    override fun requestCode() {
-        // todo тут должен быть какой-то ресурс, который будет возвращать результат валидации
+    override suspend fun requestCode(): Flow<NetworkResult<Boolean>> = flow {
+        emit(NetworkResult.Success(Random.nextBoolean()))
     }
 }
