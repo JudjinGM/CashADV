@@ -2,6 +2,7 @@ package app.cashadvisor.authorization.domain.impl
 
 import app.cashadvisor.authorization.domain.api.RegistrationDataInteractor
 import app.cashadvisor.authorization.domain.models.LoginData
+import app.cashadvisor.authorization.domain.models.PasswordInputData
 import app.cashadvisor.common.models.NetworkResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,4 +17,12 @@ class RegistrationDataInteractorImpl : RegistrationDataInteractor {
 
     override fun isLoginDataValid(data: LoginData): Boolean =
         data.email.isValid() && data.password.isValid()
+
+    override suspend fun requestPasswordReset(): Flow<NetworkResult<Boolean>> = flow {
+        emit(NetworkResult.Success(Random.nextBoolean()))
+    }
+
+    override suspend fun setNewPassword(data: PasswordInputData): Flow<NetworkResult<Boolean>> = flow {
+        emit(NetworkResult.Success(Random.nextBoolean()))
+    }
 }
