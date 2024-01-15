@@ -14,7 +14,7 @@ class TokenLocalDataSourceImpl
 @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : TokenLocalDataSource {
-    //
+
     private val accessTokenKey = stringPreferencesKey(ACCESS_TOKEN_KEY)
 
     private val refreshTokenKey = stringPreferencesKey(REFRESH_TOKEN_KEY)
