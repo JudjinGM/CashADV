@@ -1,9 +1,8 @@
 package app.cashadvisor.authorization.presentation.viewmodel
 
-import ErrorsToken
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.Resource
+import app.cashadvisor.AuthException
 import app.cashadvisor.authorization.domain.useCase.GetRefreshTokenStateUseCase
 import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCase
 import app.cashadvisor.authorization.presentation.ui.model.StartScreenUiState
@@ -55,42 +54,26 @@ class StartViewModel @Inject constructor(
 
     private fun loadAuthenticationData() {
         viewModelScope.launch {
-            getUserAuthenticationStateUseCase().zip(
-                getRefreshTokenStateUseCase()
-            ) { isUserAuthenticated, refreshToken ->
-                when (isUserAuthenticated) {
-                    is Resource.Error -> {
-                        when (refreshToken) {
-                            is Resource.Error -> TODO()//общая ошибка
-                            is Resource.Success -> when (isUserAuthenticated.error) {
-                                ErrorsToken.ErrorOne -> TODO()
-                                ErrorsToken.ErrorTwo -> TODO()
-                                ErrorsToken.ErrorThree -> TODO()
-                                null -> TODO()
-                            }
-                        }
-                    }
-
-                    is Resource.Success -> {
-                        when (refreshToken) {
-                            is Resource.Error -> {
-                                when (refreshToken.error) {
-                                    ErrorsToken.ErrorOne -> TODO()
-                                    ErrorsToken.ErrorTwo -> TODO()
-                                    ErrorsToken.ErrorThree -> TODO()
-                                    null -> TODO()
-                                }
-                            }
-
-                            is Resource.Success -> {
-                                isUserAuthenticated.data == true && refreshToken.data == true
-                            }
-                        }
+            try {
+                getUserAuthenticationStateUseCase().zip(
+                    getRefreshTokenStateUseCase()
+                ) { isUserAuthenticated, isRefreshTokenExist ->
+                    isUserAuthenticated && isRefreshTokenExist
+                }.collect {
+                    _uiState.update { currentUiState ->
+                        currentUiState.copy(isUserAuthenticated = it)
                     }
                 }
-            }.collect {
-                _uiState.update { currentUiState ->
-                    currentUiState.copy(isUserAuthenticated = it)
+            }
+            catch (e: Throwable) {
+                when(e){
+                    is AuthException.AccessTokenExceptionOne -> TODO()
+                    is AuthException.AccessTokenExceptionThree -> TODO()
+                    is AuthException.AccessTokenExceptionTwo -> TODO()
+                    is AuthException.RefreshTokenExceptionThree -> TODO()
+                    is AuthException.RefreshTokenExceptionTwo -> TODO()
+                    is AuthException.RefreshTokenExceptionOne -> TODO()
+                    else -> {TODO()}
                 }
             }
         }

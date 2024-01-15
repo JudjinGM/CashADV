@@ -13,12 +13,12 @@ class AuthRepositoryImpl
 @Inject constructor(
     private val tokenLocalDataSource: TokenLocalDataSource,
 ) : AuthRepository {
-    override fun getToken(): Flow<Resource<String, ErrorsToken>> = flow {
-        emit(Resource.Success<String, ErrorsToken>("token"))
+    override fun getToken(): Flow<String> = flow {
+        emit("token")
     }
 
 
-    override fun getRefreshToken(): Flow<Resource<String, ErrorsToken>> = flow {
-        emit(Resource.Success<String, ErrorsToken>("token"))
+    override fun getRefreshToken(): Flow<String> = flow {
+        emit("token")
     }
 }
