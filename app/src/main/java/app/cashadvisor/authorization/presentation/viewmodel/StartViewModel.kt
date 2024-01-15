@@ -65,8 +65,7 @@ class StartViewModel @Inject constructor(
                     }
                 }
             } catch (e: Throwable) {
-               handleThrowable(e)
-                }
+                handleThrowable(e)
             }
         }
     }
