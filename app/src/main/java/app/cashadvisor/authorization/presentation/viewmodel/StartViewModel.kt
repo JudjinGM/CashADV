@@ -1,6 +1,5 @@
 package app.cashadvisor.authorization.presentation.viewmodel
 
-import ErrorsToken
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.cashadvisor.Resource
@@ -57,42 +56,38 @@ class StartViewModel @Inject constructor(
         viewModelScope.launch {
             getUserAuthenticationStateUseCase().zip(
                 getRefreshTokenStateUseCase()
-            ) { isUserAuthenticated, refreshToken ->
-                when (isUserAuthenticated) {
-                    is Resource.Error -> {
-                        when (refreshToken) {
-                            is Resource.Error -> TODO()//общая ошибка
-                            is Resource.Success -> when (isUserAuthenticated.error) {
-                                ErrorsToken.ErrorOne -> TODO()
-                                ErrorsToken.ErrorTwo -> TODO()
-                                ErrorsToken.ErrorThree -> TODO()
-                                null -> TODO()
-                            }
+            ) { isUserAuthenticated, isRefreshTokenExist ->
+                when {
+                    isUserAuthenticated is Resource.Success || isRefreshTokenExist is Resource.Success -> {
+                        isUserAuthenticated.data == true && isRefreshTokenExist.data == true
+                    }
+
+                    isRefreshTokenExist is Resource.Error -> {
+                        when (isRefreshTokenExist.error) {
+                            ErrorsRefreshToken.ErrorRefreshTokenOne -> TODO()
+                            ErrorsRefreshToken.ErrorRefreshTokenTwo -> TODO()
+                            ErrorsRefreshToken.ErrorRefreshTokenThree -> TODO()
+                            null -> TODO()
                         }
                     }
 
-                    is Resource.Success -> {
-                        when (refreshToken) {
-                            is Resource.Error -> {
-                                when (refreshToken.error) {
-                                    ErrorsToken.ErrorOne -> TODO()
-                                    ErrorsToken.ErrorTwo -> TODO()
-                                    ErrorsToken.ErrorThree -> TODO()
-                                    null -> TODO()
-                                }
-                            }
-
-                            is Resource.Success -> {
-                                isUserAuthenticated.data == true && refreshToken.data == true
-                            }
+                    isUserAuthenticated is Resource.Error -> {
+                        when (isUserAuthenticated.error) {
+                            ErrorsAccessToken.ErrorAccessTokenOne -> TODO()
+                            ErrorsAccessToken.ErrorAccessTokenTwo -> TODO()
+                            ErrorsAccessToken.ErrorAccessTokenThree -> TODO()
+                            null -> TODO()
                         }
                     }
-                }
-            }.collect {
-                _uiState.update { currentUiState ->
-                    currentUiState.copy(isUserAuthenticated = it)
+
+                    else -> { false}
                 }
             }
+                .collect {
+                    _uiState.update { currentUiState ->
+                        currentUiState.copy(isUserAuthenticated = it)
+                    }
+                }
         }
     }
 }

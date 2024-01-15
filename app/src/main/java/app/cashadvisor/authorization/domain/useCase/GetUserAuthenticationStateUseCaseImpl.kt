@@ -1,6 +1,6 @@
 package app.cashadvisor.authorization.domain.useCase
 
-import ErrorsToken
+import ErrorsAccessToken
 import app.cashadvisor.Resource
 import app.cashadvisor.authorization.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,11 +11,11 @@ class GetUserAuthenticationStateUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository
 ) : GetUserAuthenticationStateUseCase {
 
-    override fun invoke(): Flow<Resource<Boolean, ErrorsToken>> =
+    override fun invoke(): Flow<Resource<Boolean, ErrorsAccessToken>> =
         authRepository.getToken().map {
             when (it) {
                 is Resource.Error -> Resource.Error(
-                    error = it.error ?: ErrorsToken.ErrorThree
+                    error = it.error ?: ErrorsAccessToken.ErrorAccessTokenThree
                 )
 
                 is Resource.Success -> Resource.Success(

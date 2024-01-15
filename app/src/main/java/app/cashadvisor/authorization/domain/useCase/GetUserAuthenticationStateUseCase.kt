@@ -1,9 +1,9 @@
 package app.cashadvisor.authorization.domain.useCase
 
-import ErrorsToken
+import ErrorsAccessToken
 import app.cashadvisor.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface GetUserAuthenticationStateUseCase {
-    operator fun invoke(): Flow<Resource<Boolean, ErrorsToken>>
+    operator fun invoke(): Flow<Resource<Boolean, ErrorsAccessToken>>
 }
