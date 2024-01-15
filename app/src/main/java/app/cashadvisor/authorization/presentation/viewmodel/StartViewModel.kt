@@ -74,16 +74,15 @@ class StartViewModel @Inject constructor(
         when (throwable) {
             is AuthException -> {
                 when (throwable) {
+                    // надо обрабатывать только нужные для экрана exceptions, остальное в else
                     is AuthException.AccessTokenExceptionOne -> TODO()
                     is AuthException.AccessTokenExceptionThree -> TODO()
                     is AuthException.AccessTokenExceptionTwo -> TODO()
                     is AuthException.RefreshTokenExceptionOne -> TODO()
                     is AuthException.RefreshTokenExceptionThree -> TODO()
                     is AuthException.RefreshTokenExceptionTwo -> TODO()
-                    else -> TODO()
                 }
             }
-
             else -> {
                 TODO()
             }
