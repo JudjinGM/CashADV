@@ -3,6 +3,7 @@ package app.cashadvisor.authorization.di
 import app.cashadvisor.authorization.data.dataSource.TokenLocalDataSource
 import app.cashadvisor.authorization.data.repositoryImpl.AuthRepositoryImpl
 import app.cashadvisor.authorization.domain.repository.AuthRepository
+import app.cashadvisor.authorization.domain.useCase.GetRefreshTokenStateUseCase
 import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCase
 import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCaseImpl
 import dagger.Module
@@ -22,6 +23,14 @@ class DomainModule {
         return GetUserAuthenticationStateUseCaseImpl(
             authRepository = authRepository
         )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetRefreshTokenUseCase(
+        authRepository: AuthRepository
+    ): GetRefreshTokenStateUseCase {
+        return GetRefreshTokenStateUseCase.Base(authRepository = authRepository)
     }
 
     @Provides
