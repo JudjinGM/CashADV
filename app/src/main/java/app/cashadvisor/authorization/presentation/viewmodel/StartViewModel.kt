@@ -58,7 +58,7 @@ class StartViewModel @Inject constructor(
                 getRefreshTokenStateUseCase()
             ) { isUserAuthenticated, isRefreshTokenExist ->
                 when {
-                    isUserAuthenticated is Resource.Success || isRefreshTokenExist is Resource.Success -> {
+                    isUserAuthenticated is Resource.Success && isRefreshTokenExist is Resource.Success -> {
                         isUserAuthenticated.data == true && isRefreshTokenExist.data == true
                     }
 
