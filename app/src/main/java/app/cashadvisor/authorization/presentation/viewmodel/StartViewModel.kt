@@ -64,17 +64,29 @@ class StartViewModel @Inject constructor(
                         currentUiState.copy(isUserAuthenticated = it)
                     }
                 }
+            } catch (e: Throwable) {
+               handleThrowable(e)
+                }
             }
-            catch (e: Throwable) {
-                when(e){
+        }
+    }
+
+    private fun handleThrowable(throwable: Throwable) {
+        when (throwable) {
+            is AuthException -> {
+                when (throwable) {
                     is AuthException.AccessTokenExceptionOne -> TODO()
                     is AuthException.AccessTokenExceptionThree -> TODO()
                     is AuthException.AccessTokenExceptionTwo -> TODO()
+                    is AuthException.RefreshTokenExceptionOne -> TODO()
                     is AuthException.RefreshTokenExceptionThree -> TODO()
                     is AuthException.RefreshTokenExceptionTwo -> TODO()
-                    is AuthException.RefreshTokenExceptionOne -> TODO()
-                    else -> {TODO()}
+                    else -> TODO()
                 }
+            }
+
+            else -> {
+                TODO()
             }
         }
     }
