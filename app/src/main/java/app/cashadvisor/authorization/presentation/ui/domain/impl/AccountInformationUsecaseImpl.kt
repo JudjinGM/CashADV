@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.domain
+package app.cashadvisor.authorization.presentation.ui.domain.impl
 
 import app.cashadvisor.authorization.presentation.ui.domain.api.AccountInformationUsecase
 import app.cashadvisor.authorization.presentation.ui.domain.models.AccountInformation
@@ -8,6 +8,7 @@ import java.util.Date
 
 class AccountInformationUsecaseImpl: AccountInformationUsecase {
     override suspend fun getAccountInformation(): Flow<AccountInformation> = flow {
+        // todo обновить класс с учетом реальных данных
         emit(MOCK_ACCOUNT_INFORMATION)
     }
 
