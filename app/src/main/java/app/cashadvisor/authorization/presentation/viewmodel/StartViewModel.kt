@@ -62,21 +62,21 @@ class StartViewModel @Inject constructor(
                         isUserAuthenticated.data == true && isRefreshTokenExist.data == true
                     }
 
-                    isRefreshTokenExist is Resource.Error -> {
-                        when (isRefreshTokenExist.error) {
-                            ErrorsRefreshToken.ErrorRefreshTokenOne -> TODO()
-                            ErrorsRefreshToken.ErrorRefreshTokenTwo -> TODO()
-                            ErrorsRefreshToken.ErrorRefreshTokenThree -> TODO()
-                            null -> TODO()
-                        }
-                    }
-
                     isUserAuthenticated is Resource.Error -> {
                         when (isUserAuthenticated.error) {
                             ErrorsAccessToken.ErrorAccessTokenOne -> TODO()
                             ErrorsAccessToken.ErrorAccessTokenTwo -> TODO()
                             ErrorsAccessToken.ErrorAccessTokenThree -> TODO()
-                            null -> TODO()
+                            else -> TODO()
+                        }
+                    }
+
+                    isRefreshTokenExist is Resource.Error -> {
+                        when (isRefreshTokenExist.error) {
+                            ErrorsRefreshToken.ErrorRefreshTokenOne -> TODO()
+                            ErrorsRefreshToken.ErrorRefreshTokenTwo -> TODO()
+                            ErrorsRefreshToken.ErrorRefreshTokenThree -> TODO()
+                            else -> TODO()
                         }
                     }
 
