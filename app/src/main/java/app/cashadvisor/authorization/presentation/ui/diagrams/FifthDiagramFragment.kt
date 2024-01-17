@@ -22,6 +22,22 @@ class FifthDiagramFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.button.setOnClickListener {
+            if (
+                binding.editTextText.text.isNotBlank() &&
+                binding.editTextText2.text.isNotBlank()
+            ) {
+                binding.circleDiagramFive.setValue(
+                    binding.editTextText.text.toString().toInt(),
+                    binding.editTextText2.text.toString().toInt()
+                )
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
