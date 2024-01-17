@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flow
 import java.util.Date
 
 class AccountInformationInteractorImpl: AccountInformationInteractor {
-    override suspend fun getAccountInformation(): Flow<AccountInformation> = flow {
+    override fun getAccountInformation(): Flow<AccountInformation> = flow {
         // todo обновить класс с учетом реальных данных
         emit(MOCK_ACCOUNT_INFORMATION)
     }

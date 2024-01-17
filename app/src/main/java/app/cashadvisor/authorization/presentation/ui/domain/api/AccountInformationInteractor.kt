@@ -4,5 +4,5 @@ import app.cashadvisor.authorization.presentation.ui.domain.models.AccountInform
 import kotlinx.coroutines.flow.Flow
 
 interface AccountInformationInteractor {
-    suspend fun getAccountInformation(): Flow<AccountInformation>
+    fun getAccountInformation(): Flow<AccountInformation>
 }
