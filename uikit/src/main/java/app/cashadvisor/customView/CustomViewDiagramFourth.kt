@@ -26,16 +26,16 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
 
     private var backgroundProgressColor = Color.GRAY
     private var progressColor = Color.GREEN
-    private var colorTextProgress = Color.WHITE
-    private var textSizeProgress = DEFAULT_TEXT_SIZE
+    private var progressTextColor = Color.WHITE
+    private var progressTextSize = DEFAULT_TEXT_SIZE
 
-    private var paddingProgressFromBackground = PADDING_PROGRESS_BACKGROUND
-    private var progressTextPadding = PADDING_TEXT_PROGRESS
+    private var progressPaddingBackground = PROGRESS_PADDING_BACKGROUND
+    private var progressTextPadding = PROGRESS_PADDING_TEXT
     private var cornerRadius = DEFAULT_CORNER_RADIUS
 
-    private lateinit var rectPaint: Paint
-    private lateinit var rectPaintProgress: Paint
-    private lateinit var textPaint: Paint
+    private lateinit var paintRect: Paint
+    private lateinit var paintProgressRect: Paint
+    private lateinit var paintText: Paint
     private lateinit var textFontProgress: Typeface
 
     private val backgroundSizeField = RectF(0f, 0f, 0f, 0f)
@@ -64,9 +64,9 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             progressColor = getColor(R.styleable.CustomViewDiagramFourth_colorProgress, Color.GREEN)
             cornerRadius =
                 getDimension(R.styleable.CustomViewDiagramFourth_radiusView, DEFAULT_CORNER_RADIUS)
-            colorTextProgress =
+            progressTextColor =
                 getColor(R.styleable.CustomViewDiagramFourth_textColorProgress, Color.WHITE)
-            textSizeProgress = getDimension(
+            progressTextSize = getDimension(
                 R.styleable.CustomViewDiagramFourth_textSizeProgress, DEFAULT_TEXT_SIZE
             )
         }
@@ -82,29 +82,29 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             Typeface.DEFAULT
         }
 
-        paddingProgressFromBackground = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, PADDING_PROGRESS_BACKGROUND, resources.displayMetrics
+        progressPaddingBackground = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, PROGRESS_PADDING_BACKGROUND, resources.displayMetrics
         )
         progressTextPadding = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP, PADDING_TEXT_PROGRESS, resources.displayMetrics
+            TypedValue.COMPLEX_UNIT_DIP, PROGRESS_PADDING_TEXT, resources.displayMetrics
         )
         typedArray.recycle()
     }
 
     private fun initPaint() {
-        rectPaint = Paint().apply {
+        paintRect = Paint().apply {
             isAntiAlias = true
             color = backgroundProgressColor
         }
-        rectPaintProgress = Paint().apply {
+        paintProgressRect = Paint().apply {
             isAntiAlias = true
             color = progressColor
         }
-        textPaint = Paint().apply {
+        paintText = Paint().apply {
             isAntiAlias = true
             textAlign = Paint.Align.RIGHT
-            color = colorTextProgress
-            textSize = textSizeProgress
+            color = progressTextColor
+            textSize = progressTextSize
             typeface = textFontProgress
         }
     }
@@ -118,10 +118,10 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
             bottom = height - paddingBottom.toFloat()
         }
         progressSizeField.apply {
-            left = paddingLeft.toFloat() + paddingProgressFromBackground
-            top = paddingTop.toFloat() + paddingProgressFromBackground
-            right = width - paddingRight - paddingProgressFromBackground
-            bottom = height - paddingBottom - paddingProgressFromBackground
+            left = paddingLeft.toFloat() + progressPaddingBackground
+            top = paddingTop.toFloat() + progressPaddingBackground
+            right = width - paddingRight - progressPaddingBackground
+            bottom = height - paddingBottom - progressPaddingBackground
         }
         barMaxWidth = width.toFloat() - progressSizeField.height()
         progress = progress
@@ -151,29 +151,29 @@ class CustomViewDiagramFourth @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
-        val xPos = progressSizeField.right - progressTextPadding - paddingProgressFromBackground
+        val xPos = progressSizeField.right - progressTextPadding - progressPaddingBackground
         val yPos = height / 2f
-        val yPosText = (yPos - ((textPaint.descent() + textPaint.ascent()) / 2))
-        progressSizeField.left = paddingLeft.toFloat() + paddingProgressFromBackground + barWidth
+        val yPosText = (yPos - ((paintText.descent() + paintText.ascent()) / 2))
+        progressSizeField.left = paddingLeft.toFloat() + progressPaddingBackground + barWidth
 
         canvas.drawRoundRect(
-            backgroundSizeField, cornerRadius, cornerRadius, rectPaint
+            backgroundSizeField, cornerRadius, cornerRadius, paintRect
         )
 
         if (progress != 0) {
             canvas.drawRoundRect(
-                progressSizeField, cornerRadius, cornerRadius, rectPaintProgress
+                progressSizeField, cornerRadius, cornerRadius, paintProgressRect
             )
         }
 
         canvas.drawText(
-            progress.toString(), xPos, yPosText, textPaint
+            progress.toString(), xPos, yPosText, paintText
         )
     }
 
     companion object {
-        const val PADDING_PROGRESS_BACKGROUND = 1f
-        const val PADDING_TEXT_PROGRESS = 5f
+        const val PROGRESS_PADDING_BACKGROUND = 1f
+        const val PROGRESS_PADDING_TEXT = 5f
         const val DEFAULT_CORNER_RADIUS = 10f
         const val DEFAULT_TEXT_SIZE = 11F
         const val DEFAULT_HEIGHT = 15f
