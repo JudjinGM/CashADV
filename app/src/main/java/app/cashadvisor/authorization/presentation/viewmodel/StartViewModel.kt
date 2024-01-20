@@ -2,7 +2,8 @@ package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.authorization.domain.useCase.GetUserAuthenticationStateUseCase
+import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
+import app.cashadvisor.authorization.domain.models.AccountInformation
 import app.cashadvisor.authorization.presentation.ui.model.StartScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val getUserAuthenticationStateUseCase: GetUserAuthenticationStateUseCase
+    private val accountInformationInteractor: AccountInformationInteractor
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<StartScreenUiState> =
@@ -51,12 +52,15 @@ class StartViewModel @Inject constructor(
     private fun loadAuthenticationData() {
         viewModelScope.launch {
             try {
-                getUserAuthenticationStateUseCase()
-                    .collect { isAuthenticationSuccessful ->
+                accountInformationInteractor.getAccountInformation()
+                    .collect { accountInformationState ->
                         _uiState.update { currentState ->
                             currentState.copy(
                                 isUserAuthenticated = true,
-                                isAuthenticationSuccessful = isAuthenticationSuccessful
+                                isAuthenticationSuccessful = when (accountInformationState) {
+                                    is AccountInformation.Authorized -> true
+                                    else -> false
+                                }
                             )
                         }
                     }

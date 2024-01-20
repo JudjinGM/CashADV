@@ -17,4 +17,9 @@
     <string name="tracker"> Трекер</string>
     <string name="settings"> Настройки</string>
 
+    <!-- PinCode screen strings -->
+    <string name="pin_code_screen">Экран ввода пинкода</string>
+    <string name="enter">Войти</string>
+    <string name="back">Назад</string>
+
 </resources>

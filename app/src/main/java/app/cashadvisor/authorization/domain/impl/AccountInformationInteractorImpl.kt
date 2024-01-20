@@ -5,8 +5,9 @@ import app.cashadvisor.authorization.domain.models.AccountInformation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.Date
+import javax.inject.Inject
 
-class AccountInformationInteractorImpl: AccountInformationInteractor {
+class AccountInformationInteractorImpl @Inject constructor() : AccountInformationInteractor {
     override fun getAccountInformation(): Flow<AccountInformation> = flow {
         // todo обновить класс с учетом реальных данных
         emit(MOCK_ACCOUNT_INFORMATION)
