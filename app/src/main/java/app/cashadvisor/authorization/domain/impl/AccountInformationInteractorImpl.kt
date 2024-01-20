@@ -1,7 +1,7 @@
-package app.cashadvisor.authorization.presentation.ui.domain.impl
+package app.cashadvisor.authorization.domain.impl
 
-import app.cashadvisor.authorization.presentation.ui.domain.api.AccountInformationInteractor
-import app.cashadvisor.authorization.presentation.ui.domain.models.AccountInformation
+import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
+import app.cashadvisor.authorization.domain.models.AccountInformation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.util.Date
