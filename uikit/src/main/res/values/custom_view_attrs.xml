@@ -25,8 +25,6 @@
     <attr name="CustomViewDiagramFourthStyle" format="reference" />
 
     <declare-styleable name="CircularGraph">
-
-    <declare-styleable name="CircularGraph">
         <attr name="cg_constSourceArcColor" format="color"/>
         <attr name="cg_varSourceArcColor" format="color"/>
         <attr name="cg_circleThickness" format="dimension"/>
