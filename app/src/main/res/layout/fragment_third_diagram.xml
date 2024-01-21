@@ -15,18 +15,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:textColorProgress="@color/black"/>
+        app:dt_colorBackground ="@color/black"/>
 
     <app.cashadvisor.customView.CustomViewDiagramThird
         android:id="@+id/diagram2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:colorProgress="?attr/sm1"
+        app:dt_colorProgress="?attr/sm1"
         app:layout_constraintBottom_toTopOf="@+id/diagram1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:textColorProgress="@color/black"/>
+        app:dt_textColorProgress="@color/black"/>
 
     <SeekBar
         android:id="@+id/seek_bar"

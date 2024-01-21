@@ -31,11 +31,11 @@
         <item name="CustomViewDiagramThirdStyle">@style/CustomViewDiagramThirdStyle</item>
     </style>
     <style name="CustomViewDiagramThirdStyle">
-        <item name="colorProgress">?attr/sm4</item>
-        <item name="colorBackground">?attr/colour1</item>
-        <item name="radiusView">10dp</item>
-        <item name="textSizeProgress">11sp</item>
-        <item name="textColorProgress">?attr/whitecolour</item>
-        <item name="textFontProgress">@font/intersemibold</item>
+        <item name="dt_colorProgress">?attr/sm4</item>
+        <item name="dt_colorBackground">?attr/colour1</item>
+        <item name="dt_radiusView">10dp</item>
+        <item name="dt_textSizeProgress">11sp</item>
+        <item name="dt_textColorProgress">?attr/whitecolour</item>
+        <item name="dt_textFontProgress">@font/intersemibold</item>
     </style>
 </resources>

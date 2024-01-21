@@ -58,19 +58,19 @@ class CustomViewDiagramThird @JvmOverloads constructor(
             attributesSet, R.styleable.CustomViewDiagramThird, defStyleAttr, defStyleRes
         ).apply {
             backgroundProgressColor = getColor(
-                R.styleable.CustomViewDiagramThird_colorBackground, Color.GRAY
+                R.styleable.CustomViewDiagramThird_dt_colorBackground, Color.GRAY
             )
-            progressColor = getColor(R.styleable.CustomViewDiagramThird_colorProgress, Color.GREEN)
+            progressColor = getColor(R.styleable.CustomViewDiagramThird_dt_colorProgress, Color.GREEN)
             cornerRadius =
-                getDimension(R.styleable.CustomViewDiagramThird_radiusView, DEFAULT_CORNER_RADIUS)
+                getDimension(R.styleable.CustomViewDiagramThird_dt_radiusView, DEFAULT_CORNER_RADIUS)
             textProgressColor =
-                getColor(R.styleable.CustomViewDiagramThird_textColorProgress, Color.WHITE)
+                getColor(R.styleable.CustomViewDiagramThird_dt_textColorProgress, Color.WHITE)
             textSizeProgress = getDimension(
-                R.styleable.CustomViewDiagramThird_textSizeProgress, DEFAULT_TEXT_SIZE
+                R.styleable.CustomViewDiagramThird_dt_textSizeProgress, DEFAULT_TEXT_SIZE
             )
         }
         val textFontId =
-            typedArray.getResourceId(R.styleable.CustomViewDiagramThird_textFontProgress, 0)
+            typedArray.getResourceId(R.styleable.CustomViewDiagramThird_dt_textFontProgress, 0)
         textFontProgress = if (textFontId != 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Typeface.create(resources.getFont(textFontId), Typeface.NORMAL)
@@ -91,7 +91,7 @@ class CustomViewDiagramThird @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    fun initPaint() {
+    private fun initPaint() {
         rectPaint = Paint().apply {
             isAntiAlias = true
             color = backgroundProgressColor
