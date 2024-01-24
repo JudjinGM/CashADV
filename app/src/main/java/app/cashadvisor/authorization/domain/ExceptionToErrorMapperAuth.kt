@@ -4,7 +4,7 @@ import app.cashadvisor.common.domain.model.ErrorEntity
 import app.cashadvisor.common.domain.Resource
 import app.cashadvisor.common.domain.ExceptionToErrorMapperBase
 import app.cashadvisor.common.utill.exceptions.AuthException
-import app.cashadvisor.common.utill.logDebugError
+import app.cashadvisor.common.utill.extensions.logDebugError
 
 class ExceptionToErrorMapperAuth : ExceptionToErrorMapperBase() {
 

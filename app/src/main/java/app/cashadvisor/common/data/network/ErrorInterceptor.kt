@@ -3,7 +3,7 @@ package app.cashadvisor.common.data.network
 import app.cashadvisor.authorization.data.dataSource.api.NetworkConnectionProvider
 import app.cashadvisor.common.data.model.ErrorResponse
 import app.cashadvisor.common.utill.exceptions.NetworkException
-import app.cashadvisor.common.utill.logNetworkError
+import app.cashadvisor.common.utill.extensions.logNetworkError
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.Response

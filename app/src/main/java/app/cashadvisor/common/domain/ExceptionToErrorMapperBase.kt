@@ -2,7 +2,7 @@ package app.cashadvisor.common.domain
 
 import app.cashadvisor.common.utill.exceptions.NetworkException
 import app.cashadvisor.common.domain.model.ErrorEntity
-import app.cashadvisor.common.utill.logNetworkError
+import app.cashadvisor.common.utill.extensions.logNetworkError
 import java.net.ConnectException
 
 abstract class ExceptionToErrorMapperBase {

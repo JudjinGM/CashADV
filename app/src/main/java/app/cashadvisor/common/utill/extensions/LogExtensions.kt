@@ -1,4 +1,4 @@
-package app.cashadvisor.common.utill
+package app.cashadvisor.common.utill.extensions
 
 import timber.log.Timber
 

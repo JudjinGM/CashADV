@@ -9,7 +9,7 @@ import app.cashadvisor.authorization.domain.models.AccountInformation
 import app.cashadvisor.authorization.domain.repository.AuthRepository
 import app.cashadvisor.common.domain.Resource
 import app.cashadvisor.common.domain.model.ErrorEntity
-import app.cashadvisor.common.utill.logDebugMessage
+import app.cashadvisor.common.utill.extensions.logDebugMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -8,7 +8,7 @@ import app.cashadvisor.authorization.data.repositoryImpl.AuthRepositoryImpl
 import app.cashadvisor.authorization.domain.ExceptionToErrorMapperAuth
 import app.cashadvisor.authorization.domain.repository.AuthRepository
 import app.cashadvisor.common.domain.ExceptionToErrorMapperBase
-import app.cashadvisor.common.utill.logDebugMessage
+import app.cashadvisor.common.utill.extensions.logDebugMessage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
