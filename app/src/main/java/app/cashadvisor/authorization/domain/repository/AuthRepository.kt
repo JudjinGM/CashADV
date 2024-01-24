@@ -1,8 +1,9 @@
 package app.cashadvisor.authorization.domain.repository
 
-import kotlinx.coroutines.flow.Flow
+import app.cashadvisor.authorization.data.model.AuthInputData
+import app.cashadvisor.authorization.domain.models.AccountInformation
+import app.cashadvisor.common.domain.Resource
 
 interface AuthRepository {
-    fun getToken(): Flow<String>
-
+    suspend fun loginByEmail(authInputData: AuthInputData): Resource<AccountInformation>
 }

@@ -14,23 +14,24 @@ import app.cashadvisor.authorization.data.model.response.ResetPasswordByEmailRes
 import app.cashadvisor.authorization.data.model.response.ResetPasswordResponse
 import retrofit2.http.Body
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
 
 interface AuthApiService {
     @PUT("auth/login/reset/password/put")
-    suspend fun resetPassword(
+    suspend fun putNewPasswordForReset(
         @Header(HEADER_NAME) token: String,
         @Body resetPasswordRequest: ResetPasswordRequest
     ): ResetPasswordResponse
 
     @POST("auth/login/reset/password")
-    suspend fun resetPasswordByEmail(
+    suspend fun resetPassword(
         @Body resetPasswordByEmailRequest: ResetPasswordByEmailRequest
     ): ResetPasswordByEmailResponse
 
     @POST("auth/reset/password/confirm")
-    suspend fun confirmResetByCodePassword(
+    suspend fun confirmPasswordResetWithCode(
         @Body confirmEmailRequest: ConfirmEmailRequest
     ): ConfirmEmailResponse
 
@@ -44,8 +45,9 @@ interface AuthApiService {
         @Body authByServiceRequest: AuthByServiceRequest
     ): LoginByServiceResponse
 
+    @Headers("Content-Type: application/json")
     @POST("auth/login")
-    suspend fun login(@Body authRequest: AuthRequest): LoginResponse
+    suspend fun loginByEmail(@Body authRequest: AuthRequest): LoginResponse
 
     @POST("auth/logout")
     suspend fun logout(): LogoutResponse
@@ -54,7 +56,7 @@ interface AuthApiService {
     suspend fun register(@Body authRequest: AuthRequest): RegisterResponse
 
     @POST("auth/confirm-email")
-    suspend fun confirmEmail(
+    suspend fun confirmEmailWithCode(
         @Body confirmEmailRequest: ConfirmEmailRequest
     ): ConfirmEmailResponse
 

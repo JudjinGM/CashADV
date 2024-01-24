@@ -38,6 +38,7 @@ dependencyResolutionManagement {
             version("kotlin", "1.9.0")
             version("devtools-ksp", "1.9.10-1.0.13")
             version("kotlinx-serialization", "1.9.20")
+            version("kotlinx-serialization-converter", "1.0.0")
             version("firebase-analytics-ktx", "")
             version("firebase-crashlytics-ktx", "")
             version("firebase-crashlytics-gradle", "2.9.9")
@@ -47,7 +48,6 @@ dependencyResolutionManagement {
             version("firebase.appdistribution", "4.0.1")
             version("android-library", "8.1.1")
             version("gms-play-services-auth", "20.7.0")
-            version("datastore-preferences", "1.0.0")
 
             plugin(
                 "android-application",
@@ -240,6 +240,12 @@ dependencyResolutionManagement {
                 "logging-interceptor"
             ).versionRef("okhttp")
 
+            library(
+                "retrofit2-kotlinx-serialization-converter",
+                "com.jakewharton.retrofit",
+                "retrofit2-kotlinx-serialization-converter"
+            ).versionRef("kotlinx-serialization-converter")
+
             // Test
             library(
                 "junit",
@@ -300,12 +306,6 @@ dependencyResolutionManagement {
                 "play-services-auth"
             ).versionRef("gms-play-services-auth")
 
-            //Datastore preferences
-            library(
-                "datastore-preferences",
-                "androidx.datastore",
-                "datastore-preferences"
-            ).versionRef("datastore-preferences")
         }
     }
 }

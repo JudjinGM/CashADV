@@ -168,6 +168,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
 
     // Test
     testImplementation(libs.junit)
@@ -185,8 +186,6 @@ dependencies {
     //Sign-In
     implementation(libs.play.services.auth)
 
-    //DataStore Preferences
-    implementation(libs.datastore.preferences)
 }
 
 kapt {

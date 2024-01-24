@@ -1,21 +1,26 @@
 package app.cashadvisor.authorization.presentation.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
 import app.cashadvisor.databinding.FragmentStartBinding
-import com.google.firebase.BuildConfig
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class StartFragment : Fragment() {
+
+    //отладочный фрагмент
 
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: StartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +41,7 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnContinue.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_entryFragment)
+            viewModel.fetch()
         }
 
 
