@@ -20,12 +20,6 @@ class AccountInformationInteractorImpl(
                     )
                 )
             }
-            emit(
-                AccountInformation.Authorized(
-                    accessToken = data?.accessToken ?: "",
-                    refreshToken = data?.refreshToken ?: ""
-                )
-            )
         } else {
             emit(AccountInformation.NotAuthorized)
         }
