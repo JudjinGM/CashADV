@@ -185,6 +185,9 @@ dependencies {
 
     //Sign-In
     implementation(libs.play.services.auth)
+
+    //Crypto
+    implementation(libs.crypto)
 }
 
 kapt {
