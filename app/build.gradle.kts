@@ -188,6 +188,9 @@ dependencies {
 
     //Crypto
     implementation(libs.crypto)
+
+    //Convert Gson
+    implementation(libs.convertgson)
 }
 
 kapt {
