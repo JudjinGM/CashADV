@@ -1,12 +1,12 @@
 package app.cashadvisor.authorization.data.impl
 
-import androidx.security.crypto.EncryptedSharedPreferences
+import android.content.SharedPreferences
 import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.CredentialsStorage
 import com.google.gson.Gson
 
 class CredentialsStorageImpl (
-    private val starage: EncryptedSharedPreferences,
+    private val storage: SharedPreferences,
     private val key: String,
     private val gson: Gson
 ): CredentialsStorage {
@@ -19,11 +19,11 @@ class CredentialsStorageImpl (
 
     override fun saveCredentials(credentials: CredentialsDto) {
         val data = gson.toJson(credentials)
-        starage.edit().putString(key, data).apply()
+        storage.edit().putString(key, data).apply()
     }
 
     override fun getCredentials(): CredentialsDto? {
-        val data = starage.getString(key, null)
+        val data = storage.getString(key, null)
         return if (data != null) {
             gson.fromJson(data, CredentialsDto::class.java)
         } else {
@@ -32,10 +32,10 @@ class CredentialsStorageImpl (
     }
 
     override fun hasCredentials(): Boolean {
-        return starage.contains(key)
+        return storage.contains(key)
     }
 
     override fun clearCredentials() {
-        starage.edit().remove(key).apply()
+        storage.edit().remove(key).apply()
     }
 }
