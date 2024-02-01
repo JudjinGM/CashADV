@@ -5,11 +5,11 @@ import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.CredentialsStorage
 import com.google.gson.Gson
 
-class CredentialsStorageImpl (
+class CredentialsStorageImpl(
     private val storage: SharedPreferences,
     private val key: String,
     private val gson: Gson
-): CredentialsStorage {
+) : CredentialsStorage {
 
     /**
      * todo подумать, чтобы отнаследоваться от CoroutineScope by CoroutineScope(
