@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.firebase.crashlytics.gradle)
     alias(libs.plugins.gms.googleServices)
     alias(libs.plugins.firebase.appdistribution)
+    id("kotlin-parcelize")
 }
 
 android {
