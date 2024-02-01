@@ -1,24 +1,40 @@
 package app.cashadvisor.authorization.domain.impl
 
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
+import app.cashadvisor.authorization.domain.api.CredentialsStorage
 import app.cashadvisor.authorization.domain.models.AccountInformation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.util.Date
 
-class AccountInformationInteractorImpl: AccountInformationInteractor {
+class AccountInformationInteractorImpl(
+    private val storage: CredentialsStorage
+) : AccountInformationInteractor {
     override fun getAccountInformation(): Flow<AccountInformation> = flow {
-        // todo обновить класс с учетом реальных данных
-        emit(MOCK_ACCOUNT_INFORMATION)
+        if (storage.hasCredentials()) {
+            val data = storage.getCredentials()
+            data?.let {
+                emit(
+                    AccountInformation.Authorized(
+                        accessToken = it.accessToken,
+                        refreshToken = it.refreshToken
+                    )
+                )
+            }
+            emit(
+                AccountInformation.Authorized(
+                    accessToken = data?.accessToken ?: "",
+                    refreshToken = data?.refreshToken ?: ""
+                )
+            )
+        } else {
+            emit(AccountInformation.NotAuthorized)
+        }
     }
 
     companion object {
         private val MOCK_ACCOUNT_INFORMATION = AccountInformation.Authorized(
-            email = "test@test.test",
-            token = "123",
+            accessToken = "123",
             refreshToken = "123",
-            isEmailVerified = true,
-            tokenValidTill = Date()
         )
     }
 
