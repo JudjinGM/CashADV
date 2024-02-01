@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 Timber.tag("MainActivity").d("Credentials: $credentials")
             }
         }
-        val layoutParams =
+        var layoutParams =
             ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT)
         layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
@@ -98,6 +98,25 @@ class MainActivity : AppCompatActivity() {
 
         with(binding.root as ConstraintLayout) {
             addView(storageButton, layoutParams)
+        }
+
+        val deleteStorageButton = Button(this).apply {
+            text = "Delete Strorage"
+            setOnClickListener {
+                storage.clearCredentials()
+                Timber.tag("MainActivity").d("Credentials removed")
+                val credentials = storage.getCredentials()
+                Timber.tag("MainActivity").d("Credentials: $credentials")
+            }
+        }
+        layoutParams =
+            ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+        layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+
+        with(binding.root as ConstraintLayout) {
+            addView(deleteStorageButton, layoutParams)
         }
 
 
