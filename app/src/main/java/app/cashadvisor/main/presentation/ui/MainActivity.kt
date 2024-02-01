@@ -2,21 +2,30 @@ package app.cashadvisor.main.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
+import app.cashadvisor.authorization.data.dto.CredentialsDto
+import app.cashadvisor.authorization.domain.api.CredentialsStorage
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
+    @Inject
+    lateinit var storage: CredentialsStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +77,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.root.addView(logAndCrashButton)
+
+        val storageButton = Button(this).apply {
+            text = "Storage"
+            setOnClickListener {
+                storage.saveCredentials(CredentialsDto(
+                    accessToken = "test",
+                    refreshToken = "test",
+                ))
+                Timber.tag("MainActivity").d("Credentials saved")
+                val credentials = storage.getCredentials()
+                Timber.tag("MainActivity").d("Credentials: $credentials")
+            }
+        }
+        val layoutParams =
+            ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID
+        layoutParams.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+
+        with(binding.root as ConstraintLayout) {
+            addView(storageButton, layoutParams)
+        }
 
 
         // Creates a button that mimics a crash when pressed
