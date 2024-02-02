@@ -2,13 +2,11 @@ package app.cashadvisor.authorization.di
 
 import app.cashadvisor.authorization.data.dataSource.api.AuthRemoteDataSource
 import app.cashadvisor.authorization.data.dataSource.impl.AuthRemoteDataSourceImpl
-import app.cashadvisor.authorization.data.dataSource.api.TokenLocalDataSource
 import app.cashadvisor.authorization.data.network.AuthApiService
 import app.cashadvisor.authorization.data.repositoryImpl.AuthRepositoryImpl
-import app.cashadvisor.authorization.domain.ExceptionToErrorMapperAuth
+import app.cashadvisor.authorization.domain.AuthExceptionToErrorMapper
 import app.cashadvisor.authorization.domain.repository.AuthRepository
-import app.cashadvisor.common.domain.ExceptionToErrorMapperBase
-import app.cashadvisor.common.utill.extensions.logDebugMessage
+import app.cashadvisor.common.domain.BaseExceptionToErrorMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,21 +28,11 @@ class DataModule {
     @Singleton
     fun provideAuthRepository(
         authRemoteDataSource: AuthRemoteDataSource,
-        @AuthMapper exceptionToErrorMapperBase: ExceptionToErrorMapperBase
+        @AuthMapper baseExceptionToErrorMapper: BaseExceptionToErrorMapper
     ): AuthRepository {
         return AuthRepositoryImpl(
             authRemoteDataSource = authRemoteDataSource,
-            exceptionToErrorMapperBase = exceptionToErrorMapperBase,
-            //TODO: создаю анонимный класс, пока нет реализации, надо будет заменить
-            tokenLocalDataSource = object : TokenLocalDataSource {
-                override suspend fun saveAccessToken(accessToken: String) {
-                    logDebugMessage("access token saved")
-                }
-
-                override suspend fun saveRefreshToken(refreshToken: String) {
-                    logDebugMessage("refresh token saved")
-                }
-            }
+            baseExceptionToErrorMapper = baseExceptionToErrorMapper,
         )
     }
 
@@ -59,8 +47,8 @@ class DataModule {
 
     @AuthMapper
     @Provides
-    fun provideExceptionToErrorMapper(): ExceptionToErrorMapperBase {
-        return ExceptionToErrorMapperAuth()
+    fun provideExceptionToErrorMapper(): BaseExceptionToErrorMapper {
+        return AuthExceptionToErrorMapper()
     }
 }
 

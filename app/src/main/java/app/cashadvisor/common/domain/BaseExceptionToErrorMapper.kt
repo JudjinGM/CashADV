@@ -5,7 +5,7 @@ import app.cashadvisor.common.domain.model.ErrorEntity
 import app.cashadvisor.common.utill.extensions.logNetworkError
 import java.net.ConnectException
 
-abstract class ExceptionToErrorMapperBase {
+abstract class BaseExceptionToErrorMapper {
 
     abstract fun <T> mapSpecificException(
         e: Exception,

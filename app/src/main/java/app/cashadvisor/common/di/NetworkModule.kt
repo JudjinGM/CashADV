@@ -46,14 +46,17 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(@UnAuthInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(
+        @UnAuthInterceptorOkHttpClient okHttpClient: OkHttpClient,
+        json: Json
+    ): Retrofit {
         val endpointBaseUrl = if (BuildConfig.FLAVOR == PROD) {
             ENDPOINT_URL_PROD
         } else ENDPOINT_URL_STAGE
         return Retrofit.Builder()
             .baseUrl(endpointBaseUrl)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
     }
 
@@ -124,11 +127,13 @@ class NetworkModule {
     @Singleton
     fun provideErrorInterceptor(
         errorCodeMapper: ErrorCodeMapper,
-        networkConnectionProvider: NetworkConnectionProvider
+        networkConnectionProvider: NetworkConnectionProvider,
+        json: Json
     ): ErrorInterceptor {
         return ErrorInterceptor(
             errorCodeMapper = errorCodeMapper,
-            networkConnectionProvider = networkConnectionProvider
+            networkConnectionProvider = networkConnectionProvider,
+            json = json
         )
     }
 
@@ -142,6 +147,12 @@ class NetworkModule {
     @Singleton
     fun provideNetworkConnectionProvider(@ApplicationContext context: Context): NetworkConnectionProvider {
         return NetworkConnectionProviderImpl(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json {
+        return Json { }
     }
 
 

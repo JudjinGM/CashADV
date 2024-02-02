@@ -2,11 +2,11 @@ package app.cashadvisor.authorization.domain
 
 import app.cashadvisor.common.domain.model.ErrorEntity
 import app.cashadvisor.common.domain.Resource
-import app.cashadvisor.common.domain.ExceptionToErrorMapperBase
+import app.cashadvisor.common.domain.BaseExceptionToErrorMapper
 import app.cashadvisor.common.utill.exceptions.AuthException
 import app.cashadvisor.common.utill.extensions.logDebugError
 
-class ExceptionToErrorMapperAuth : ExceptionToErrorMapperBase() {
+class AuthExceptionToErrorMapper : BaseExceptionToErrorMapper() {
 
     override fun <T> mapSpecificException(
         e: Exception,

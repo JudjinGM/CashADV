@@ -8,7 +8,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
-import java.io.IOException
 import java.net.HttpURLConnection
 import javax.inject.Inject
 
@@ -16,13 +15,14 @@ import javax.inject.Inject
 class ErrorInterceptor @Inject constructor(
     private val errorCodeMapper: ErrorCodeMapper,
     private val networkConnectionProvider: NetworkConnectionProvider,
+    private val json: Json
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!networkConnectionProvider.isConnected()) {
             throw NetworkException.NoInternetConnection()
         }
-        val response = with(chain) { proceed(request()) }
+        val response = chain.proceed(chain.request())
         if (response.code !in (HttpURLConnection.HTTP_OK..HttpURLConnection.HTTP_CREATED)) {
             throwErrorIfRequire(response.peekBody(Long.MAX_VALUE), response.code)
         }
@@ -30,22 +30,14 @@ class ErrorInterceptor @Inject constructor(
     }
 
     private fun throwErrorIfRequire(responseBody: ResponseBody, responseCode: Int) {
-        var error: IOException? = null
         try {
-            val errorResponse =
-                Json.decodeFromString<ErrorResponse>(responseBody.string())
-            error =
-                errorCodeMapper.getException(
-                    errorResponse.message,
-                    responseCode,
-                    errorResponse.statusCode
-                )
+            val errorResponse = json.decodeFromString<ErrorResponse>(responseBody.string())
+            throw errorCodeMapper.getException(
+                errorResponse.message, responseCode, errorResponse.statusCode
+            )
         } catch (exception: Exception) {
             logNetworkError(exception.message)
-        }
-        if (error != null) {
-            throw error
+            throw NetworkException.Undefined(exception.message ?: "", -1)
         }
     }
-
 }

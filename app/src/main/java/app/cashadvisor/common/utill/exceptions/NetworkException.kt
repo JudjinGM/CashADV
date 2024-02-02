@@ -22,8 +22,12 @@ sealed class NetworkException(
     class NoInternetConnection(
         message: String = NO_INTERNET_CONNECTION,
         httpStatusCode: Int = NO_INTERNET_CONNECTION_CODE
-    ) :
-        NetworkException(message, httpStatusCode)
+    ) : NetworkException(message, httpStatusCode)
+
+    class Undefined(
+        message: String, httpStatusCode: Int
+    ) : NetworkException(message, httpStatusCode)
+
 
     companion object {
         const val NO_INTERNET_CONNECTION = "No internet connection"
