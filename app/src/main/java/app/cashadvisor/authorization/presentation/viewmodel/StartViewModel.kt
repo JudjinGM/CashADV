@@ -1,10 +1,10 @@
 package app.cashadvisor.authorization.presentation.viewmodel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
 import app.cashadvisor.authorization.domain.models.AccountInformation
-import app.cashadvisor.authorization.presentation.ui.model.StartScreenUiState
+import app.cashadvisor.authorization.presentation.ui.models.StartScreenUiState
+import app.cashadvisor.common.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StartViewModel @Inject constructor(
     private val accountInformationInteractor: AccountInformationInteractor
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _uiState: MutableStateFlow<StartScreenUiState> =
         MutableStateFlow(StartScreenUiState())

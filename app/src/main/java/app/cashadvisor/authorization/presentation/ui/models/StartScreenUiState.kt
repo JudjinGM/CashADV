@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.model
+package app.cashadvisor.authorization.presentation.ui.models
 
 data class StartScreenUiState(
     val isDebug: Boolean = false,
