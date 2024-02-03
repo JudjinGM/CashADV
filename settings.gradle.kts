@@ -100,6 +100,11 @@ dependencyResolutionManagement {
                 "com.android.library"
             ).versionRef("android-library")
 
+            plugin(
+                "kotlin-parcelize",
+                "org.jetbrains.kotlin.plugin.parcelize"
+            ).versionRef("kotlin")
+
             // Core
             library(
                 "androidx-core-ktx",
