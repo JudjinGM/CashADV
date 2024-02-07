@@ -3,34 +3,34 @@ package app.cashadvisor.common.utill.exceptions
 import java.io.IOException
 
 sealed class NetworkException(
-    message: String,
-    httpStatusCode: Int,
-) : IOException(message) {
+    val errorBody: String,
+    val httpStatusCode: Int,
+) : IOException(errorBody) {
 
-    class InvalidOrExpiredToken(message: String, httpStatusCode: Int) :
-        NetworkException(message, httpStatusCode)
+    class BadRequest(errorMessage: String, httpStatusCode: Int) :
+        NetworkException(errorMessage, httpStatusCode)
 
-    class Unauthorized(message: String, httpStatusCode: Int) :
-        NetworkException(message, httpStatusCode)
+    class Unauthorized(errorMessage: String, httpStatusCode: Int) :
+        NetworkException(errorMessage, httpStatusCode)
 
-    class InternalServerError(message: String, httpStatusCode: Int) :
-        NetworkException(message, httpStatusCode)
-
-    class BadRequest(message: String, httpStatusCode: Int) :
-        NetworkException(message, httpStatusCode)
+    class InternalServerError(errorMessage: String, httpStatusCode: Int) :
+        NetworkException(errorMessage, httpStatusCode)
 
     class NoInternetConnection(
-        message: String = NO_INTERNET_CONNECTION,
+        errorMessage: String = NO_INTERNET_CONNECTION,
         httpStatusCode: Int = NO_INTERNET_CONNECTION_CODE
-    ) : NetworkException(message, httpStatusCode)
+    ) : NetworkException(errorMessage, httpStatusCode)
 
     class Undefined(
-        message: String, httpStatusCode: Int
-    ) : NetworkException(message, httpStatusCode)
+        errorMessage: String = UNDEFINED_MESSAGE,
+        httpStatusCode: Int = UNDEFINED_CODE
+    ) : NetworkException(errorMessage, httpStatusCode)
 
 
     companion object {
         const val NO_INTERNET_CONNECTION = "No internet connection"
         const val NO_INTERNET_CONNECTION_CODE = -1
+        const val UNDEFINED_MESSAGE = ""
+        const val UNDEFINED_CODE = 0
     }
 }

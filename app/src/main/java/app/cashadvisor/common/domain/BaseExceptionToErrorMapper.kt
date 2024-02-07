@@ -18,12 +18,15 @@ abstract class BaseExceptionToErrorMapper {
                 getNetworkError(e)
             }
 
-            else -> mapSpecificException(e)
+            else -> {
+                logNetworkError(e.message)
+                mapSpecificException(e)
+            }
         }
     }
 
-    protected fun <T> getNetworkError(e: Exception): Resource<T> {
-        return Resource.Error<T>(
+    private fun <T> getNetworkError(e: Exception): Resource<T> {
+        return Resource.Error(
             ErrorEntity.NetworksError.NoInternet(
                 e.message ?: DEFAULT_ERROR_MESSAGE
             )
