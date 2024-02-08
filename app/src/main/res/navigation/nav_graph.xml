@@ -58,10 +58,13 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_entryFragment"
-            app:destination="@id/entryFragment" />
+            app:destination="@id/entryFragment"/>
         <action
             android:id="@+id/action_startFragment_to_uikitSampleFragment"
             app:destination="@id/uikitSampleFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_pinCodeFragment"
+            app:destination="@id/pinCodeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/entryFragment"
@@ -395,4 +398,12 @@
         android:name="app.cashadvisor.authorization.presentation.ui.diagrams.FifthDiagramFragment"
         android:label="fragment_fifth_diagram"
         tools:layout="@layout/fragment_fifth_diagram" />
+    <fragment
+        android:id="@+id/pinCodeFragment"
+        android:name="app.cashadvisor.authorization.presentation.ui.PinCodeFragment"
+        android:label="PinCodeFragment" >
+        <action
+            android:id="@+id/action_pinCodeFragment_to_analyticsFragment"
+            app:destination="@id/analyticsFragment" />
+    </fragment>
 </navigation>

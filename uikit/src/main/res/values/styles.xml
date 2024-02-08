@@ -58,6 +58,24 @@
         <item name="android:textColor">?attr/colour1</item>
     </style>
 
+    <!-- Start Screen Text Styles -->
+    <style name="Widget.CashAdvisor.Text.HeaderStart">
+        <item name="fontFamily">@font/montserratbold</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="Widget.CashAdvisor.Text.SubtextStart1">
+        <item name="fontFamily">@font/intersemibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/subcolour2</item>
+    </style>
+
+    <style name="Widget.CashAdvisor.Text.SubtextStart2">
+        <item name="fontFamily">@font/gilroysemibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/subcolour2</item>
+    </style>
+
     <!-- Register Disclaimer Text Styles -->
     <style name="Widget.CashAdvisor.Text.DisclaimerText" parent="Widget.CashAdvisor.Text.Subtext">
         <item name="android:textAlignment">2</item>
