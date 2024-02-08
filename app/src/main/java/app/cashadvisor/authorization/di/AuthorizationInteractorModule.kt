@@ -1,4 +1,4 @@
-package app.cashadvisor.common.di
+package app.cashadvisor.authorization.di
 
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
 import app.cashadvisor.authorization.domain.api.CredentialsStorage
@@ -8,10 +8,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
+
 @Module
 @InstallIn(ViewModelComponent::class)
-class InteractorModule {
-
+class AuthorizationInteractorModule {
     @Provides
     fun providesAccountInformationInteractor(
         storage: CredentialsStorage,
