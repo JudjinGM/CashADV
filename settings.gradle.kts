@@ -48,7 +48,6 @@ dependencyResolutionManagement {
             version("android-library", "8.1.1")
             version("gms-play-services-auth", "20.7.0")
             version("crypto", "1.0.0-alpha02")
-            version("convert-gson", "2.9.0")
 
             plugin(
                 "android-application",
@@ -311,11 +310,6 @@ dependencyResolutionManagement {
                 "security-crypto"
             ).versionRef("crypto")
 
-            library(
-                "convertgson",
-                "com.squareup.retrofit2",
-                "converter-gson"
-            ).versionRef("convert-gson")
         }
     }
 }
