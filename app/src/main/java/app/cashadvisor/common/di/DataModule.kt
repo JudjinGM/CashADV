@@ -6,12 +6,12 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import app.cashadvisor.authorization.data.impl.CredentialsStorageImpl
 import app.cashadvisor.authorization.domain.api.CredentialsStorage
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import javax.inject.Singleton
 
 
@@ -21,7 +21,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideGson(): Gson = Gson()
+    fun provideJson(): Json = Json { ignoreUnknownKeys = true }
 
     @Provides
     @Singleton
@@ -47,7 +47,7 @@ class DataModule {
         @ApplicationContext context: Context,
         storage: SharedPreferences = providesEncriptedSharedPreferences(context),
         key: String = CREDENTIALS_KEY,
-        gson: Gson = provideGson()
+        gson: Json = provideJson()
     ): CredentialsStorage = CredentialsStorageImpl(storage, key, gson)
 
     companion object {

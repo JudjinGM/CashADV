@@ -1,14 +1,14 @@
 package app.cashadvisor.authorization.data.impl
-
+import kotlinx.serialization.json.Json
 import android.content.SharedPreferences
 import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.CredentialsStorage
-import com.google.gson.Gson
+import kotlinx.serialization.encodeToString
 
 class CredentialsStorageImpl(
     private val storage: SharedPreferences,
     private val key: String,
-    private val gson: Gson
+    private val json: Json
 ) : CredentialsStorage {
 
     /**
@@ -18,17 +18,13 @@ class CredentialsStorageImpl(
      */
 
     override fun saveCredentials(credentials: CredentialsDto) {
-        val data = gson.toJson(credentials)
+        val data = json.encodeToString(credentials)
         storage.edit().putString(key, data).apply()
     }
 
     override fun getCredentials(): CredentialsDto? {
         val data = storage.getString(key, null)
-        return if (data != null) {
-            gson.fromJson(data, CredentialsDto::class.java)
-        } else {
-            null
-        }
+        return data?.let { json.decodeFromString<CredentialsDto>(it) }
     }
 
     override fun hasCredentials(): Boolean {
