@@ -27,7 +27,7 @@ dependencyResolutionManagement {
             version("espresso-core", "3.5.1")
             version("fragment-ktx", "1.6.2")
             version("glide", "4.15.1")
-            version("hilt-android", "2.44")
+            version("hilt-android", "2.50")
             version("junit", "4.13.2")
             version("kotlinx-coroutines-android", "1.7.1")
             version("kotlinx-serialization-json", "1.6.1")
