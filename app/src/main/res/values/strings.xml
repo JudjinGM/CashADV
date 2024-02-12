@@ -3,4 +3,7 @@
 
     <!-- Google authentication-->
     <string name="client_id">409936335875-b2f0q0k1rt55vqb3oc751c7121dmd49q.apps.googleusercontent.com</string>
+    <string name="login_via_vk">Войти через vk</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

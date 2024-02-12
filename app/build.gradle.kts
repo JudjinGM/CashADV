@@ -1,6 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 import com.google.firebase.appdistribution.gradle.firebaseAppDistribution
+import com.android.build.api.dsl.ApplicationDefaultConfig
 
 plugins {
     alias(libs.plugins.android.application)
@@ -26,6 +26,8 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        initVKID()
     }
 
     signingConfigs {
@@ -43,7 +45,7 @@ android {
                 System.getenv("KEY_PASSWORD") ?: localProperties.getProperty("keyPassword")
                 ?: "keyPasswordEmpty"
 
-            storeFile = file("keyStore/cashadvisor.jks" )
+            storeFile = file("keyStore/cashadvisor.jks")
             storePassword = storePasswordLocal
             keyAlias = keyAliasLocal
             keyPassword = keyPasswordLocal
@@ -180,6 +182,9 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(platform(libs.firebase.bom))
 
+    // Auth vk
+    implementation(libs.vk.auth)
+
     // Ui Kit Library
     implementation(project(":uikit"))
 
@@ -193,4 +198,22 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
+}
+
+fun ApplicationDefaultConfig.initVKID() {
+    val localProperties = gradleLocalProperties(rootDir)
+
+    val clientId = System.getenv("VKIDCLIENTID") ?: localProperties.getProperty("VKIDCLIENTID")
+        ?: throw GradleException("There is no VKIDClientID. Please specify it by ENV.VKIDCLIENTID or VKIDCLIENTID=xxx in local.properties")
+    val clientSecret =
+        System.getenv("VKIDCLIENTSECRET") ?: localProperties.getProperty("VKIDCLIENTSECRET")
+        ?: throw GradleException("There is no VKIDClientSecret. Please specify it by ENV.VKIDCLIENTSECRET or VKIDCLIENTSECRET=xxx in local.properties")
+    addManifestPlaceholders(
+        mapOf(
+            "VKIDRedirectHost" to "vk.com",
+            "VKIDRedirectScheme" to "vk$clientId",
+            "VKIDClientID" to clientId,
+            "VKIDClientSecret" to clientSecret
+        )
+    )
 }
