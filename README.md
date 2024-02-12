@@ -28,4 +28,4 @@
 <img src="https://github.com/JudjinGM/Photos/blob/main/CashAdvisor%20Photos/settings_app.png" width=30% height=30%> <img src="https://github.com/JudjinGM/Photos/blob/main/CashAdvisor%20Photos/settings_settings.png" width=30% height=30%>
 
 ## Стек используемых технологий
-Kotlin, MVVM with Clean Architecture, Android Architecture Components, MVVM, Kotlin Coroutines, Hilt, Retrofit2, Gson, Navigation Component, Glide, Timber, CI/CD, Gradle, Github Actions, Firebase (Crashlytics, App Distribution), Google Cloud Console.
+Kotlin, MVVM with Clean Architecture, Android Architecture Components, MVVM, Kotlin Coroutines, Hilt, Retrofit2, Kotlinx.serialization, Navigation Component, Glide, Timber, CI/CD, Gradle, Github Actions, Firebase (Crashlytics, App Distribution), Google Cloud Console.
