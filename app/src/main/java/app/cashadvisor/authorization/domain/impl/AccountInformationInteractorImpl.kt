@@ -5,25 +5,21 @@ import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.authorization.domain.models.AccountInformation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
 class AccountInformationInteractorImpl(
     private val storage: CredentialsRepository
 ) : AccountInformationInteractor {
-    override fun getAccountInformation(): Flow<AccountInformation> = flow {
-        if (storage.hasCredentials()) {
-            val data = storage.getCredentials()
-            data?.let {
-                emit(
-                    AccountInformation.Authorized(
-                        accessToken = it.accessToken,
-                        refreshToken = it.refreshToken
-                    )
+    override suspend fun getAccountInformation(): Flow<AccountInformation> =
+        storage.getCredentialsFlow().map { credentials ->
+            credentials?.let {
+                AccountInformation.Authorized(
+                    accessToken = it.accessToken,
+                    refreshToken = it.refreshToken
                 )
-            }
-        } else {
-            emit(AccountInformation.NotAuthorized)
+            } ?: AccountInformation.NotAuthorized
         }
-    }
+
 
     companion object {
         private val MOCK_ACCOUNT_INFORMATION = AccountInformation.Authorized(
@@ -31,5 +27,4 @@ class AccountInformationInteractorImpl(
             refreshToken = "123",
         )
     }
-
 }

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,12 +16,13 @@ import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
+    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
@@ -77,16 +80,17 @@ class MainActivity : AppCompatActivity() {
         }
         binding.root.addView(logAndCrashButton)
 
+
+        this.lifecycleScope.launch {
+            viewModel.state.collect {
+                Timber.tag("MainActivity").d("AccountInformation: $it")
+            }
+        }
+
         val storageButton = Button(this).apply {
             text = "Storage"
             setOnClickListener {
-                storage.saveCredentials(CredentialsDto(
-                    accessToken = "test",
-                    refreshToken = "test",
-                ))
-                Timber.tag("MainActivity").d("Credentials saved")
-                val credentials = storage.getCredentials()
-                Timber.tag("MainActivity").d("Credentials: $credentials")
+                viewModel.saveCredentials( "test", "test")
             }
         }
         var layoutParams =
@@ -100,12 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         val deleteStorageButton = Button(this).apply {
-            text = "Delete Strorage"
+            text = "Logout"
             setOnClickListener {
-                storage.clearCredentials()
-                Timber.tag("MainActivity").d("Credentials removed")
-                val credentials = storage.getCredentials()
-                Timber.tag("MainActivity").d("Credentials: $credentials")
+                viewModel.logout()
             }
         }
         layoutParams =
