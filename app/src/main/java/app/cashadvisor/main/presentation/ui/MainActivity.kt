@@ -2,7 +2,6 @@ package app.cashadvisor.main.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +10,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
 import app.cashadvisor.authorization.data.dto.CredentialsDto
-import app.cashadvisor.authorization.domain.api.CredentialsStorage
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     @Inject
-    lateinit var storage: CredentialsStorage
+    lateinit var storage: CredentialsRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

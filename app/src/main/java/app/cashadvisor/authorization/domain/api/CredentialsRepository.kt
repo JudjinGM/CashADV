@@ -2,7 +2,7 @@ package app.cashadvisor.authorization.domain.api
 
 import app.cashadvisor.authorization.data.dto.CredentialsDto
 
-interface CredentialsStorage {
+interface CredentialsRepository {
 
     fun saveCredentials(credentials: CredentialsDto)
     fun getCredentials(): CredentialsDto?

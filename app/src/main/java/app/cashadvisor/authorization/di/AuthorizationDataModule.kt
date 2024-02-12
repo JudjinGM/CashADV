@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import app.cashadvisor.authorization.data.impl.CredentialsStorageImpl
-import app.cashadvisor.authorization.domain.api.CredentialsStorage
+import app.cashadvisor.authorization.data.impl.CredentialsRepositoryImpl
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +45,7 @@ class AuthorizationDataModule {
         storage: SharedPreferences = providesEncriptedSharedPreferences(context),
         key: String = CREDENTIALS_KEY,
         gson: Json
-    ): CredentialsStorage = CredentialsStorageImpl(storage, key, gson)
+    ): CredentialsRepository = CredentialsRepositoryImpl(storage, key, gson)
     companion object {
         private const val SECRET_SETTINGS = "secret_shared_prefs"
         private const val CREDENTIALS_KEY = "secret_credentials"

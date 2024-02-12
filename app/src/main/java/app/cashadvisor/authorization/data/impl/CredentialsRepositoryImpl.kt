@@ -2,14 +2,14 @@ package app.cashadvisor.authorization.data.impl
 import kotlinx.serialization.json.Json
 import android.content.SharedPreferences
 import app.cashadvisor.authorization.data.dto.CredentialsDto
-import app.cashadvisor.authorization.domain.api.CredentialsStorage
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import kotlinx.serialization.encodeToString
 
-class CredentialsStorageImpl(
+class CredentialsRepositoryImpl(
     private val storage: SharedPreferences,
     private val key: String,
     private val json: Json
-) : CredentialsStorage {
+) : CredentialsRepository {
 
     /**
      * todo подумать, чтобы отнаследоваться от CoroutineScope by CoroutineScope(

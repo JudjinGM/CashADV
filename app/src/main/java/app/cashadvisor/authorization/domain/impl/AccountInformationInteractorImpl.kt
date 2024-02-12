@@ -1,13 +1,13 @@
 package app.cashadvisor.authorization.domain.impl
 
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
-import app.cashadvisor.authorization.domain.api.CredentialsStorage
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.authorization.domain.models.AccountInformation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AccountInformationInteractorImpl(
-    private val storage: CredentialsStorage
+    private val storage: CredentialsRepository
 ) : AccountInformationInteractor {
     override fun getAccountInformation(): Flow<AccountInformation> = flow {
         if (storage.hasCredentials()) {
