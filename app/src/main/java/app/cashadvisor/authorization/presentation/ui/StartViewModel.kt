@@ -2,9 +2,11 @@ package app.cashadvisor.authorization.presentation.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.authorization.domain.api.AuthInteractor
 import app.cashadvisor.authorization.domain.api.InputValidationInteractor
+import app.cashadvisor.authorization.domain.api.LoginInteractor
+import app.cashadvisor.authorization.domain.api.RegisterInteractor
 import app.cashadvisor.authorization.domain.models.states.ConfirmCodeValidationState
+import app.cashadvisor.authorization.domain.models.states.EmailValidationState
 import app.cashadvisor.authorization.presentation.ui.models.TestStartState
 import app.cashadvisor.authorization.presentation.ui.models.TestStartUiState
 import app.cashadvisor.common.domain.Resource
@@ -20,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val authInteractor: AuthInteractor,
+    private val registerInteractor: RegisterInteractor,
+    private val loginInteractor: LoginInteractor,
     private val inputValidationInteractor: InputValidationInteractor
 ) : ViewModel() {
 
@@ -43,8 +46,9 @@ class StartViewModel @Inject constructor(
             state.collect { state ->
                 _uiState.update { uiState ->
                     uiState.copy(
-                        emailCodeIsValid = state.isEmailCodeValid,
-                        loginCodeIsValid = state.isLoginCodeValid,
+                        emailIsValid = state.isEmailValid,
+                        emailCodeIsValid = state.isEmailCodeValid && state.isRegisterInProgress,
+                        loginCodeIsValid = state.isLoginCodeValid && state.isLoginInProgress,
                         message = state.messageForUser
                     )
                 }
@@ -53,9 +57,37 @@ class StartViewModel @Inject constructor(
         }
     }
 
+    fun setEmail(email: String) {
+        viewModelScope.launch {
+            val result = inputValidationInteractor.validateEmail(email)
+            when (result) {
+                is EmailValidationState.Success -> {
+                    _state.update {
+                        it.copy(email = result.email, isEmailValid = true)
+                    }
+                }
+
+                is EmailValidationState.Error -> {
+                    _state.update {
+                        it.copy(email = result.email, isEmailValid = false)
+                    }
+                }
+            }
+        }
+    }
+
     fun register() {
         viewModelScope.launch {
-            val result = authInteractor.registerByEmail(
+            registerInteractor.isRegisterInProgress().collect { isInProgress ->
+                _state.update {
+                    it.copy(
+                        isRegisterInProgress = isInProgress
+                    )
+                }
+            }
+        }
+        viewModelScope.launch {
+            val result = registerInteractor.registerByEmail(
                 currentState.email,
                 currentState.password
             )
@@ -63,10 +95,8 @@ class StartViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Message register ${result.data.message}")
-                    logDebugMessage("Token register ${result.data.token}")
                     _state.update {
                         it.copy(
-                            registerToken = result.data.token,
                             messageForUser = result.data.message
                         )
                     }
@@ -83,23 +113,15 @@ class StartViewModel @Inject constructor(
                             logDebugMessage("NoInternet ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.Register -> {
+                        is ErrorEntity.Register -> {
                             when (result.error) {
-                                is ErrorEntity.Auth.Register.FailedToGenerateTokenOrSendEmail -> {
+                                is ErrorEntity.Register.FailedToGenerateTokenOrSendEmail -> {
                                     logDebugMessage("FailedToGenerateTokenOrSendEmail ${result.error.message}")
                                 }
 
-                                is ErrorEntity.Auth.Register.InvalidEmail -> {
+                                is ErrorEntity.Register.InvalidEmail -> {
                                     logDebugMessage("InvalidEmail ${result.error.message}")
 
-                                }
-
-                                is ErrorEntity.Auth.Register.InvalidEmailInput -> {
-                                    logDebugMessage("InvalidEmailInput ${result.error.message}")
-                                }
-
-                                is ErrorEntity.Auth.Register.InvalidPasswordInput -> {
-                                    logDebugMessage("InvalidPasswordInput ${result.error.message}")
                                 }
                             }
                         }
@@ -116,42 +138,40 @@ class StartViewModel @Inject constructor(
 
     fun sendEmailConfirmCode() {
         viewModelScope.launch {
-            logDebugMessage("email: ${currentState.email.value}, code: ${currentState.emailCode.value}, token: ${currentState.registerToken.value}")
+            logDebugMessage("email: ${currentState.email.value}, code: ${currentState.emailCode.value}")
 
-            val result = authInteractor.confirmEmailAndRegistrationWithCode(
-                currentState.email, currentState.emailCode, currentState.registerToken
+            val result = registerInteractor.confirmEmailAndRegistrationWithCode(
+                currentState.email, currentState.emailCode
             )
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Success register: ${result.data}")
                     _state.update {
-                        it.copy(messageForUser = result.data)
+                        it.copy(
+                            messageForUser = result.data,
+                            isRegisterInProgress = false
+                        )
                     }
                 }
 
                 is Resource.Error -> {
                     _state.update {
-                        it.copy(messageForUser = "Error: ${result.error.message}")
+                        it.copy(
+                            messageForUser = "Error: ${result.error.message}",
+                            isRegisterInProgress = false
+                        )
                     }
 
                     when (result.error) {
-                        is ErrorEntity.Auth.EmailCodeConfirmation.FailedToConfirmEmailOrRegisterUser -> {
+                        is ErrorEntity.RegisterByEmailConfirmationWithCode.FailedToConfirmRegisterByEmailOrRegisterUserWithCode -> {
                             logDebugMessage("FailedToConfirmEmailOrRegisterUser ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.EmailCodeConfirmation.InvalidCodeInput -> {
-                            logDebugMessage("InvalidCodeInput ${result.error.message}")
-                        }
-
-                        is ErrorEntity.Auth.EmailCodeConfirmation.InvalidEmailInput -> {
-                            logDebugMessage("InvalidEmailInput ${result.error.message}")
-                        }
-
-                        is ErrorEntity.Auth.EmailCodeConfirmation.InvalidToken -> {
+                        is ErrorEntity.RegisterByEmailConfirmationWithCode.InvalidToken -> {
                             logDebugMessage("InvalidToken ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.EmailCodeConfirmation.WrongConfirmationCode -> {
+                        is ErrorEntity.RegisterByEmailConfirmationWithCode.WrongWithCodeConfirmationRegisterBy -> {
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                         }
 
@@ -189,47 +209,50 @@ class StartViewModel @Inject constructor(
 
     fun login() {
         viewModelScope.launch {
-            val result = authInteractor.loginByEmail(
+            loginInteractor.isLoginInProgress().collect { isInProgress ->
+                _state.update {
+                    it.copy(
+                        isLoginInProgress = isInProgress
+                    )
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            val result = loginInteractor.loginByEmail(
                 currentState.email,
                 currentState.password
             )
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Message login ${result.data.message}")
-                    logDebugMessage("Token login ${result.data.token}")
                     _state.update {
                         it.copy(
-                            loginToken = result.data.token,
-                            messageForUser = result.data.message
+                            messageForUser = result.data.message,
                         )
                     }
                 }
 
                 is Resource.Error -> {
                     _state.update {
-                        it.copy(messageForUser = "Error: ${result.error.message}")
+                        it.copy(
+                            messageForUser = "Error: ${result.error.message}",
+                        )
                     }
 
                     when (result.error) {
-                        is ErrorEntity.Auth.Login.FailedToGenerateTokenOrSendEmail -> {
+                        is ErrorEntity.Login.FailedToGenerateTokenOrSendEmail -> {
                             logDebugMessage("FailedToGenerateTokenOrSendEmail ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.Login.InvalidEmailOrPassword -> {
+                        is ErrorEntity.Login.InvalidEmailOrPassword -> {
                             logDebugMessage("InvalidEmailOrPassword ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.Login.InvalidInput -> {
+                        is ErrorEntity.Login.InvalidInput -> {
                             logDebugMessage("InvalidInput ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.Login.InvalidEmailInput -> {
-                            logDebugMessage("InvalidEmailInput ${result.error.message}")
-                        }
-
-                        is ErrorEntity.Auth.Login.InvalidPasswordInput -> {
-                            logDebugMessage("InvalidPasswordInput ${result.error.message}")
-                        }
 
                         is ErrorEntity.NetworksError.NoInternet -> {
                             logDebugMessage("NoInternet ${result.error.message}")
@@ -246,39 +269,36 @@ class StartViewModel @Inject constructor(
 
     fun sendLoginConfirmCode() {
         viewModelScope.launch {
-            val result = authInteractor.confirmLoginByEmailWithCode(
+            val result = loginInteractor.confirmLoginByEmailWithCode(
                 currentState.email,
                 currentState.loginCode,
-                currentState.loginToken
             )
 
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Success login: ${result.data}")
                     _state.update {
-                        it.copy(messageForUser = result.data)
+                        it.copy(
+                            messageForUser = result.data,
+                        )
                     }
                 }
 
                 is Resource.Error -> {
                     _state.update {
-                        it.copy(messageForUser = "Error: ${result.error.message}")
+                        it.copy(
+                            messageForUser = "Error: ${result.error.message}",
+                        )
                     }
 
                     when (result.error) {
-                        is ErrorEntity.Auth.LoginCodeConfirmation.InvalidCodeInput -> {
-                            logDebugMessage("InvalidCodeInput ${result.error.message}")
-                        }
 
-                        is ErrorEntity.Auth.LoginCodeConfirmation.InvalidEmailInput -> {
-                            logDebugMessage("InvalidEmailInput ${result.error.message}")
-                        }
 
-                        is ErrorEntity.Auth.LoginCodeConfirmation.InvalidRequestPayload -> {
+                        is ErrorEntity.LoginByEmailConfirmationWithCode.InvalidRequestPayload -> {
                             logDebugMessage("InvalidRequestPayload ${result.error.message}")
                         }
 
-                        is ErrorEntity.Auth.LoginCodeConfirmation.WrongConfirmationCode -> {
+                        is ErrorEntity.LoginByEmailConfirmationWithCode.WrongWithCodeConfirmationByEmail -> {
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                             logDebugMessage("WrongConfirmationCode remaining attempts ${result.error.remainingAttempts}")
                             logDebugMessage("WrongConfirmationCode lock duration ${result.error.lockDuration}")

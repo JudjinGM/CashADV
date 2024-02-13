@@ -1,43 +1,39 @@
 package app.cashadvisor.common.domain
 
-import app.cashadvisor.common.utill.exceptions.NetworkException
 import app.cashadvisor.common.domain.model.ErrorEntity
+import app.cashadvisor.common.utill.exceptions.NetworkException
 import app.cashadvisor.common.utill.extensions.logNetworkError
 import java.net.ConnectException
 
 abstract class BaseExceptionToErrorMapper {
 
-    abstract fun <T> mapSpecificException(
-        e: Exception,
-    ): Resource<T>
+    abstract fun handleSpecificException(
+        exception: Exception,
+    ): ErrorEntity
 
-    fun <T> mapException(e: Exception): Resource<T> {
-        return when (e) {
+    fun handleException(exception: Exception): ErrorEntity {
+        return when (exception) {
             is ConnectException, is NetworkException -> {
-                logNetworkError(e.message)
-                getNetworkError(e)
+                logNetworkError(exception.message)
+                handleNetworkError(exception)
             }
 
             else -> {
-                logNetworkError(e.message)
-                mapSpecificException(e)
+                logNetworkError(exception.message)
+                handleSpecificException(exception)
             }
         }
     }
 
-    private fun <T> getNetworkError(e: Exception): Resource<T> {
-        return Resource.Error(
-            ErrorEntity.NetworksError.NoInternet(
-                e.message ?: DEFAULT_ERROR_MESSAGE
-            )
+    private fun handleNetworkError(exception: Exception): ErrorEntity {
+        return ErrorEntity.NetworksError.NoInternet(
+            exception.message ?: DEFAULT_ERROR_MESSAGE
         )
     }
 
-    protected fun <T> getUnknownError(e: Exception): Resource<T> {
-        return Resource.Error(
-            ErrorEntity.UnknownError(
-                e.message ?: DEFAULT_ERROR_MESSAGE
-            )
+    protected fun handleUnknownError(exception: Exception): ErrorEntity {
+        return ErrorEntity.UnknownError(
+            exception.message ?: DEFAULT_ERROR_MESSAGE
         )
     }
 

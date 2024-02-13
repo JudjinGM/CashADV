@@ -16,6 +16,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/emailInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintEnd_toEndOf="@id/btn_register"
+        app:layout_constraintStart_toStartOf="@id/btn_register"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:hint="Введите email" />
+
     <Button
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
@@ -30,16 +41,17 @@
         android:id="@+id/emailCodeInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="@id/btn_register"
         app:layout_constraintStart_toStartOf="@id/btn_register"
-        app:layout_constraintTop_toBottomOf="@id/btn_register" />
+        app:layout_constraintTop_toBottomOf="@id/btn_register"
+        android:hint="Введите код" />
 
 
     <Button
         android:id="@+id/sendEmailCodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Отправить код подтверждения email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,17 +70,18 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/loginCodeInput"
         android:layout_width="0dp"
+        android:layout_marginTop="32dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@id/btn_login"
         app:layout_constraintStart_toStartOf="@id/btn_login"
-        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        android:hint="Введите код" />
 
 
     <Button
         android:id="@+id/sendLoginCodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Отправить код подтверждения входа"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -51,6 +51,10 @@ class StartFragment : Fragment() {
     }
 
     private fun configureViews() {
+        binding.emailInput.doOnTextChanged { text, _, _, _ ->
+            viewModel.setEmail(text.toString())
+        }
+
         binding.btnRegister.setOnClickListener {
             viewModel.register()
         }
@@ -101,6 +105,9 @@ class StartFragment : Fragment() {
         with(uiState) {
             binding.sendEmailCodeButton.isEnabled = emailCodeIsValid
             binding.sendLoginCodeButton.isEnabled = loginCodeIsValid
+            binding.btnRegister.isEnabled = emailIsValid
+            binding.btnLogin.isEnabled = emailIsValid
+
             if (message.isNotBlank()) {
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
                 viewModel.messageWasShown()

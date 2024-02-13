@@ -4,8 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RegisterResponse(
+data class ConfirmRegisterResponse(
     val message: String,
-    val token: String,
-    @SerialName("status_code") val statusCode: Int = 0,
+    @SerialName("status_code") val statusCode: Int
 )

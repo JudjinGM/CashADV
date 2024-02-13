@@ -2,10 +2,9 @@ package app.cashadvisor.common.di
 
 import android.content.Context
 import app.cashadvisor.BuildConfig
-import app.cashadvisor.authorization.data.impl.NetworkConnectionProviderImpl
-import app.cashadvisor.authorization.data.api.NetworkConnectionProvider
-import app.cashadvisor.common.data.network.NetworkErrorCodeToExceptionMapper
-import app.cashadvisor.common.data.network.ErrorInterceptor
+import app.cashadvisor.common.data.ErrorInterceptor
+import app.cashadvisor.common.data.api.NetworkConnectionProvider
+import app.cashadvisor.common.data.impl.NetworkConnectionProviderImpl
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -25,6 +24,18 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class OkHttpClientBuilder
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UnsafeOkHttpClientBuilder
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class UnAuthInterceptorOkHttpClient
+
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
@@ -32,8 +43,8 @@ class NetworkModule {
     //TODO: после решения проблем с сертификтом на сервере убрать лишние аннотации
 
     @UnAuthInterceptorOkHttpClient
-    @Provides
     @Singleton
+    @Provides
     fun provideOkHttpClient(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         errorInterceptor: ErrorInterceptor,
@@ -45,6 +56,7 @@ class NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideRetrofit(
         @UnAuthInterceptorOkHttpClient okHttpClient: OkHttpClient,
@@ -123,23 +135,6 @@ class NetworkModule {
     /**
      * Перехватчик для обработки ошибок, приходящих с сервера
      */
-    @Provides
-    @Singleton
-    fun provideErrorInterceptor(
-        networkErrorCodeToExceptionMapper: NetworkErrorCodeToExceptionMapper,
-        networkConnectionProvider: NetworkConnectionProvider,
-    ): ErrorInterceptor {
-        return ErrorInterceptor(
-            networkErrorCodeToExceptionMapper = networkErrorCodeToExceptionMapper,
-            networkConnectionProvider = networkConnectionProvider,
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideErrorCodeMapper(): NetworkErrorCodeToExceptionMapper {
-        return NetworkErrorCodeToExceptionMapper()
-    }
 
     @Provides
     @Singleton
@@ -161,15 +156,3 @@ class NetworkModule {
     }
 
 }
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class OkHttpClientBuilder
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class UnsafeOkHttpClientBuilder
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class UnAuthInterceptorOkHttpClient

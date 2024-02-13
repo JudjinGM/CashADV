@@ -10,8 +10,9 @@ import app.cashadvisor.authorization.domain.models.PasswordValidationError
 import app.cashadvisor.authorization.domain.models.states.ConfirmCodeValidationState
 import app.cashadvisor.authorization.domain.models.states.EmailValidationState
 import app.cashadvisor.authorization.domain.models.states.PasswordValidationState
+import javax.inject.Inject
 
-class InputValidationInteractorImpl : InputValidationInteractor {
+class InputValidationInteractorImpl @Inject constructor() : InputValidationInteractor {
     override suspend fun validateEmail(email: String): EmailValidationState {
         val isEmailValid = isValidText(email, REGEX_PATTERN_EMAIL)
         return if (isEmailValid) {
@@ -52,9 +53,9 @@ class InputValidationInteractorImpl : InputValidationInteractor {
 
     companion object {
         const val REGEX_PATTERN_EMAIL =
-            """^(?!.*[_.-]{2,})(?!.*[_.-]$)(?!^[-_.])[a-zA-Z0-9._-]{1,49}[a-zA-Z0-9]@(?!-)[a-zA-Z0-9-]{1,63}(\.[a-zA-Z]{2,})+$|^.{7,114}$"""
+            """^(?=(?:(?!.*[_.-]{2,})(?!.*[_.-]$)(?!^[-_.])[a-zA-Z0-9._-]{1,49}[a-zA-Z0-9]@(?!-)[a-zA-Z0-9-]{1,63}(\.[a-zA-Z]{2,})+)$)(?=(?:.{7,114})$).*"""
         const val REGEX_PATTERN_PASSWORD = """^[a-zA-Z0-9_]{8,30}$"""
-        const val REGEX_PATTERN_CODE = """^\d\d\d\d$"""
+        const val REGEX_PATTERN_CODE = """^[0-9]{4}$"""
         const val EMPTY_VALUE = ""
     }
 }
