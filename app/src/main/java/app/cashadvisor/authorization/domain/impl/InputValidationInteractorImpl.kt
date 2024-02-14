@@ -13,6 +13,10 @@ import app.cashadvisor.authorization.domain.models.states.PasswordValidationStat
 import javax.inject.Inject
 
 class InputValidationInteractorImpl @Inject constructor() : InputValidationInteractor {
+
+    //TODO: ошибки ввода данных пока не ясны,
+    //TODO: при необходимости можно будет добавить, например, отдельную проверку длины текста для более конкретных ошибок
+    //TODO: для этого надо будет расширить конкретные enum ошибок
     override suspend fun validateEmail(email: String): EmailValidationState {
         val isEmailValid = isValidText(email, REGEX_PATTERN_EMAIL)
         return if (isEmailValid) {
@@ -34,7 +38,7 @@ class InputValidationInteractorImpl @Inject constructor() : InputValidationInter
     }
 
     override suspend fun validateConfirmationCode(code: String): ConfirmCodeValidationState {
-        return if (isValidCode(code, REGEX_PATTERN_CODE)) {
+        return if (isValidText(code, REGEX_PATTERN_CODE)) {
             ConfirmCodeValidationState.Success(confirmCode = ConfirmCode(code))
         } else ConfirmCodeValidationState.Error(
             confirmCode = ConfirmCode(EMPTY_VALUE),
@@ -46,10 +50,6 @@ class InputValidationInteractorImpl @Inject constructor() : InputValidationInter
         text: String,
         regexPattern: String,
     ): Boolean = text.matches(Regex(regexPattern))
-
-    private fun isValidCode(text: String, regexPattern: String): Boolean {
-        return text.matches(Regex(regexPattern))
-    }
 
     companion object {
         const val REGEX_PATTERN_EMAIL =

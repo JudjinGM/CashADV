@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LoginInteractorImpl @Inject constructor(
-    val loginRepository: LoginRepository,
+    private val loginRepository: LoginRepository,
 ) : LoginInteractor {
 
     override suspend fun loginByEmail(email: Email, password: Password): Resource<LoginData> {

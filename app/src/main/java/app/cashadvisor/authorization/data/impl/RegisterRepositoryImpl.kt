@@ -37,6 +37,7 @@ class RegisterRepositoryImpl
             val data = registerRemoteDataSource.registerByEmail(
                 inputDto = registerDomainMapper.toRegisterByEmailInputDto(email, password)
             )
+
             _state.update {
                 it.copy(state = RegisterState.State.InProcess(codeToken = data.token))
             }
@@ -78,13 +79,15 @@ class RegisterRepositoryImpl
                     )
                 }
             }
-            _state.update {
-                it.copy(state = RegisterState.State.Initial)
-            }
             val data = registerRemoteDataSource.confirmRegisterByEmailWithCode(
                 inputDto = registerDomainMapper
                     .toConfirmRegisterByEmailWithCodeInputDto(email, code, token)
             )
+
+            _state.update {
+                it.copy(state = RegisterState.State.Initial)
+            }
+
             Resource.Success(
                 data = registerDomainMapper.toRegisterAuthorizationData(data)
             )

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class RegisterInteractorImpl @Inject constructor(
-    val registerRepository: RegisterRepository,
+    private val registerRepository: RegisterRepository,
 ) : RegisterInteractor {
 
     override suspend fun registerByEmail(email: Email, password: Password): Resource<RegisterData> {

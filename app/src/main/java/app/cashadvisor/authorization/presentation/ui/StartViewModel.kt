@@ -47,7 +47,7 @@ class StartViewModel @Inject constructor(
                 _uiState.update { uiState ->
                     uiState.copy(
                         emailIsValid = state.isEmailValid,
-                        emailCodeIsValid = state.isEmailCodeValid && state.isRegisterInProgress,
+                        registerCodeIsValid = state.isEmailCodeValid && state.isRegisterInProgress,
                         loginCodeIsValid = state.isLoginCodeValid && state.isLoginInProgress,
                         message = state.messageForUser
                     )
@@ -149,7 +149,6 @@ class StartViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             messageForUser = result.data,
-                            isRegisterInProgress = false
                         )
                     }
                 }
@@ -158,7 +157,6 @@ class StartViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             messageForUser = "Error: ${result.error.message}",
-                            isRegisterInProgress = false
                         )
                     }
 
@@ -302,8 +300,17 @@ class StartViewModel @Inject constructor(
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                             logDebugMessage("WrongConfirmationCode remaining attempts ${result.error.remainingAttempts}")
                             logDebugMessage("WrongConfirmationCode lock duration ${result.error.lockDuration}")
+                            _state.update {
+                                it.copy(
+                                    messageForUser = "You left only ${result.error.remainingAttempts} attempts",
+                                )
+                            }
 
-
+                            _state.update {
+                                it.copy(
+                                    messageForUser = "Your lock duration for ${result.error.lockDuration/1000000000} seconds",
+                                )
+                            }
                         }
 
                         is ErrorEntity.NetworksError.NoInternet -> {

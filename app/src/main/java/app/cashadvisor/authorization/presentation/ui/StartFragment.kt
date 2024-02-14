@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class StartFragment : Fragment() {
 
-    //отладочный фрагмент, перед МР все будет очищено, верстка будет приведена в первоначальное состояние
+    //TODO: отладочный фрагмент, перед МР все будет очищено, верстка будет приведена в первоначальное состояние
 
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
@@ -103,7 +103,7 @@ class StartFragment : Fragment() {
 
     private fun updateUi(uiState: TestStartUiState) {
         with(uiState) {
-            binding.sendEmailCodeButton.isEnabled = emailCodeIsValid
+            binding.sendEmailCodeButton.isEnabled = registerCodeIsValid
             binding.sendLoginCodeButton.isEnabled = loginCodeIsValid
             binding.btnRegister.isEnabled = emailIsValid
             binding.btnLogin.isEnabled = emailIsValid

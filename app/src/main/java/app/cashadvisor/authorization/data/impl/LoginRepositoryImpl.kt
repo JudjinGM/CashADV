@@ -74,9 +74,7 @@ class LoginRepositoryImpl
                     )
                 }
             }
-            _state.update {
-                it.copy(state = LoginState.State.Initial)
-            }
+
             val data = loginRemoteDataSource.confirmLoginByEmailWithCode(
                 inputDto = loginDomainMapper.toConfirmLoginByEmailWithCodeInputDto(
                     email,
@@ -84,6 +82,11 @@ class LoginRepositoryImpl
                     token
                 )
             )
+
+            _state.update {
+                it.copy(state = LoginState.State.Initial)
+            }
+
             Resource.Success(
                 data = loginDomainMapper.toLoginAuthorizationData(data)
             )
