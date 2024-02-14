@@ -7,6 +7,40 @@
     tools:context=".authorization.presentation.ui.EntryFragment">
 
     <TextView
+        android:id="@+id/gridUpperTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/grid_text_start_margin"
+        android:gravity="start"
+        android:text="@string/upper_grids_text"
+        android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/appNameTextView" />
+
+    <TextView
+        android:id="@+id/appNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/app_name_top_margin"
+        android:layout_marginStart="@dimen/grid_text_start_margin"
+        android:gravity="start"
+        android:text="@string/grid_app_name"
+        android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gridLowerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/grid_text_start_margin"
+        android:gravity="start"
+        android:text="@string/lower_grids_text"
+        android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appNameTextView" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/bottom_navigation_height"

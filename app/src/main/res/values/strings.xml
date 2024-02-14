@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Cash Advisor</string>
+    <string name="grid_app_name">#Cash Advisor</string>
+    <string name="upper_grids_text">#финздоровье\n#акции\n#дивиденды\n#финграм\n#благосостояние\n#обязательства</string>
+    <string name="lower_grids_text">#активы\n#инвестиции\n#налоги\n#банки\n#сбережения\n#планирование\n#бюджет\n#доходы</string>
+
 
     <!-- Google authentication-->
     <string name="client_id">409936335875-b2f0q0k1rt55vqb3oc751c7121dmd49q.apps.googleusercontent.com</string>

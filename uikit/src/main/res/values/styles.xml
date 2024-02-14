@@ -64,6 +64,10 @@
         <item name="android:textSize">40sp</item>
     </style>
 
+    <style name="Widget.CashAdvisor.Text.HeaderStart.Gray">
+        <item name="android:textColor">?attr/bg2</item>
+    </style>
+
     <style name="Widget.CashAdvisor.Text.SubtextStart1">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">14sp</item>
