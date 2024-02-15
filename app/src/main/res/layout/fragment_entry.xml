@@ -14,15 +14,15 @@
         android:gravity="start"
         android:text="@string/upper_grids_text"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/appNameTextView" />
+        app:layout_constraintBottom_toTopOf="@+id/appNameTextView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/app_name_top_margin"
         android:layout_marginStart="@dimen/grid_text_start_margin"
+        android:layout_marginTop="@dimen/app_name_top_margin"
         android:gravity="start"
         android:text="@string/grid_app_name"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart"
@@ -49,8 +49,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxWidth="@dimen/start_screen_cardview_maxwidth"
+        android:minHeight="@dimen/start_screen_cardview_minheight"
+        app:cardCornerRadius="@dimen/start_screen_cardview_radius"
+        android:layout_marginHorizontal="@dimen/start_screen_cardview_horizontal_padding"
+        android:layout_marginBottom="@dimen/start_screen_cardview_margin_bottom"
+        app:cardElevation="@dimen/start_screen_cardview_elevation"
+        app:layout_constraintBottom_toBottomOf="parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:minHeight="@dimen/start_screen_cardview_llbuttons_minheight"
+            android:paddingHorizontal="@dimen/start_screen_cardview_buttons_padding"
+            android:paddingTop="@dimen/start_screen_cardview_buttons_padding">
+
+            <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@null"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gilroysemibold"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:background="@drawable/black_button_r_10_no_stroke"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
+                android:layout_weight="65"
+                android:layout_marginEnd="8dp"
+                android:text="@string/register_text" />
+
+            <com.google.android.material.button.MaterialButton
+                app:backgroundTint="@null"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:fontFamily="@font/gilroysemibold"
+                android:background="@drawable/button_r10_black_stroke"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
+                android:layout_weight="25"
+                android:text="Войти" />
+
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
     <Button
-        android:id="@+id/btn_signup"
+        android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
@@ -68,27 +123,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_signup"
+        app:layout_constraintStart_toEndOf="@+id/signup"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.7"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7" />
 
     <Button
         android:id="@+id/btn_auth_vk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_via_vk"
         android:layout_marginVertical="20dp"
-        app:layout_constraintStart_toStartOf="@id/btn_signup"
-        app:layout_constraintTop_toBottomOf="@id/btn_signup" />
+        android:text="@string/login_via_vk"
+        app:layout_constraintStart_toStartOf="@id/signup"
+        app:layout_constraintTop_toBottomOf="@id/signup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
