@@ -2,10 +2,14 @@ name: Build and sent to QA stageQa
 
 on:
   # Triggers the workflow when pull request closed events but only for the "dev" branch
+#  pull_request:
+#    types:
+#      - closed
+#    branches: [ "dev" ]
+
   pull_request:
-    types:
-      - closed
     branches: [ "dev" ]
+
 
   workflow_dispatch:
 
