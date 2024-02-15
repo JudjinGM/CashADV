@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.firebase.crashlytics.gradle)
     alias(libs.plugins.gms.googleServices)
     alias(libs.plugins.firebase.appdistribution)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -189,6 +190,10 @@ dependencies {
 
     //Sign-In
     implementation(libs.play.services.auth)
+
+    //Crypto
+    implementation(libs.crypto)
+
 }
 
 kapt {
