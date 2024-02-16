@@ -1,9 +1,9 @@
 package app.cashadvisor.authorization.presentation.viewmodel.models
 
-sealed class EntryScreenState {
+sealed interface EntryScreenState {
 
-    object Default : EntryScreenState()
-    object SignIn : EntryScreenState()
-    object SignUp : EntryScreenState()
+    object Default : EntryScreenState
+    object SignIn : EntryScreenState
+    object SignUp : EntryScreenState
 
 }
