@@ -70,6 +70,7 @@
             android:paddingTop="@dimen/start_screen_cardview_buttons_padding">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_signup"
                 app:backgroundTint="@null"
                 android:textColor="@color/white"
                 android:fontFamily="@font/gilroysemibold"
@@ -83,6 +84,7 @@
                 android:text="@string/register_text" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_login"
                 app:backgroundTint="@null"
                 android:textColor="@color/black"
                 android:textAllCaps="false"
@@ -93,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
                 android:layout_weight="25"
-                android:text="Войти" />
+                android:text="@string/login_text" />
 
 
 
@@ -110,13 +112,13 @@
         android:layout_height="wrap_content"
         android:text="Зарегистрироваться"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_login"
+        app:layout_constraintEnd_toStartOf="@+id/login"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Войти"
