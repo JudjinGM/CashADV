@@ -1,7 +1,7 @@
 package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
-import app.cashadvisor.authorization.presentation.viewmodel.models.EntryInteractionState
+import app.cashadvisor.authorization.presentation.viewmodel.models.EntryInteraction
 import app.cashadvisor.authorization.presentation.viewmodel.models.EntryScreenState
 import app.cashadvisor.common.ui.BaseViewModel
 import app.cashadvisor.common.utils.debounce
@@ -22,13 +22,13 @@ class EntryViewModel @Inject constructor() : BaseViewModel() {
         _state.value = EntryScreenState.Default
     }
 
-    fun handleInteraction(action: EntryInteractionState) {
+    fun handleInteraction(action: EntryInteraction) {
         when (action) {
-            is EntryInteractionState.SignUpTapped -> {
+            is EntryInteraction.SignUpTapped -> {
                 _state.value = EntryScreenState.SignUp
             }
 
-            is EntryInteractionState.SignInTapped -> {
+            is EntryInteraction.SignInTapped -> {
                 _state.value = EntryScreenState.SignIn
             }
         }

@@ -5,7 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
 import app.cashadvisor.authorization.presentation.viewmodel.EntryViewModel
-import app.cashadvisor.authorization.presentation.viewmodel.models.EntryInteractionState
+import app.cashadvisor.authorization.presentation.viewmodel.models.EntryInteraction
 import app.cashadvisor.authorization.presentation.viewmodel.models.EntryScreenState
 import app.cashadvisor.common.ui.BaseFragment
 import app.cashadvisor.common.utils.debounce
@@ -16,16 +16,16 @@ import kotlinx.coroutines.launch
 class EntryFragment :
     BaseFragment<FragmentEntryBinding, EntryViewModel>(FragmentEntryBinding::inflate) {
     override val viewModel: EntryViewModel by viewModels()
-    private var onButtonClickDebounce: ((EntryInteractionState) -> Unit)? = null
+    private var onButtonClickDebounce: ((EntryInteraction) -> Unit)? = null
 
 
     override fun onConfigureViews() {
         configureDebounce()
         binding.btnLogin.setOnClickListener {
-            onButtonClickDebounce?.invoke(EntryInteractionState.SignInTapped)
+            onButtonClickDebounce?.invoke(EntryInteraction.SignInTapped)
         }
         binding.btnSignup.setOnClickListener {
-            onButtonClickDebounce?.invoke(EntryInteractionState.SignUpTapped)
+            onButtonClickDebounce?.invoke(EntryInteraction.SignUpTapped)
         }
     }
 
