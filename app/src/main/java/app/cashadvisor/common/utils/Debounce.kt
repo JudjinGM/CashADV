@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 fun <T> debounce(
     delayMillis: Long,
     coroutineScope: CoroutineScope,
-    useLastParam: Boolean,
+    useLastParam: Boolean = false,
     actionWithDelay: Boolean = true,
     action: (T) -> Unit
 ): (T) -> Unit {
