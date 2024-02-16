@@ -43,81 +43,67 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/start_screen_cardview_horizontal_padding"
+        android:layout_marginBottom="@dimen/start_screen_cardview_margin_bottom"
         android:maxWidth="@dimen/start_screen_cardview_maxwidth"
         android:minHeight="@dimen/start_screen_cardview_minheight"
         app:cardCornerRadius="@dimen/start_screen_cardview_radius"
-        android:layout_marginHorizontal="@dimen/start_screen_cardview_horizontal_padding"
-        android:layout_marginBottom="@dimen/start_screen_cardview_margin_bottom"
         app:cardElevation="@dimen/start_screen_cardview_elevation"
-        app:layout_constraintBottom_toBottomOf="parent" >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/start_screen_cardview_buttons_padding"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/start_screen_cardview_buttons_padding">
 
-        <LinearLayout
-            android:id="@+id/ll_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="0"
-            android:weightSum="100"
-            android:minHeight="@dimen/start_screen_cardview_llbuttons_minheight"
-            android:paddingTop="@dimen/start_screen_cardview_buttons_padding">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_signup"
-                app:backgroundTint="@null"
-                android:textColor="@color/white"
-                android:fontFamily="@font/gilroysemibold"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:background="@drawable/black_button_r_10_no_stroke"
+            <LinearLayout
+                android:id="@+id/ll_buttons"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
-                android:layout_weight="65"
-                android:layout_marginEnd="8dp"
-                android:text="@string/register_text" />
+                android:minHeight="@dimen/start_screen_cardview_llbuttons_minheight"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/start_screen_cardview_buttons_padding"
+                android:weightSum="100">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
-                app:backgroundTint="@null"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
-                android:fontFamily="@font/gilroysemibold"
-                android:background="@drawable/button_r10_black_stroke"
-                android:layout_marginStart="8dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_signup"
+                    style="@style/Widget.CashAdvisor.Button.SignupButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="65"
+                    android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
+                    android:text="@string/register_text" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_login"
+                    style="@style/Widget.CashAdvisor.Button.SigninButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="25"
+                    android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
+                    android:text="@string/login_text" />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/entryTextView"
+                style="@style/Widget.CashAdvisor.Text.Subtext"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
-                android:layout_weight="25"
-                android:text="@string/login_text" />
-
-
-
-
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_top_entry_text_notes"
+                android:layout_marginBottom="@dimen/margin_bottom_entry_text_notes"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/entry_text" />
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/entryTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/Widget.CashAdvisor.Text.Subtext"
-            android:gravity="center_vertical"
-            android:text="@string/entry_text"
-            android:layout_marginTop="@dimen/margin_top_entry_text_notes"
-            android:layout_marginBottom="@dimen/margin_bottom_entry_text_notes"/>
-
-    </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
