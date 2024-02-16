@@ -49,7 +49,7 @@
     <style name="Widget.CashAdvisor.Text.Subtext">
         <item name="fontFamily">@font/intersemibold</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">?attr/colour1</item>
+        <item name="android:textColor">?attr/subcolour2</item>
     </style>
 
     <style name="Widget.CashAdvisor.Text.num_sub">

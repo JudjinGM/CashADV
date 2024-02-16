@@ -5,6 +5,7 @@
     <string name="lower_grids_text">#активы\n#инвестиции\n#налоги\n#банки\n#сбережения\n#планирование\n#бюджет\n#доходы</string>
     <string name="register_text">Зарегистрироватьcя</string>
     <string name="login_text">Войти</string>
+    <string name="entry_text">Зарегистрируйтесь, если у&#160;Вас нет аккаунта, или&#160;войдите, если аккаунт уже&#160;создан.</string>
 
 
     <!-- Google authentication-->

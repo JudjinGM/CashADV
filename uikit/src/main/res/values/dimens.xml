@@ -17,6 +17,8 @@
     <dimen name="start_screen_cardview_llbuttons_minheight">56dp</dimen>
     <dimen name="start_screen_cardview_buttons_minheight">40dp</dimen>
     <dimen name="button_radius_10">10dp</dimen>
+    <dimen name="margin_top_entry_text_notes">8dp</dimen>
+    <dimen name="margin_bottom_entry_text_notes">8dp</dimen>
 
 
 
