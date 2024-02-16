@@ -16,7 +16,7 @@ class EntryViewModel @Inject constructor() : BaseViewModel() {
     val state: StateFlow<EntryScreenState>
         get() = _state
     private var coolDownDebounce: ((Unit) -> Unit) = debounce(
-        COUNTDOWNDELAY,
+        COOL_DOWN_DELAY,
         viewModelScope
     ) {
         _state.value = EntryScreenState.Default
@@ -26,17 +26,16 @@ class EntryViewModel @Inject constructor() : BaseViewModel() {
         when (action) {
             is EntryInteractionState.SignUpTapped -> {
                 _state.value = EntryScreenState.SignUp
-                coolDownDebounce.invoke(Unit)
             }
 
             is EntryInteractionState.SignInTapped -> {
                 _state.value = EntryScreenState.SignIn
-                coolDownDebounce.invoke(Unit)
             }
         }
+        coolDownDebounce.invoke(Unit)
     }
 
     companion object {
-        private const val COUNTDOWNDELAY = 100L
+        private const val COOL_DOWN_DELAY = 100L
     }
 }
