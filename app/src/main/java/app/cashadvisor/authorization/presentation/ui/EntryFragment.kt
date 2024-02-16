@@ -80,13 +80,9 @@ class EntryFragment : Fragment() {
             findNavController().navigate(R.id.action_entryFragment_to_signupFragment)
         }
 
-        binding.signInButton.setOnClickListener{
+        binding.btnLogin.setOnClickListener{
             val signIntent = mGoogleSignInClient.signInIntent
             startResultSignIn.launch(signIntent)
-        }
-        binding.btnAuthVk.setOnClickListener {
-            val vkid = VKID(requireContext())
-            vkid.authorize(this, vkAuthCallback)
         }
 
     }
