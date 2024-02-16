@@ -11,7 +11,6 @@ import app.cashadvisor.common.ui.BaseFragment
 import app.cashadvisor.common.utils.debounce
 import app.cashadvisor.databinding.FragmentEntryBinding
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 
 class EntryFragment :
@@ -23,11 +22,9 @@ class EntryFragment :
     override fun onConfigureViews() {
         configureDebounce()
         binding.btnLogin.setOnClickListener {
-            Timber.tag("EntryFragment").d("Sign in tapped")
             onButtonClickDebounce?.invoke(EntryInteractionState.SignInTapped)
         }
         binding.btnSignup.setOnClickListener {
-            Timber.tag("EntryFragment").d("Sign up tapped")
             onButtonClickDebounce?.invoke(EntryInteractionState.SignUpTapped)
         }
     }
@@ -43,13 +40,11 @@ class EntryFragment :
     private fun render(state: EntryScreenState) {
         when (state) {
             is EntryScreenState.SignUp -> {
-                Timber.tag("EntryFragment").d("Sign up")
                 findNavController().navigate(R.id.action_entryFragment_to_signupFragment)
 
             }
 
             is EntryScreenState.SignIn -> {
-                Timber.tag("EntryFragment").d("Sign in")
                 findNavController().navigate(R.id.action_entryFragment_to_loginFragment)
 
             }
