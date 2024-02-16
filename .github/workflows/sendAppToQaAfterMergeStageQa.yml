@@ -23,6 +23,8 @@ jobs:
           STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          VKIDCLIENTID: ${{ secrets.VKIDCLIENTID }}
+          VKIDCLIENTSECRET: ${{ secrets.VKIDCLIENTSECRET }}
           CREDENTIAL_FILE_CONTENT: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
         run: |
           echo "$CREDENTIAL_FILE_CONTENT" > ./app/serviceCredentialsFile.json
