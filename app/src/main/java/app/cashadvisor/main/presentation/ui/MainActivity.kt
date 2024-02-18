@@ -16,7 +16,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
-import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -36,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         Timber.tag("MainActivity").d("Debug log")
         Timber.tag("MainActivity").i("Info log")
         Timber.tag("MainActivity").w("Warning log")
