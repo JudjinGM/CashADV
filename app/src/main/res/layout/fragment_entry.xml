@@ -86,6 +86,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="25"
                     android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:text="@string/login_text" />
 
 
