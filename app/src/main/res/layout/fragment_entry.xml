@@ -83,7 +83,7 @@
                     style="@style/Widget.CashAdvisor.Button.SigninButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="8dp"
                     android:layout_weight="25"
                     android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
                     android:lines="1"
