@@ -74,7 +74,8 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="65"
                     android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
-                    android:ellipsize="start"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:text="@string/register_text" />
 
                 <com.google.android.material.button.MaterialButton
