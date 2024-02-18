@@ -7,6 +7,7 @@
     <dimen name="tap_to_ui_kit_bottom_margin">96dp</dimen>
     <dimen name="app_name_top_margin">304dp</dimen>
     <dimen name="grid_text_start_margin">16dp</dimen>
+    <dimen name="grid_text_end_margin_hack">-500dp</dimen>
     <dimen name="start_screen_cardview_minheight">104dp</dimen>
     <dimen name="start_screen_cardview_maxwidth">104dp</dimen>
     <dimen name="start_screen_cardview_radius">16dp</dimen>

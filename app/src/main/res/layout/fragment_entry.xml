@@ -8,10 +8,12 @@
 
     <TextView
         android:id="@+id/gridUpperTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/grid_text_start_margin"
         android:gravity="start"
+        android:scrollHorizontally="true"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/upper_grids_text"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
         app:layout_constraintBottom_toTopOf="@+id/appNameTextView"
@@ -25,6 +27,7 @@
         android:layout_marginTop="@dimen/app_name_top_margin"
         android:gravity="start"
         android:text="@string/grid_app_name"
+        android:layout_marginEnd="@dimen/grid_text_end_margin_hack"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/grid_text_start_margin"
         android:gravity="start"
+        android:layout_marginEnd="@dimen/grid_text_end_margin_hack"
         android:text="@string/lower_grids_text"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +73,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_signup"
                     style="@style/Widget.CashAdvisor.Button.SignupButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="65"
@@ -81,10 +85,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_login"
                     style="@style/Widget.CashAdvisor.Button.SigninButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:layout_weight="25"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="35"
                     android:minHeight="@dimen/start_screen_cardview_buttons_minheight"
                     android:lines="1"
                     android:ellipsize="end"
