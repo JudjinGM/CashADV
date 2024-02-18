@@ -14,6 +14,7 @@
         android:gravity="start"
         android:scrollHorizontally="true"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/grid_text_end_margin_hack"
         android:text="@string/upper_grids_text"
         android:textAppearance="@style/Widget.CashAdvisor.Text.HeaderStart.Gray"
         app:layout_constraintBottom_toTopOf="@+id/appNameTextView"
