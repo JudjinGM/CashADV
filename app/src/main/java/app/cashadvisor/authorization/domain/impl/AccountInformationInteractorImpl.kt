@@ -2,9 +2,8 @@ package app.cashadvisor.authorization.domain.impl
 
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
 import app.cashadvisor.authorization.domain.api.CredentialsRepository
-import app.cashadvisor.authorization.domain.models.AccountInformation
+import app.cashadvisor.authorization.domain.models.states.AccountInformation
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 
 class AccountInformationInteractorImpl(

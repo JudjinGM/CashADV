@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.models
+package app.cashadvisor.authorization.presentation.ui.test
 
 data class TestStartUiState(
     val emailIsValid: Boolean = false,

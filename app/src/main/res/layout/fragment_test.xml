@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authorization.presentation.ui.diagrams.TestFragment">
+    tools:context=".authorization.presentation.ui.test.TestFragment">
 
     <TextView
         android:id="@+id/title"

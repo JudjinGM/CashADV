@@ -142,13 +142,6 @@ class NetworkModule {
         return NetworkConnectionProviderImpl(context)
     }
 
-    @Provides
-    @Singleton
-    fun provideJson(): Json {
-        return Json { }
-    }
-
-
     companion object {
         const val ENDPOINT_URL_PROD = "https://212.233.78.3:8080/v1/"
         const val ENDPOINT_URL_STAGE = "https://212.233.78.3:8080/v1/"

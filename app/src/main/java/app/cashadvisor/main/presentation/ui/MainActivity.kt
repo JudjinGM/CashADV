@@ -1,17 +1,16 @@
 package app.cashadvisor.main.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import app.cashadvisor.R
-import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.databinding.ActivityMainBinding
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -20,6 +19,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding

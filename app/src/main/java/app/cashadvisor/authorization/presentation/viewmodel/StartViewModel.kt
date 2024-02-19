@@ -2,7 +2,7 @@ package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
-import app.cashadvisor.authorization.domain.models.AccountInformation
+import app.cashadvisor.authorization.domain.models.states.AccountInformation
 import app.cashadvisor.authorization.presentation.ui.models.StartScreenUiState
 import app.cashadvisor.common.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

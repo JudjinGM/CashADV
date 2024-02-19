@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.diagrams
+package app.cashadvisor.authorization.presentation.ui.test
 
 import androidx.lifecycle.viewModelScope
 import app.cashadvisor.authorization.domain.api.InputValidationInteractor
@@ -6,8 +6,6 @@ import app.cashadvisor.authorization.domain.api.LoginInteractor
 import app.cashadvisor.authorization.domain.api.RegisterInteractor
 import app.cashadvisor.authorization.domain.models.states.ConfirmCodeValidationState
 import app.cashadvisor.authorization.domain.models.states.EmailValidationState
-import app.cashadvisor.authorization.presentation.ui.models.TestStartState
-import app.cashadvisor.authorization.presentation.ui.models.TestStartUiState
 import app.cashadvisor.common.domain.Resource
 import app.cashadvisor.common.domain.model.ErrorEntity
 import app.cashadvisor.common.ui.BaseViewModel

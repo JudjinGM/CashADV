@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.models
+package app.cashadvisor.authorization.presentation.ui.test
 
 import app.cashadvisor.authorization.domain.models.ConfirmCode
 import app.cashadvisor.authorization.domain.models.Email

@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.presentation.ui.diagrams
+package app.cashadvisor.authorization.presentation.ui.test
 
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import app.cashadvisor.authorization.presentation.ui.models.TestStartUiState
 import app.cashadvisor.common.ui.BaseFragment
 import app.cashadvisor.databinding.FragmentTestBinding
 import dagger.hilt.android.AndroidEntryPoint
