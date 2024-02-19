@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_name_description_between_margin">0dp</dimen>
+    <dimen name="tap_to_continue_bottom_margin">12dp</dimen>
+    <dimen name="tap_to_ui_kit_bottom_margin">96dp</dimen>
+    <dimen name="app_name_top_margin">304dp</dimen>
+
+</resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
@@ -19,6 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.vk.id.AccessToken
+import com.vk.id.VKID
+import com.vk.id.VKIDAuthFail
 
 class EntryFragment : Fragment() {
     private var _binding: FragmentEntryBinding? = null
@@ -26,6 +30,29 @@ class EntryFragment : Fragment() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var startResultSignIn: ActivityResultLauncher<Intent>
 
+    private val vkAuthCallback = object : VKID.AuthCallback {
+        override fun onSuccess(accessToken: AccessToken) {
+            val token = accessToken.token
+            Toast.makeText(requireContext(), "token: ${token}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "${accessToken.userData.firstName} ${accessToken.userData.lastName}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        override fun onFail(fail: VKIDAuthFail) {
+            Toast.makeText(requireContext(), "error: ${fail.description}", Toast.LENGTH_LONG).show()
+            when (fail) {
+                is VKIDAuthFail.Canceled -> {
+                    //...
+                }
+                else -> {
+                    //...
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +72,6 @@ class EntryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_entryFragment_to_loginFragment)
         }
@@ -58,6 +84,11 @@ class EntryFragment : Fragment() {
             val signIntent = mGoogleSignInClient.signInIntent
             startResultSignIn.launch(signIntent)
         }
+        binding.btnAuthVk.setOnClickListener {
+            val vkid = VKID(requireContext())
+            vkid.authorize(this, vkAuthCallback)
+        }
+
     }
 
     override fun onDestroyView() {
