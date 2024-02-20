@@ -1,11 +1,11 @@
 package app.cashadvisor.authorization.data.api
 
-import app.cashadvisor.authorization.data.models.ConfirmLoginByEmailWithCodeInputDto
-import app.cashadvisor.authorization.data.models.LoginAuthorizationOutputDto
-import app.cashadvisor.authorization.data.models.LoginInputDto
+import app.cashadvisor.authorization.data.models.AuthByEmailInputDto
+import app.cashadvisor.authorization.data.models.ConfirmByEmailWithCodeInputDto
+import app.cashadvisor.authorization.data.models.LoginAuthenticationOutputDto
 import app.cashadvisor.authorization.data.models.LoginOutputDto
 
 interface LoginRemoteDataSource {
-    suspend fun loginByEmail(inputDto: LoginInputDto): LoginOutputDto
-    suspend fun confirmLoginByEmailWithCode(inputDto: ConfirmLoginByEmailWithCodeInputDto): LoginAuthorizationOutputDto
+    suspend fun loginByEmail(inputDto: AuthByEmailInputDto): LoginOutputDto
+    suspend fun confirmLoginByEmailWithCode(inputDto: ConfirmByEmailWithCodeInputDto): LoginAuthenticationOutputDto
 }

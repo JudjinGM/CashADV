@@ -15,7 +15,7 @@ class NetworkToRegisterExceptionMapper @Inject constructor(
         return when (exception) {
             is NetworkException.BadRequest -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                RegisterException.Register.InvalidEmail(
+                RegisterException.Register.BadRequestInvalidEmailOrMissingContentTypeHeader(
                     message = errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -23,7 +23,7 @@ class NetworkToRegisterExceptionMapper @Inject constructor(
 
             is NetworkException.InternalServerError -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                RegisterException.Register.FailedToGenerateTokenOrSendEmail(
+                RegisterException.Register.InternalServerErrorFailedToGenerateTokenOrSendEmail(
                     errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -38,7 +38,7 @@ class NetworkToRegisterExceptionMapper @Inject constructor(
         return when (exception) {
             is NetworkException.BadRequest -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                RegisterException.EmailCodeConfirmation.InvalidToken(
+                RegisterException.EmailCodeConfirmation.BadRequestInvalidTokenOrMissingContentTypeHeade(
                     errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -57,7 +57,7 @@ class NetworkToRegisterExceptionMapper @Inject constructor(
 
             is NetworkException.InternalServerError -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                RegisterException.EmailCodeConfirmation.FailedToConfirmEmailOrRegisterUser(
+                RegisterException.EmailCodeConfirmation.InternalServerErrorFailedToConfirmEmailOrRegisterUser(
                     errorResponse.message,
                     errorResponse.statusCode
                 )

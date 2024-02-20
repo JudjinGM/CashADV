@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AuthorizationNetworkModule {
+class AuthenticationNetworkModule {
     @Provides
     @Singleton
     fun provideRegisterApiService(retrofit: Retrofit): RegisterApiService {

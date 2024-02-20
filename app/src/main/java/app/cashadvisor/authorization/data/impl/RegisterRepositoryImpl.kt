@@ -2,12 +2,12 @@ package app.cashadvisor.authorization.data.impl
 
 import app.cashadvisor.authorization.data.api.RegisterRemoteDataSource
 import app.cashadvisor.authorization.di.RegisterExceptionMapper
-import app.cashadvisor.authorization.domain.RegisterDomainMapper
+import app.cashadvisor.authorization.domain.AuthenticationDomainMapper
 import app.cashadvisor.authorization.domain.api.RegisterRepository
 import app.cashadvisor.authorization.domain.models.ConfirmCode
 import app.cashadvisor.authorization.domain.models.Email
 import app.cashadvisor.authorization.domain.models.Password
-import app.cashadvisor.authorization.domain.models.RegisterAuthorizationData
+import app.cashadvisor.authorization.domain.models.RegisterAuthenticationData
 import app.cashadvisor.authorization.domain.models.RegisterData
 import app.cashadvisor.authorization.domain.models.states.RegisterState
 import app.cashadvisor.common.domain.BaseExceptionToErrorMapper
@@ -24,7 +24,7 @@ class RegisterRepositoryImpl
 @Inject constructor(
     private val registerRemoteDataSource: RegisterRemoteDataSource,
     @RegisterExceptionMapper val exceptionToErrorMapper: BaseExceptionToErrorMapper,
-    private val registerDomainMapper: RegisterDomainMapper
+    private val authenticationDomainMapper: AuthenticationDomainMapper
 ) : RegisterRepository {
 
     private val _state: MutableStateFlow<RegisterState> = MutableStateFlow(RegisterState())
@@ -35,14 +35,14 @@ class RegisterRepositoryImpl
     override suspend fun registerByEmail(email: Email, password: Password): Resource<RegisterData> {
         return try {
             val data = registerRemoteDataSource.registerByEmail(
-                inputDto = registerDomainMapper.toRegisterByEmailInputDto(email, password)
+                inputDto = authenticationDomainMapper.toAuthByEmailInputDto(email, password)
             )
 
             _state.update {
                 it.copy(state = RegisterState.State.InProcess(codeToken = data.token))
             }
             Resource.Success(
-                data = registerDomainMapper.toRegisterData(data)
+                data = authenticationDomainMapper.toRegisterData(data)
             )
 
         } catch (exception: Exception) {
@@ -62,7 +62,7 @@ class RegisterRepositoryImpl
     override suspend fun confirmRegisterByEmailWithCode(
         email: Email,
         code: ConfirmCode,
-    ): Resource<RegisterAuthorizationData> {
+    ): Resource<RegisterAuthenticationData> {
         return try {
             val token: String
 
@@ -73,15 +73,15 @@ class RegisterRepositoryImpl
 
                 else -> {
                     return Resource.Error(
-                        ErrorEntity.RegisterByEmailConfirmationWithCode.InvalidToken(
+                        ErrorEntity.RegisterConfirmationWithCode.InvalidToken(
                             WRONG_STATE_ERROR
                         )
                     )
                 }
             }
             val data = registerRemoteDataSource.confirmRegisterByEmailWithCode(
-                inputDto = registerDomainMapper
-                    .toConfirmRegisterByEmailWithCodeInputDto(email, code, token)
+                inputDto = authenticationDomainMapper
+                    .toConfirmByEmailWithCodeInputDto(email, code, token)
             )
 
             _state.update {
@@ -89,7 +89,7 @@ class RegisterRepositoryImpl
             }
 
             Resource.Success(
-                data = registerDomainMapper.toRegisterAuthorizationData(data)
+                data = authenticationDomainMapper.toRegisterAuthenticationData(data)
             )
 
 

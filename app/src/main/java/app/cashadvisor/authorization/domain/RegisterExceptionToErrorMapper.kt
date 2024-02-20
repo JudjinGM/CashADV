@@ -21,31 +21,32 @@ class RegisterExceptionToErrorMapper @Inject constructor() : BaseExceptionToErro
 
     private fun handleRegisterException(exception: RegisterException.Register): ErrorEntity {
         return when (exception) {
-            is RegisterException.Register.FailedToGenerateTokenOrSendEmail -> {
-                ErrorEntity.Register.FailedToGenerateTokenOrSendEmail(message = exception.message)
+
+            is RegisterException.Register.BadRequestInvalidEmailOrMissingContentTypeHeader -> {
+                ErrorEntity.Register.InvalidEmail(message = exception.message)
             }
 
-            is RegisterException.Register.InvalidEmail -> {
-                ErrorEntity.Register.InvalidEmail(message = exception.message)
+            is RegisterException.Register.InternalServerErrorFailedToGenerateTokenOrSendEmail -> {
+                ErrorEntity.Register.FailedToGenerateTokenOrSendEmail(message = exception.message)
             }
         }
     }
 
     private fun handleEmailConfirmCodeException(exception: RegisterException.EmailCodeConfirmation): ErrorEntity {
         return when (exception) {
-            is RegisterException.EmailCodeConfirmation.InvalidToken -> {
-                ErrorEntity.RegisterByEmailConfirmationWithCode.InvalidToken(exception.message)
+            is RegisterException.EmailCodeConfirmation.BadRequestInvalidTokenOrMissingContentTypeHeade -> {
+                ErrorEntity.RegisterConfirmationWithCode.InvalidToken(exception.message)
             }
 
             is RegisterException.EmailCodeConfirmation.UnauthorizedWrongConfirmationCode ->
-                ErrorEntity.RegisterByEmailConfirmationWithCode.WrongWithCodeConfirmationRegisterBy(
+                ErrorEntity.RegisterConfirmationWithCode.WrongConfirmationCode(
                     message = exception.message,
                     remainingAttempts = exception.remainingAttempts,
                     lockDuration = exception.lockDuration
                 )
 
-            is RegisterException.EmailCodeConfirmation.FailedToConfirmEmailOrRegisterUser -> {
-                ErrorEntity.RegisterByEmailConfirmationWithCode.FailedToConfirmRegisterByEmailOrRegisterUserWithCode(
+            is RegisterException.EmailCodeConfirmation.InternalServerErrorFailedToConfirmEmailOrRegisterUser -> {
+                ErrorEntity.RegisterConfirmationWithCode.FailedToConfirmEmailOrRegisterUser(
                     exception.message
                 )
             }

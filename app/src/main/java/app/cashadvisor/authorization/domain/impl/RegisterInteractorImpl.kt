@@ -1,5 +1,7 @@
 package app.cashadvisor.authorization.domain.impl
 
+import app.cashadvisor.authorization.data.dto.CredentialsDto
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.authorization.domain.api.RegisterInteractor
 import app.cashadvisor.authorization.domain.api.RegisterRepository
 import app.cashadvisor.authorization.domain.models.ConfirmCode
@@ -12,6 +14,7 @@ import javax.inject.Inject
 
 class RegisterInteractorImpl @Inject constructor(
     private val registerRepository: RegisterRepository,
+    private val credentialsRepository: CredentialsRepository
 ) : RegisterInteractor {
 
     override suspend fun registerByEmail(email: Email, password: Password): Resource<RegisterData> {
@@ -38,7 +41,12 @@ class RegisterInteractorImpl @Inject constructor(
         val result = registerRepository.confirmRegisterByEmailWithCode(email, code)
         return when (result) {
             is Resource.Success -> {
-                //TODO: вызов метода создания нового аккаунта репозитория аккаунт
+                credentialsRepository.saveCredentials(
+                    CredentialsDto(
+                        accessToken = result.data.tokenDetails.accessToken,
+                        refreshToken = result.data.tokenDetails.refreshToken
+                    )
+                )
                 Resource.Success(result.data.message)
             }
 

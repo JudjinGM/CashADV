@@ -1,6 +1,6 @@
 package app.cashadvisor.authorization.data.models
 
-data class LoginInputDto(
+data class AuthByEmailInputDto(
     val email: String,
     val password: String
 )

@@ -1,5 +1,7 @@
 package app.cashadvisor.authorization.domain.impl
 
+import app.cashadvisor.authorization.data.dto.CredentialsDto
+import app.cashadvisor.authorization.domain.api.CredentialsRepository
 import app.cashadvisor.authorization.domain.api.LoginInteractor
 import app.cashadvisor.authorization.domain.api.LoginRepository
 import app.cashadvisor.authorization.domain.models.ConfirmCode
@@ -12,6 +14,7 @@ import javax.inject.Inject
 
 class LoginInteractorImpl @Inject constructor(
     private val loginRepository: LoginRepository,
+    private val credentialsRepository: CredentialsRepository
 ) : LoginInteractor {
 
     override suspend fun loginByEmail(email: Email, password: Password): Resource<LoginData> {
@@ -36,6 +39,12 @@ class LoginInteractorImpl @Inject constructor(
         return when (result) {
 
             is Resource.Success -> {
+                credentialsRepository.saveCredentials(
+                    CredentialsDto(
+                        accessToken = result.data.tokenDetails.accessToken,
+                        refreshToken = result.data.tokenDetails.refreshToken
+                    )
+                )
                 Resource.Success(data = result.data.message)
             }
 

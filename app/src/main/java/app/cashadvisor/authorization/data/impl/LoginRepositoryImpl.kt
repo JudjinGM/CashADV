@@ -2,11 +2,11 @@ package app.cashadvisor.authorization.data.impl
 
 import app.cashadvisor.authorization.data.api.LoginRemoteDataSource
 import app.cashadvisor.authorization.di.LoginExceptionMapper
-import app.cashadvisor.authorization.domain.LoginDomainMapper
+import app.cashadvisor.authorization.domain.AuthenticationDomainMapper
 import app.cashadvisor.authorization.domain.api.LoginRepository
 import app.cashadvisor.authorization.domain.models.ConfirmCode
 import app.cashadvisor.authorization.domain.models.Email
-import app.cashadvisor.authorization.domain.models.LoginAuthorizationData
+import app.cashadvisor.authorization.domain.models.LoginAuthenticationData
 import app.cashadvisor.authorization.domain.models.LoginData
 import app.cashadvisor.authorization.domain.models.Password
 import app.cashadvisor.authorization.domain.models.states.LoginState
@@ -24,7 +24,7 @@ class LoginRepositoryImpl
 @Inject constructor(
     private val loginRemoteDataSource: LoginRemoteDataSource,
     @LoginExceptionMapper private val exceptionToErrorMapper: BaseExceptionToErrorMapper,
-    private val loginDomainMapper: LoginDomainMapper
+    private val authenticationDomainMapper: AuthenticationDomainMapper
 ) : LoginRepository {
 
     private val _state: MutableStateFlow<LoginState> = MutableStateFlow(LoginState())
@@ -35,14 +35,14 @@ class LoginRepositoryImpl
     override suspend fun loginByEmail(email: Email, password: Password): Resource<LoginData> {
         return try {
             val data = loginRemoteDataSource.loginByEmail(
-                inputDto = loginDomainMapper.toLoginByEmailInputDto(email, password)
+                inputDto = authenticationDomainMapper.toAuthByEmailInputDto(email, password)
             )
 
             _state.update {
                 it.copy(state = LoginState.State.InProcess(codeToken = data.token))
             }
             Resource.Success(
-                data = loginDomainMapper.toLoginData(data)
+                data = authenticationDomainMapper.toLoginData(data)
             )
         } catch (exception: Exception) {
             _state.update {
@@ -57,7 +57,7 @@ class LoginRepositoryImpl
     override suspend fun confirmLoginByEmailWithCode(
         email: Email,
         code: ConfirmCode,
-    ): Resource<LoginAuthorizationData> {
+    ): Resource<LoginAuthenticationData> {
         return try {
             val token: String
 
@@ -68,7 +68,7 @@ class LoginRepositoryImpl
 
                 else -> {
                     return Resource.Error(
-                        ErrorEntity.RegisterByEmailConfirmationWithCode.InvalidToken(
+                        ErrorEntity.RegisterConfirmationWithCode.InvalidToken(
                             WRONG_STATE_ERROR
                         )
                     )
@@ -76,7 +76,7 @@ class LoginRepositoryImpl
             }
 
             val data = loginRemoteDataSource.confirmLoginByEmailWithCode(
-                inputDto = loginDomainMapper.toConfirmLoginByEmailWithCodeInputDto(
+                inputDto = authenticationDomainMapper.toConfirmByEmailWithCodeInputDto(
                     email,
                     code,
                     token
@@ -88,7 +88,7 @@ class LoginRepositoryImpl
             }
 
             Resource.Success(
-                data = loginDomainMapper.toLoginAuthorizationData(data)
+                data = authenticationDomainMapper.toLoginAuthenticationData(data)
             )
         } catch (exception: Exception) {
             Resource.Error(

@@ -2,7 +2,7 @@ package app.cashadvisor.authorization.domain.api
 
 import app.cashadvisor.authorization.domain.models.ConfirmCode
 import app.cashadvisor.authorization.domain.models.Email
-import app.cashadvisor.authorization.domain.models.LoginAuthorizationData
+import app.cashadvisor.authorization.domain.models.LoginAuthenticationData
 import app.cashadvisor.authorization.domain.models.LoginData
 import app.cashadvisor.authorization.domain.models.Password
 import app.cashadvisor.common.domain.Resource
@@ -17,7 +17,7 @@ interface LoginRepository {
     suspend fun confirmLoginByEmailWithCode(
         email: Email,
         code: ConfirmCode,
-    ): Resource<LoginAuthorizationData>
+    ): Resource<LoginAuthenticationData>
 
     fun isLoginInProgress(): Flow<Boolean>
 }

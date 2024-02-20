@@ -1,6 +1,6 @@
 package app.cashadvisor.authorization.data.models
 
-data class LoginAuthorizationOutputDto(
+data class LoginAuthenticationOutputDto(
     val message: String,
     val statusCode: Int,
     val accessTokenLifeTime: Long,

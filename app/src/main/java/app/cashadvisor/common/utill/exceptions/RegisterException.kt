@@ -18,12 +18,12 @@ sealed class RegisterException(
         message: String
     ) : RegisterException(message) {
 
-        class InvalidEmail(
+        class BadRequestInvalidEmailOrMissingContentTypeHeader(
             override val message: String,
             val statusCode: Int
         ) : Register(message)
 
-        class FailedToGenerateTokenOrSendEmail(
+        class InternalServerErrorFailedToGenerateTokenOrSendEmail(
             override val message: String,
             val statusCode: Int
         ) : Register(message)
@@ -32,7 +32,7 @@ sealed class RegisterException(
     sealed class EmailCodeConfirmation(
         override val message: String,
     ) : RegisterException(message) {
-        class InvalidToken(
+        class BadRequestInvalidTokenOrMissingContentTypeHeade(
             override val message: String,
             val statusCode: Int
         ) : EmailCodeConfirmation(message)
@@ -44,15 +44,15 @@ sealed class RegisterException(
             val statusCode: Int
         ) : EmailCodeConfirmation(message)
 
-        class FailedToConfirmEmailOrRegisterUser(
+        class InternalServerErrorFailedToConfirmEmailOrRegisterUser(
             override val message: String,
             val statusCode: Int
         ) : EmailCodeConfirmation(message)
     }
 
-
     companion object {
         const val NO_INTERNET_CONNECTION = "No internet connection"
         const val UNDEFINED_MESSAGE = "Undefined"
     }
+
 }

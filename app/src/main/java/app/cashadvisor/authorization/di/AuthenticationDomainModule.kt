@@ -13,7 +13,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-interface AuthorizationDomainModule {
+interface AuthenticationDomainModule {
 
     @Binds
     fun bindRegisterInteractor(

@@ -1,12 +1,12 @@
 package app.cashadvisor.authorization.data.impl
 
-import app.cashadvisor.authorization.data.LoginDataMapper
+import app.cashadvisor.authorization.data.AuthenticationDataMapper
 import app.cashadvisor.authorization.data.NetworkToLoginExceptionMapper
 import app.cashadvisor.authorization.data.api.LoginApiService
 import app.cashadvisor.authorization.data.api.LoginRemoteDataSource
-import app.cashadvisor.authorization.data.models.ConfirmLoginByEmailWithCodeInputDto
-import app.cashadvisor.authorization.data.models.LoginAuthorizationOutputDto
-import app.cashadvisor.authorization.data.models.LoginInputDto
+import app.cashadvisor.authorization.data.models.AuthByEmailInputDto
+import app.cashadvisor.authorization.data.models.ConfirmByEmailWithCodeInputDto
+import app.cashadvisor.authorization.data.models.LoginAuthenticationOutputDto
 import app.cashadvisor.authorization.data.models.LoginOutputDto
 import app.cashadvisor.common.utill.exceptions.NetworkException
 import javax.inject.Inject
@@ -15,30 +15,30 @@ class LoginRemoteDataSourceImpl
 @Inject constructor(
     private val loginApiService: LoginApiService,
     private val networkToLoginExceptionMapper: NetworkToLoginExceptionMapper,
-    private val loginDataMapper: LoginDataMapper
+    private val authenticationDataMapper: AuthenticationDataMapper
 ) : LoginRemoteDataSource {
 
-    override suspend fun loginByEmail(inputDto: LoginInputDto): LoginOutputDto {
+    override suspend fun loginByEmail(inputDto: AuthByEmailInputDto): LoginOutputDto {
         return try {
             val response = loginApiService.loginByEmail(
-                loginByEmailRequest = loginDataMapper.toLoginByEmailRequest(inputDto)
+                loginByEmailRequest = authenticationDataMapper.toLoginByEmailRequest(inputDto)
             )
-            loginDataMapper.toLoginOutputDto(response)
+            authenticationDataMapper.toLoginOutputDto(response)
         } catch (exception: NetworkException) {
             throw networkToLoginExceptionMapper.handleExceptionForLoginByEmail(exception)
         }
     }
 
     override suspend fun confirmLoginByEmailWithCode(
-        inputDto: ConfirmLoginByEmailWithCodeInputDto
-    ): LoginAuthorizationOutputDto {
+        inputDto: ConfirmByEmailWithCodeInputDto
+    ): LoginAuthenticationOutputDto {
         return try {
             val response = loginApiService.confirmLoginByEmailWithCode(
-                confirmLoginByEmailRequest = loginDataMapper.toConfirmLoginByEmailWithCodeRequest(
+                confirmLoginByEmailRequest = authenticationDataMapper.toConfirmLoginByEmailWithCodeRequest(
                     inputDto
                 )
             )
-            loginDataMapper.toLoginAuthorizationOutputDto(response)
+            authenticationDataMapper.toLoginAuthorizationOutputDto(response)
         } catch (exception: NetworkException) {
             throw networkToLoginExceptionMapper
                 .handleExceptionForLoginConfirmationByEmailWithCode(exception)

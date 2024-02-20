@@ -21,20 +21,20 @@ class LoginExceptionToErrorMapper @Inject constructor() : BaseExceptionToErrorMa
 
     private fun handleLoginException(exception: LoginException.Login): ErrorEntity {
         return when (exception) {
-            is LoginException.Login.FailedToGenerateTokenOrSendEmail -> {
-                ErrorEntity.Login.FailedToGenerateTokenOrSendEmail(
+            is LoginException.Login.BadRequestInvalidInputOrContentType -> {
+                ErrorEntity.Login.InvalidInput(
                     exception.message
                 )
             }
 
-            is LoginException.Login.InvalidEmailOrPassword -> {
+            is LoginException.Login.UnauthorizedInvalidEmailOrPassword -> {
                 ErrorEntity.Login.InvalidEmailOrPassword(
                     exception.message
                 )
             }
 
-            is LoginException.Login.InvalidInputOrContentType -> {
-                ErrorEntity.Login.InvalidInput(
+            is LoginException.Login.InternalServerErrorFailedToGenerateToken -> {
+                ErrorEntity.Login.FailedToGenerateTokenOrSendEmail(
                     exception.message
                 )
             }
@@ -43,17 +43,24 @@ class LoginExceptionToErrorMapper @Inject constructor() : BaseExceptionToErrorMa
 
     private fun handleLoginConfirmCodeException(exception: LoginException.LoginCodeConfirmation): ErrorEntity {
         return when (exception) {
-            is LoginException.LoginCodeConfirmation.InvalidRequestPayload -> {
-                ErrorEntity.LoginByEmailConfirmationWithCode.InvalidRequestPayload(exception.message)
+            is LoginException.LoginCodeConfirmation.BadRequestInvalidRequestPayload -> {
+                ErrorEntity.LoginConfirmationWithCode.InvalidToken(exception.message)
             }
 
             is LoginException.LoginCodeConfirmation.UnauthorizedWrongConfirmationCode -> {
-                ErrorEntity.LoginByEmailConfirmationWithCode.WrongWithCodeConfirmationByEmail(
+                ErrorEntity.LoginConfirmationWithCode.WrongConfirmationCode(
                     message = exception.message,
                     remainingAttempts = exception.remainingAttempts,
                     lockDuration = exception.lockDuration
                 )
             }
+
+            is LoginException.LoginCodeConfirmation.InternalServerErrorFailedToLogin -> {
+                ErrorEntity.LoginConfirmationWithCode.FailedToConfirmEmailOrLoginUser(
+                    message = exception.message
+                )
+            }
+
         }
     }
 

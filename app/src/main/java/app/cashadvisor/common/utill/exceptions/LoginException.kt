@@ -17,27 +17,26 @@ sealed class LoginException(
         message: String
     ) : LoginException(message) {
 
-        class InvalidInputOrContentType(
+        class BadRequestInvalidInputOrContentType(
             override val message: String,
             val statusCode: Int
         ) : Login(message)
 
-        class InvalidEmailOrPassword(
+        class UnauthorizedInvalidEmailOrPassword(
             override val message: String,
             val statusCode: Int
         ) : Login(message)
 
-        class FailedToGenerateTokenOrSendEmail(
+        class InternalServerErrorFailedToGenerateToken(
             override val message: String,
             val statusCode: Int
         ) : Login(message)
-
     }
 
     sealed class LoginCodeConfirmation(
         override val message: String,
     ) : LoginException(message) {
-        class InvalidRequestPayload(
+        class BadRequestInvalidRequestPayload(
             override val message: String,
             val statusCode: Int
         ) : LoginCodeConfirmation(message)
@@ -48,10 +47,16 @@ sealed class LoginException(
             val lockDuration: Int,
             val statusCode: Int
         ) : LoginCodeConfirmation(message)
+
+        class InternalServerErrorFailedToLogin(
+            override val message: String,
+            val statusCode: Int
+        ) : LoginCodeConfirmation(message)
     }
 
     companion object {
         const val NO_INTERNET_CONNECTION = "No internet connection"
         const val UNDEFINED_MESSAGE = "Undefined"
     }
+
 }

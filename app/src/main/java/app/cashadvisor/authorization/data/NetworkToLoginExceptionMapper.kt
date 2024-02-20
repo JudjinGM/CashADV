@@ -15,7 +15,7 @@ class NetworkToLoginExceptionMapper @Inject constructor(
         return when (exception) {
             is NetworkException.BadRequest -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                LoginException.Login.InvalidInputOrContentType(
+                LoginException.Login.BadRequestInvalidInputOrContentType(
                     message = errorResponse.message,
                     statusCode = errorResponse.statusCode
                 )
@@ -23,7 +23,7 @@ class NetworkToLoginExceptionMapper @Inject constructor(
 
             is NetworkException.Unauthorized -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                LoginException.Login.InvalidEmailOrPassword(
+                LoginException.Login.UnauthorizedInvalidEmailOrPassword(
                     message = errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -31,7 +31,7 @@ class NetworkToLoginExceptionMapper @Inject constructor(
 
             is NetworkException.InternalServerError -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                LoginException.Login.FailedToGenerateTokenOrSendEmail(
+                LoginException.Login.InternalServerErrorFailedToGenerateToken(
                     errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -46,7 +46,7 @@ class NetworkToLoginExceptionMapper @Inject constructor(
         return when (exception) {
             is NetworkException.BadRequest -> {
                 val errorResponse = handleErrorResponse<ErrorResponse>(exception.errorBody)
-                LoginException.LoginCodeConfirmation.InvalidRequestPayload(
+                LoginException.LoginCodeConfirmation.BadRequestInvalidRequestPayload(
                     errorResponse.message,
                     errorResponse.statusCode
                 )
@@ -59,6 +59,15 @@ class NetworkToLoginExceptionMapper @Inject constructor(
                     remainingAttempts = errorResponse.remainingAttempts,
                     lockDuration = errorResponse.lockDuration,
                     message = errorResponse.error,
+                    statusCode = errorResponse.statusCode
+                )
+            }
+
+            is NetworkException.InternalServerError -> {
+                val errorResponse =
+                    handleErrorResponse<ErrorResponse>(exception.errorBody)
+                LoginException.LoginCodeConfirmation.InternalServerErrorFailedToLogin(
+                    message = errorResponse.message,
                     statusCode = errorResponse.statusCode
                 )
             }

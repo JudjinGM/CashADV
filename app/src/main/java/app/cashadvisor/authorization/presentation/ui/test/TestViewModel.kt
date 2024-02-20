@@ -159,15 +159,15 @@ class TestViewModel @Inject constructor(
                     }
 
                     when (result.error) {
-                        is ErrorEntity.RegisterByEmailConfirmationWithCode.FailedToConfirmRegisterByEmailOrRegisterUserWithCode -> {
+                        is ErrorEntity.RegisterConfirmationWithCode.FailedToConfirmEmailOrRegisterUser -> {
                             logDebugMessage("FailedToConfirmEmailOrRegisterUser ${result.error.message}")
                         }
 
-                        is ErrorEntity.RegisterByEmailConfirmationWithCode.InvalidToken -> {
+                        is ErrorEntity.RegisterConfirmationWithCode.InvalidToken -> {
                             logDebugMessage("InvalidToken ${result.error.message}")
                         }
 
-                        is ErrorEntity.RegisterByEmailConfirmationWithCode.WrongWithCodeConfirmationRegisterBy -> {
+                        is ErrorEntity.RegisterConfirmationWithCode.WrongConfirmationCode -> {
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                         }
 
@@ -290,11 +290,11 @@ class TestViewModel @Inject constructor(
                     when (result.error) {
 
 
-                        is ErrorEntity.LoginByEmailConfirmationWithCode.InvalidRequestPayload -> {
+                        is ErrorEntity.LoginConfirmationWithCode.InvalidToken -> {
                             logDebugMessage("InvalidRequestPayload ${result.error.message}")
                         }
 
-                        is ErrorEntity.LoginByEmailConfirmationWithCode.WrongWithCodeConfirmationByEmail -> {
+                        is ErrorEntity.LoginConfirmationWithCode.WrongConfirmationCode -> {
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                             logDebugMessage("WrongConfirmationCode remaining attempts ${result.error.remainingAttempts}")
                             logDebugMessage("WrongConfirmationCode lock duration ${result.error.lockDuration}")

@@ -20,33 +20,34 @@ sealed class ErrorEntity(open val message: String) {
             Register(message)
     }
 
-
-    sealed class LoginByEmailConfirmationWithCode(override val message: String) :
-        ErrorEntity(message) {
-        data class InvalidRequestPayload(override val message: String) :
-            LoginByEmailConfirmationWithCode(message)
-
-        data class WrongWithCodeConfirmationByEmail(
-            override val message: String,
-            val remainingAttempts: Int,
-            val lockDuration: Int
-        ) : LoginByEmailConfirmationWithCode(message)
-    }
-
-    sealed class RegisterByEmailConfirmationWithCode(override val message: String) :
+    sealed class LoginConfirmationWithCode(override val message: String) :
         ErrorEntity(message) {
         data class InvalidToken(override val message: String) :
-            RegisterByEmailConfirmationWithCode(message)
+            LoginConfirmationWithCode(message)
 
-        data class WrongWithCodeConfirmationRegisterBy(
+        data class WrongConfirmationCode(
             override val message: String,
             val remainingAttempts: Int,
             val lockDuration: Int
-        ) : RegisterByEmailConfirmationWithCode(message)
+        ) : LoginConfirmationWithCode(message)
 
-        data class FailedToConfirmRegisterByEmailOrRegisterUserWithCode(override val message: String) :
-            RegisterByEmailConfirmationWithCode(message)
+        data class FailedToConfirmEmailOrLoginUser(override val message: String) :
+            LoginConfirmationWithCode(message)
+    }
 
+    sealed class RegisterConfirmationWithCode(override val message: String) :
+        ErrorEntity(message) {
+        data class InvalidToken(override val message: String) :
+            RegisterConfirmationWithCode(message)
+
+        data class WrongConfirmationCode(
+            override val message: String,
+            val remainingAttempts: Int,
+            val lockDuration: Int
+        ) : RegisterConfirmationWithCode(message)
+
+        data class FailedToConfirmEmailOrRegisterUser(override val message: String) :
+            RegisterConfirmationWithCode(message)
     }
 
     companion object {

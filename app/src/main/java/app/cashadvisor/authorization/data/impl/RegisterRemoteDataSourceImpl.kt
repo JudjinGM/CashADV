@@ -1,12 +1,12 @@
 package app.cashadvisor.authorization.data.impl
 
+import app.cashadvisor.authorization.data.AuthenticationDataMapper
 import app.cashadvisor.authorization.data.NetworkToRegisterExceptionMapper
-import app.cashadvisor.authorization.data.RegisterDataMapper
 import app.cashadvisor.authorization.data.api.RegisterApiService
 import app.cashadvisor.authorization.data.api.RegisterRemoteDataSource
-import app.cashadvisor.authorization.data.models.ConfirmRegisterByEmailWithCodeInputDto
-import app.cashadvisor.authorization.data.models.RegisterAuthorizationOutputDto
-import app.cashadvisor.authorization.data.models.RegisterByEmailInputDto
+import app.cashadvisor.authorization.data.models.ConfirmByEmailWithCodeInputDto
+import app.cashadvisor.authorization.data.models.RegisterAuthenticationOutputDto
+import app.cashadvisor.authorization.data.models.AuthByEmailInputDto
 import app.cashadvisor.authorization.data.models.RegisterOutputDto
 import app.cashadvisor.common.utill.exceptions.NetworkException
 import javax.inject.Inject
@@ -15,30 +15,30 @@ class RegisterRemoteDataSourceImpl
 @Inject constructor(
     private val registerApiService: RegisterApiService,
     private val networkToRegisterExceptionMapper: NetworkToRegisterExceptionMapper,
-    private val registerDataMapper: RegisterDataMapper
+    private val authenticationDataMapper: AuthenticationDataMapper
 ) : RegisterRemoteDataSource {
 
-    override suspend fun registerByEmail(inputDto: RegisterByEmailInputDto): RegisterOutputDto {
+    override suspend fun registerByEmail(inputDto: AuthByEmailInputDto): RegisterOutputDto {
         return try {
             val response = registerApiService.registerByEmail(
-                registerByEmailRequest = registerDataMapper.toRegisterByEmailRequest(inputDto)
+                registerByEmailRequest = authenticationDataMapper.toRegisterByEmailRequest(inputDto)
             )
-            registerDataMapper.toRegisterOutputDto(response)
+            authenticationDataMapper.toRegisterOutputDto(response)
         } catch (exception: NetworkException) {
             throw networkToRegisterExceptionMapper.handleExceptionForRegisterByEmail(exception)
         }
     }
 
     override suspend fun confirmRegisterByEmailWithCode(
-        inputDto: ConfirmRegisterByEmailWithCodeInputDto
-    ): RegisterAuthorizationOutputDto {
+        inputDto: ConfirmByEmailWithCodeInputDto
+    ): RegisterAuthenticationOutputDto {
         return try {
             val response = registerApiService.confirmRegisterByEmailWithCode(
-                confirmRegisterByEmailRequest = registerDataMapper.toConfirmRegisterByEmailRequest(
+                confirmRegisterByEmailRequest = authenticationDataMapper.toConfirmRegisterByEmailRequest(
                     inputDto
                 )
             )
-            registerDataMapper.toRegisterAuthorizationOutputDto(response)
+            authenticationDataMapper.toRegisterAuthorizationOutputDto(response)
         } catch (exception: NetworkException) {
             throw networkToRegisterExceptionMapper
                 .handleExceptionForRegisterConfirmationByEmailWithCode(exception)
