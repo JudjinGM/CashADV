@@ -8,6 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import app.cashadvisor.R
+import app.cashadvisor.authorization.presentation.ui.models.StartScreenEvents
+import app.cashadvisor.authorization.presentation.ui.models.StartScreenSideEffects
 import app.cashadvisor.authorization.presentation.ui.models.StartScreenUiState
 import app.cashadvisor.authorization.presentation.viewmodel.StartViewModel
 import app.cashadvisor.common.ui.BaseFragment
@@ -21,11 +23,11 @@ class StartFragment :
     override val viewModel: StartViewModel by viewModels()
     override fun onConfigureViews() {
         binding.containerLayout.setOnClickListener {
-            viewModel.authenticateUser()
+            viewModel.handleEvent(StartScreenEvents.ProceedNextClicked)
         }
 
         binding.tapToUiKitSampleTextView.setOnClickListener {
-            findNavController().navigate(R.id.action_startFragment_to_uikitSampleFragment)
+            viewModel.handleEvent(StartScreenEvents.UiKitClicked)
         }
     }
 
@@ -37,24 +39,49 @@ class StartFragment :
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.sideEffects.collect { sideEffect ->
+                    handleSideEffect(sideEffect)
+                }
+            }
+        }
     }
 
     private fun updateUi(uiState: StartScreenUiState) {
-        with(uiState) {
-            binding.tapToUiKitSampleTextView.isVisible = isDebug
+        when (uiState.state) {
 
-            userMessage?.let {
-                Toast.makeText(requireContext(), getText(userMessage), Toast.LENGTH_SHORT).show()
-                viewModel.userMessageShown()
+            StartScreenUiState.UiState.Loading -> {}
+
+            is StartScreenUiState.UiState.Success -> {
+                binding.tapToUiKitSampleTextView.isVisible = uiState.state.isDebug
             }
 
-            if (isUserAuthenticated) {
-                if (isAuthenticationSuccessful) {
-                    findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
-                } else {
-                    findNavController().navigate(R.id.action_startFragment_to_entryFragment)
-                }
-                viewModel.userProceededNext()
+            StartScreenUiState.UiState.Error -> {}
+        }
+    }
+
+    private fun handleSideEffect(sideEffect: StartScreenSideEffects) {
+        when (sideEffect) {
+            StartScreenSideEffects.NavigateToAuthenticationScreen -> {
+                findNavController().navigate(R.id.action_startFragment_to_entryFragment)
+
+            }
+
+            StartScreenSideEffects.NavigateToPinCodeScreen -> {
+                findNavController().navigate(R.id.action_startFragment_to_pinCodeFragment)
+            }
+
+
+            StartScreenSideEffects.NavigateToUiKitScreen -> {
+                findNavController().navigate(R.id.action_startFragment_to_uikitSampleFragment)
+            }
+
+            is StartScreenSideEffects.ShowToast -> {
+                Toast.makeText(
+                    requireContext(), getText(sideEffect.message), Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
