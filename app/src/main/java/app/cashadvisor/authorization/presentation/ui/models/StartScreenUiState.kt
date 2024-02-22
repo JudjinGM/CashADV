@@ -1,8 +1,12 @@
 package app.cashadvisor.authorization.presentation.ui.models
 
 data class StartScreenUiState(
-    val isDebug: Boolean = false,
-    val isUserAuthenticated: Boolean = false,
-    val isAuthenticationSuccessful: Boolean = false,
-    val userMessage: Int? = null
-)
+    val state: UiState
+) {
+    sealed interface UiState {
+        data object Loading : UiState
+        data class Success(val isDebug: Boolean = false) : UiState
+        data object Error : UiState
+    }
+
+}
