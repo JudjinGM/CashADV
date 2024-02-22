@@ -11,8 +11,11 @@ import app.cashadvisor.common.domain.model.ErrorEntity
 import app.cashadvisor.common.ui.BaseViewModel
 import app.cashadvisor.common.utill.extensions.logDebugMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -37,6 +40,10 @@ class TestViewModel @Inject constructor(
 
     private val state: StateFlow<TestStartState> = _state.asStateFlow()
 
+    private val _sideEffects: MutableSharedFlow<TestSideEffect> = MutableSharedFlow()
+
+    val sideEffect: SharedFlow<TestSideEffect> = _sideEffects.asSharedFlow()
+
     private val currentState get() = state.replayCache.firstOrNull() ?: TestStartState()
 
     fun init() {
@@ -46,16 +53,26 @@ class TestViewModel @Inject constructor(
                     uiState.copy(
                         emailIsValid = state.isEmailValid,
                         registerCodeIsValid = state.isEmailCodeValid && state.isRegisterInProgress,
-                        loginCodeIsValid = state.isLoginCodeValid && state.isLoginInProgress,
-                        message = state.messageForUser
+                        loginCodeIsValid = state.isLoginCodeValid && state.isLoginInProgress
                     )
                 }
-
             }
         }
     }
 
-    fun setEmail(email: String) {
+    fun handleEvent(event: TestScreenEvent) {
+        when (event) {
+            is TestScreenEvent.SetEmail -> setEmail(event.email)
+            TestScreenEvent.Register -> register()
+            is TestScreenEvent.SetRegisterConformationCode -> setRegisterConfirmCode(event.code)
+            TestScreenEvent.ConfirmRegister -> sendRegisterConfirmCode()
+            TestScreenEvent.Login -> login()
+            is TestScreenEvent.SetLoginConformationCode -> setLoginConfirmCode(event.code)
+            TestScreenEvent.ConfirmLogin -> sendLoginConfirmCode()
+        }
+    }
+
+    private fun setEmail(email: String) {
         viewModelScope.launch {
             val result = inputValidationInteractor.validateEmail(email)
             when (result) {
@@ -74,7 +91,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun register() {
+    private fun register() {
         viewModelScope.launch {
             registerInteractor.isRegisterInProgress().collect { isInProgress ->
                 _state.update {
@@ -93,16 +110,14 @@ class TestViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Message register ${result.data.message}")
-                    _state.update {
-                        it.copy(
-                            messageForUser = result.data.message
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = result.data.message))
                     }
                 }
 
                 is Resource.Error -> {
-                    _state.update {
-                        it.copy(messageForUser = "Error: ${result.error.message}")
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = "Error: ${result.error.message}"))
                     }
 
                     when (result.error) {
@@ -134,7 +149,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun sendEmailConfirmCode() {
+    private fun sendRegisterConfirmCode() {
         viewModelScope.launch {
             logDebugMessage("email: ${currentState.email.value}, code: ${currentState.emailCode.value}")
 
@@ -144,18 +159,14 @@ class TestViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Success register: ${result.data}")
-                    _state.update {
-                        it.copy(
-                            messageForUser = result.data,
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = result.data))
                     }
                 }
 
                 is Resource.Error -> {
-                    _state.update {
-                        it.copy(
-                            messageForUser = "Error: ${result.error.message}",
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = result.error.message))
                     }
 
                     when (result.error) {
@@ -169,11 +180,18 @@ class TestViewModel @Inject constructor(
 
                         is ErrorEntity.RegisterConfirmationWithCode.WrongConfirmationCode -> {
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
+                            viewModelScope.launch {
+                                _sideEffects.emit(
+                                    TestSideEffect.ShowMessage(
+                                        "You left only ${result.error.remainingAttempts} attempts \n " +
+                                                "Your lock duration for ${result.error.lockDuration / 1000000000} seconds"
+                                    )
+                                )
+                            }
                         }
 
                         is ErrorEntity.NetworksError.NoInternet -> {
                             logDebugMessage("NoInternet ${result.error.message}")
-
                         }
 
                         else -> logDebugMessage("Something went wrong ${result.error.message}")
@@ -184,7 +202,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun setEmailConfirmCode(code: String) {
+    private fun setRegisterConfirmCode(code: String) {
         viewModelScope.launch {
             val result = inputValidationInteractor.validateConfirmationCode(code)
             when (result) {
@@ -203,7 +221,7 @@ class TestViewModel @Inject constructor(
     }
 
 
-    fun login() {
+    private fun login() {
         viewModelScope.launch {
             loginInteractor.isLoginInProgress().collect { isInProgress ->
                 _state.update {
@@ -222,18 +240,14 @@ class TestViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Message login ${result.data.message}")
-                    _state.update {
-                        it.copy(
-                            messageForUser = result.data.message,
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = result.data.message))
                     }
                 }
 
                 is Resource.Error -> {
-                    _state.update {
-                        it.copy(
-                            messageForUser = "Error: ${result.error.message}",
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = "Error: ${result.error.message}"))
                     }
 
                     when (result.error) {
@@ -263,7 +277,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun sendLoginConfirmCode() {
+    private fun sendLoginConfirmCode() {
         viewModelScope.launch {
             val result = loginInteractor.confirmLoginByEmailWithCode(
                 currentState.email,
@@ -273,18 +287,14 @@ class TestViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     logDebugMessage("Success login: ${result.data}")
-                    _state.update {
-                        it.copy(
-                            messageForUser = result.data,
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = result.data))
                     }
                 }
 
                 is Resource.Error -> {
-                    _state.update {
-                        it.copy(
-                            messageForUser = "Error: ${result.error.message}",
-                        )
+                    viewModelScope.launch {
+                        _sideEffects.emit(TestSideEffect.ShowMessage(message = "Error: ${result.error.message}"))
                     }
 
                     when (result.error) {
@@ -298,15 +308,13 @@ class TestViewModel @Inject constructor(
                             logDebugMessage("WrongConfirmationCode ${result.error.message}")
                             logDebugMessage("WrongConfirmationCode remaining attempts ${result.error.remainingAttempts}")
                             logDebugMessage("WrongConfirmationCode lock duration ${result.error.lockDuration}")
-                            _state.update {
-                                it.copy(
-                                    messageForUser = "You left only ${result.error.remainingAttempts} attempts",
-                                )
-                            }
 
-                            _state.update {
-                                it.copy(
-                                    messageForUser = "Your lock duration for ${result.error.lockDuration/1000000000} seconds",
+                            viewModelScope.launch {
+                                _sideEffects.emit(
+                                    TestSideEffect.ShowMessage(
+                                        "You left only ${result.error.remainingAttempts} attempts \n " +
+                                                "Your lock duration for ${result.error.lockDuration / 1000000000} seconds"
+                                    )
                                 )
                             }
                         }
@@ -324,7 +332,7 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun setLoginConfirmCode(code: String) {
+    private fun setLoginConfirmCode(code: String) {
         viewModelScope.launch {
             val result = inputValidationInteractor.validateConfirmationCode(code)
 
@@ -342,13 +350,4 @@ class TestViewModel @Inject constructor(
         }
     }
 
-    fun messageWasShown() {
-        _state.update {
-            it.copy(messageForUser = EMPTY_MESSAGE)
-        }
-    }
-
-    companion object {
-        const val EMPTY_MESSAGE = ""
-    }
 }

@@ -12,7 +12,6 @@ data class TestStartState(
     val isEmailValid: Boolean = false,
     val isEmailCodeValid: Boolean = false,
     val isLoginCodeValid: Boolean = false,
-    val messageForUser: String = "",
     val isRegisterInProgress: Boolean = false,
     val isLoginInProgress: Boolean = false
 )

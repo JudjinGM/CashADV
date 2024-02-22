@@ -17,8 +17,11 @@ class InputValidationInteractorImpl @Inject constructor() : InputValidationInter
     //TODO: ошибки ввода данных пока не ясны,
     //TODO: при необходимости можно будет добавить, например, отдельную проверку длины текста для более конкретных ошибок
     //TODO: для этого надо будет расширить конкретные enum ошибок
+
+    //TODO: добавил удаление пробелов спереди и сзади у email и password, если лишнее, удалить.
+
     override suspend fun validateEmail(email: String): EmailValidationState {
-        val isEmailValid = isValidText(email, REGEX_PATTERN_EMAIL)
+        val isEmailValid = isValidText(email.trimStart().trimEnd(), REGEX_PATTERN_EMAIL)
         return if (isEmailValid) {
             EmailValidationState.Success(Email(value = email))
         } else EmailValidationState.Error(
@@ -28,7 +31,7 @@ class InputValidationInteractorImpl @Inject constructor() : InputValidationInter
     }
 
     override suspend fun validatePassword(password: String): PasswordValidationState {
-        val isPasswordValid = isValidText(password, REGEX_PATTERN_PASSWORD)
+        val isPasswordValid = isValidText(password.trimStart().trimEnd(), REGEX_PATTERN_PASSWORD)
         return if (isPasswordValid) {
             PasswordValidationState.Success(Password(value = password))
         } else PasswordValidationState.Error(

@@ -20,33 +20,33 @@ class TestFragment() :
 
     override fun onConfigureViews() {
         binding.emailInput.doOnTextChanged { text, _, _, _ ->
-            viewModel.setEmail(text.toString())
+            viewModel.handleEvent(TestScreenEvent.SetEmail(text.toString()))
         }
 
         binding.btnRegister.setOnClickListener {
-            viewModel.register()
+            viewModel.handleEvent(TestScreenEvent.Register)
         }
 
         binding.emailCodeInput
             .doOnTextChanged { text, _, _, _ ->
-                viewModel.setEmailConfirmCode(text.toString())
+                viewModel.handleEvent(TestScreenEvent.SetRegisterConformationCode(text.toString()))
             }
 
         binding.sendEmailCodeButton.setOnClickListener {
-            viewModel.sendEmailConfirmCode()
+            viewModel.handleEvent(TestScreenEvent.ConfirmRegister)
         }
 
         binding.btnLogin.setOnClickListener {
-            viewModel.login()
+            viewModel.handleEvent(TestScreenEvent.Login)
         }
 
         binding.loginCodeInput
             .doOnTextChanged { text, _, _, _ ->
-                viewModel.setLoginConfirmCode(text.toString())
+                viewModel.handleEvent(TestScreenEvent.SetLoginConformationCode(text.toString()))
             }
 
         binding.sendLoginCodeButton.setOnClickListener {
-            viewModel.sendLoginConfirmCode()
+            viewModel.handleEvent(TestScreenEvent.ConfirmLogin)
         }
     }
 
@@ -58,6 +58,15 @@ class TestFragment() :
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.sideEffect.collect {
+                    handleSideEffects(it)
+                }
+            }
+        }
+
         viewModel.init()
     }
 
@@ -67,11 +76,13 @@ class TestFragment() :
             binding.sendLoginCodeButton.isEnabled = loginCodeIsValid
             binding.btnRegister.isEnabled = emailIsValid
             binding.btnLogin.isEnabled = emailIsValid
+        }
+    }
 
-            if (message.isNotBlank()) {
-                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-                viewModel.messageWasShown()
-            }
+    private fun handleSideEffects(sideEffect: TestSideEffect) {
+        when (sideEffect) {
+            is TestSideEffect.ShowMessage ->
+                Toast.makeText(requireContext(), sideEffect.message, Toast.LENGTH_LONG).show()
         }
     }
 
