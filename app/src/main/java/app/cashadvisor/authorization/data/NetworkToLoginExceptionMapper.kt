@@ -84,11 +84,11 @@ class NetworkToLoginExceptionMapper @Inject constructor(
             }
 
             is NetworkException.Undefined -> {
-                LoginException.Undefined()
+                LoginException.Undefined(message = exception.errorBody)
             }
 
             else -> {
-                LoginException.Undefined()
+                LoginException.Undefined(message = exception.errorBody)
             }
         }
     }
@@ -101,5 +101,4 @@ class NetworkToLoginExceptionMapper @Inject constructor(
             throw LoginException.Undefined()
         }
     }
-
 }

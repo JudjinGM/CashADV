@@ -4,6 +4,7 @@ import app.cashadvisor.common.data.api.NetworkConnectionProvider
 import app.cashadvisor.common.utill.exceptions.NetworkException
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 import java.net.HttpURLConnection
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,14 +23,19 @@ class ErrorInterceptor @Inject constructor(
         val request = chain.request()
         val response = chain.proceed(request)
         if (response.code !in (HttpURLConnection.HTTP_OK..HttpURLConnection.HTTP_CREATED)) {
-            throwErrorIfRequire(response.peekBody(Long.MAX_VALUE).string(), response.code)
+            val responseBody = response.body
+            if (responseBody == null) {
+                throw NetworkException.ResponseBodyIsNull(httpStatusCode = response.code)
+            } else {
+                throw getExceptionAccordingToResponseCode(responseBody.string(), response.code)
+            }
         }
         return response
     }
 
-    private fun throwErrorIfRequire(
+    private fun getExceptionAccordingToResponseCode(
         errorMessage: String, responseCode: Int,
-    ) {
+    ): IOException {
         throw networkErrorCodeToExceptionMapper.getException(
             errorMessage = errorMessage, responseCode = responseCode
         )
