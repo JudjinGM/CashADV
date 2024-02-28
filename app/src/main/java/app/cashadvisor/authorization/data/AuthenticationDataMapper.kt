@@ -1,10 +1,10 @@
 package app.cashadvisor.authorization.data
 
+import app.cashadvisor.authorization.data.models.AuthByEmailInputDto
 import app.cashadvisor.authorization.data.models.ConfirmByEmailWithCodeInputDto
 import app.cashadvisor.authorization.data.models.LoginAuthenticationOutputDto
 import app.cashadvisor.authorization.data.models.LoginOutputDto
 import app.cashadvisor.authorization.data.models.RegisterAuthenticationOutputDto
-import app.cashadvisor.authorization.data.models.AuthByEmailInputDto
 import app.cashadvisor.authorization.data.models.RegisterOutputDto
 import app.cashadvisor.authorization.data.models.TokenDetailsOutputDto
 import app.cashadvisor.authorization.data.models.request.ConfirmLoginByEmailRequest
@@ -49,6 +49,7 @@ class AuthenticationDataMapper @Inject constructor() {
             statusCode = response.statusCode,
             accessTokenLifeTime = response.accessTokenLifeTime,
             refreshTokenLifeTime = response.refreshTokenLifeTime,
+            deviceId = response.deviceId,
             tokenDetailsDto = toTokenDetailsOutputDto(response.tokenDetailsDto)
         )
     }
@@ -82,6 +83,7 @@ class AuthenticationDataMapper @Inject constructor() {
             statusCode = response.statusCode,
             accessTokenLifeTime = response.accessTokenLifeTime,
             refreshTokenLifeTime = response.refreshTokenLifeTime,
+            deviceId = response.deviceId,
             tokenDetailsDto = toTokenDetailsOutputDto(response.tokenDetailsDto)
         )
     }

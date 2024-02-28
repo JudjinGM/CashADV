@@ -5,5 +5,6 @@ data class LoginAuthenticationOutputDto(
     val statusCode: Int,
     val accessTokenLifeTime: Long,
     val refreshTokenLifeTime: Long,
+    val deviceId: String,
     val tokenDetailsDto: TokenDetailsOutputDto
 )

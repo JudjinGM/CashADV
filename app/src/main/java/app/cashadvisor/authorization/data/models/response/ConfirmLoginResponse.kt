@@ -9,5 +9,6 @@ data class ConfirmLoginResponse(
     @SerialName("status_code") val statusCode: Int,
     @SerialName("access_token_life_time") val accessTokenLifeTime: Long,
     @SerialName("refresh_token_life_time") val refreshTokenLifeTime: Long,
+    @SerialName("device_id") val deviceId: String,
     @SerialName("token_details") val tokenDetailsDto: TokenDetailsDto
 )
