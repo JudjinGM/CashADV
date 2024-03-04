@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import app.cashadvisor.authorization.data.dto.CredentialsDto
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
 import app.cashadvisor.authorization.domain.api.CredentialsRepository
-import app.cashadvisor.authorization.domain.models.AccountInformation
+import app.cashadvisor.authorization.domain.models.states.AccountInformation
 import app.cashadvisor.common.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

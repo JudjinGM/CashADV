@@ -32,6 +32,10 @@ class UikitSampleFragment :
         binding.fifthDiagramButton.setOnClickListener {
             findNavController().navigate(R.id.action_uikitSampleFragment_to_fifthDiagramFragment)
         }
+
+        binding.testFragmentButton.setOnClickListener {
+            findNavController().navigate(R.id.action_uikitSampleFragment_to_testFragment)
+        }
     }
 
     override fun onSubscribe() {

@@ -1,4 +1,4 @@
-package app.cashadvisor.authorization.domain.models
+package app.cashadvisor.authorization.domain.models.states
 
 sealed class AccountInformation {
     object NotAuthorized : AccountInformation()

@@ -2,12 +2,12 @@ package app.cashadvisor.authorization.presentation.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import app.cashadvisor.authorization.domain.api.AccountInformationInteractor
-import app.cashadvisor.authorization.domain.models.AccountInformation
+import app.cashadvisor.authorization.presentation.ui.models.StartScreenUiState
 import app.cashadvisor.authorization.presentation.ui.models.StartScreenEvents
 import app.cashadvisor.authorization.presentation.ui.models.StartScreenSideEffects
-import app.cashadvisor.authorization.presentation.ui.models.StartScreenUiState
 import app.cashadvisor.common.ui.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import app.cashadvisor.authorization.domain.models.states.AccountInformation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

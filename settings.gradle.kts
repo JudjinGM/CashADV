@@ -42,6 +42,7 @@ dependencyResolutionManagement {
             version("kotlin", "1.9.0")
             version("devtools-ksp", "1.9.10-1.0.13")
             version("kotlinx-serialization", "1.9.20")
+            version("kotlinx-serialization-converter", "1.0.0")
             version("firebase-analytics-ktx", "")
             version("firebase-crashlytics-ktx", "")
             version("firebase-crashlytics-gradle", "2.9.9")
@@ -251,6 +252,12 @@ dependencyResolutionManagement {
                 "logging-interceptor"
             ).versionRef("okhttp")
 
+            library(
+                "retrofit2-kotlinx-serialization-converter",
+                "com.jakewharton.retrofit",
+                "retrofit2-kotlinx-serialization-converter"
+            ).versionRef("kotlinx-serialization-converter")
+
             // Test
             library(
                 "junit",
@@ -283,7 +290,8 @@ dependencyResolutionManagement {
                 "firebase-crashlytics-ktx"
             ).withoutVersion()
 
-            library("firebase-bom",
+            library(
+                "firebase-bom",
                 "com.google.firebase",
                 "firebase-bom"
             ).versionRef("firebase-bom")
