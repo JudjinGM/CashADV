@@ -43,8 +43,8 @@ sealed class LoginException(
 
         class UnauthorizedWrongConfirmationCode(
             override val message: String,
-            val remainingAttempts: Int,
-            val lockDuration: Int,
+            val remainingAttempts: Long,
+            val lockDuration: Long,
             val statusCode: Int
         ) : LoginCodeConfirmation(message)
 

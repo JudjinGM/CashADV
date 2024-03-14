@@ -27,8 +27,8 @@ sealed class ErrorEntity(open val message: String) {
 
         data class WrongConfirmationCode(
             override val message: String,
-            val remainingAttempts: Int,
-            val lockDuration: Int
+            val remainingAttempts: Long,
+            val lockDuration: Long
         ) : LoginConfirmationWithCode(message)
 
         data class FailedToConfirmEmailOrLoginUser(override val message: String) :
@@ -42,8 +42,8 @@ sealed class ErrorEntity(open val message: String) {
 
         data class WrongConfirmationCode(
             override val message: String,
-            val remainingAttempts: Int,
-            val lockDuration: Int
+            val remainingAttempts: Long,
+            val lockDuration: Long
         ) : RegisterConfirmationWithCode(message)
 
         data class FailedToConfirmEmailOrRegisterUser(override val message: String) :
