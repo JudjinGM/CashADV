@@ -8,5 +8,5 @@ data class ErrorWrongConfirmationCodeResponse(
     @SerialName("remaining_attempts") val remainingAttempts: Long,
     @SerialName("lock_duration") val lockDuration: Long,
     val error: String,
-    @SerialName("status_code") val statusCode: Long
+    @SerialName("status_code") val statusCode: Int
 )
